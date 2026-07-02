@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Admin Dashboard | Stackly AI Agency" />
+  <meta name="theme-color" content="#030814" />
+  <title>Admin Dashboard | Stackly AI Agency</title>
+  <link rel="icon" href="assets/top-logo.webp" type="image/webp" sizes="32x32" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    :root {
+      --primary: #e24c4a;
+      --primary-light: #ff6b6b;
+      --primary-pale: rgba(226, 76, 74, 0.12);
+      --accent: #10b981;
+      --accent-light: rgba(16, 185, 129, 0.1);
+      --sidebar-bg: #030814;
+      --topbar-bg: #0a1120;
+      --surface: #1e293b;
+      --bg: #0f172a;
+      --bg-alt: #334155;
+      --border: #334155;
+      --text-dark: #f8fafc;
+      --text-body: #cbd5e1;
+      --text-muted: #94a3b8;
+      --font-display: 'Exo 2', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --r-sm: 8px; --r-md: 12px; --r-lg: 16px; --r-xl: 24px; --r-full: 9999px;
+      --shadow-sm: 0 2px 8px rgba(15,23,42,0.06);
+      --shadow-md: 0 8px 24px rgba(15,23,42,0.08);
+      --shadow-lg: 0 16px 48px rgba(15,23,42,0.14);
+      --ease: cubic-bezier(0.25,0.46,0.45,0.94);
+      --sidebar-w: 260px; --topbar-h: 68px;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{overflow-x:hidden;-webkit-text-size-adjust:100%}
+    body{font-family:var(--font-body);background:var(--bg);color:var(--text-body);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased;padding-bottom:env(safe-area-inset-bottom)}
+    a{color:inherit;text-decoration:none}
+    button{cursor:pointer;font-family:inherit;border:none;background:none}
+    img{display:block;max-width:100%}
+    .dash-layout{display:flex;min-height:100vh}
+    .sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(3,8,20,0.65);z-index:299;backdrop-filter:blur(2px)}
+    .sidebar-overlay.active{display:block}
+    .sidebar{width:var(--sidebar-w);background:var(--sidebar-bg);height:calc(100vh - var(--topbar-h));display:flex;flex-direction:column;position:fixed;top:var(--topbar-h);left:0;z-index:300;transition:transform .32s var(--ease);overflow-y:auto;overflow-x:hidden;border-right:1px solid rgba(255,255,255,0.06)}
+    .sidebar::-webkit-scrollbar{width:4px}
+    .sidebar::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.12);border-radius:99px}
+    .sidebar__user{padding:1rem 1.25rem;border-bottom:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02)}
+    .sidebar__user-inner{display:flex;align-items:center;gap:.75rem}
+    .sidebar__avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--accent));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.95rem;color:#fff;flex-shrink:0}
+    .sidebar__user-info{min-width:0;flex:1}
+    .sidebar__user-label{font-size:.62rem;letter-spacing:1.2px;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:3px}
+    .sidebar__user-name{font-weight:700;font-size:.88rem;color:#fff;line-height:1.3;word-break:break-word}
+    .sidebar__user-email{font-size:.72rem;color:var(--primary-light);word-break:break-all;line-height:1.35}
+    .sidebar__user-role{display:inline-flex;align-items:center;gap:4px;margin-top:6px;background:rgba(99,102,241,0.18);border:1px solid rgba(99,102,241,0.35);color:#a5b4fc;font-size:.62rem;font-weight:700;padding:3px 10px;border-radius:var(--r-full);letter-spacing:.06em;text-transform:uppercase}
+    .sidebar__nav{flex:1;padding:1rem .75rem}
+    .sidebar__nav-section{margin-bottom:1.25rem}
+    .sidebar__nav-section-label{font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,0.28);padding:0 .75rem;margin-bottom:.4rem}
+    .sidebar__nav-item{display:flex;align-items:center;gap:.75rem;padding:.7rem .75rem;border-radius:var(--r-md);font-size:.875rem;font-weight:500;color:rgba(255,255,255,0.5);cursor:pointer;transition:all .18s var(--ease);position:relative}
+    .sidebar__nav-item:hover{background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.9)}
+    .sidebar__nav-item.active{background:rgba(14,165,233,0.15);color:#fff;font-weight:600}
+    .sidebar__nav-item.active::before{content:'';position:absolute;left:0;top:20%;bottom:20%;width:3px;background:var(--primary);border-radius:0 3px 3px 0}
+    .sidebar__nav-item i{width:20px;text-align:center;font-size:.95rem;flex-shrink:0}
+    .sidebar__nav-badge{margin-left:auto;background:var(--accent);color:#fff;font-size:.62rem;font-weight:800;padding:.1rem .45rem;border-radius:var(--r-full)}
+    .sidebar__nav-badge.red{background:#ef4444}
+    .sidebar__bottom{padding:.75rem;border-top:1px solid rgba(255,255,255,0.06)}
+    .sidebar__logout{display:flex;align-items:center;gap:.75rem;padding:.75rem;border-radius:var(--r-md);font-size:.875rem;font-weight:600;color:rgba(252,165,165,0.75);width:100%;transition:all .18s var(--ease)}
+    .sidebar__logout:hover{background:rgba(239,68,68,0.12);color:#fca5a5}
+    .sidebar__logout i{width:20px;text-align:center}
+    .dash-main{margin-left:var(--sidebar-w);flex:1;min-width:0;display:flex;flex-direction:column;min-height:100vh}
+    .topbar{position:fixed;top:0;left:0;right:0;width:100%;min-height:var(--topbar-h);padding:env(safe-area-inset-top,0px) 1.5rem 0;background:var(--topbar-bg);border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;gap:1rem;z-index:400;box-shadow:0 4px 20px rgba(0,0,0,0.25)}
+    .topbar__hamburger{display:none;align-items:center;justify-content:center;width:40px;height:40px;border-radius:var(--r-sm);background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);color:#fff;font-size:1.05rem;flex-shrink:0;transition:all .18s var(--ease)}
+    .topbar__hamburger:hover{background:rgba(255,255,255,0.14)}
+    .topbar__logo-zone{width:calc(var(--sidebar-w) - 40px);flex-shrink:0;display:flex;align-items:center}
+    .topbar__logo img{height:42px;width:auto;max-width:150px;object-fit:contain}
+    .topbar__divider{width:1px;height:36px;background:rgba(255,255,255,0.1);flex-shrink:0}
+    .topbar__meta{flex:1;min-width:0;overflow:hidden}
+    .topbar__page-title{font-family:var(--font-display);font-size:1.15rem;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .topbar__page-title span{color:var(--primary-light)}
+    .topbar__breadcrumb{font-size:.73rem;color:rgba(255,255,255,0.45);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .topbar__actions{display:flex;align-items:center;gap:.5rem;margin-left:auto}
+    .topbar__icon-btn{width:38px;height:38px;border-radius:var(--r-sm);background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.1);color:#fff;display:flex;align-items:center;justify-content:center;position:relative;font-size:.95rem;transition:all .18s var(--ease)}
+    .topbar__icon-btn:hover{background:rgba(226,76,74,0.15);border-color:rgba(226,76,74,0.35)}
+    .topbar__notif-dot{position:absolute;top:5px;right:5px;width:7px;height:7px;background:#ef4444;border-radius:50%;border:1.5px solid var(--topbar-bg)}
+    .dash-content-wrap{padding-top:var(--topbar-h);background:var(--bg);min-height:100vh}
+    .dash-content{padding:1.75rem 1.5rem 2.5rem;max-width:1400px;width:100%}
+    .section-panel{display:none}.section-panel.active{display:block}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+    .animate-up{animation:fadeUp .4s var(--ease)}
+    .welcome-banner{background:linear-gradient(135deg,var(--sidebar-bg) 0%,#b83230 50%,#e24c4a 120%);border-radius:var(--r-xl);padding:1.75rem 2rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.75rem;overflow:hidden;position:relative}
+    .welcome-banner::before{content:'';position:absolute;top:-50px;right:-50px;width:200px;height:200px;background:radial-gradient(circle,rgba(226,76,74,0.18) 0%,transparent 70%);border-radius:50%}
+    .welcome-banner__text{position:relative;z-index:1;min-width:0;flex:1}
+    .welcome-banner__tag{display:inline-flex;align-items:center;gap:.4rem;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);color:#fff;font-size:.7rem;font-weight:600;padding:.25rem .7rem;border-radius:var(--r-full);margin-bottom:.6rem;letter-spacing:.05em;text-transform:uppercase}
+    .welcome-banner__tag i{color:var(--primary-light)}
+    .welcome-banner__title{font-family:var(--font-display);font-size:clamp(1.2rem,2.5vw,1.65rem);font-weight:700;color:#fff;line-height:1.3;margin-bottom:.35rem}
+    .welcome-banner__title span{color:var(--primary-light)}
+    .welcome-banner__sub{font-size:.85rem;color:rgba(255,255,255,0.72)}
+    .welcome-banner__actions{display:flex;gap:.75rem;flex-shrink:0;position:relative;z-index:1;flex-wrap:wrap}
+    .welcome-banner__btn{display:inline-flex;align-items:center;gap:.45rem;padding:.6rem 1.25rem;border-radius:var(--r-full);font-size:.82rem;font-weight:700;transition:all .18s var(--ease);white-space:nowrap}
+    .welcome-banner__btn--primary{background:var(--primary);color:#fff;border:2px solid var(--primary)}
+    .welcome-banner__btn--primary:hover{background:#b83230;transform:translateY(-2px)}
+    .welcome-banner__btn--outline{background:rgba(255,255,255,0.08);color:#fff;border:2px solid rgba(255,255,255,0.2)}
+    .welcome-banner__btn--outline:hover{background:rgba(255,255,255,0.14);transform:translateY(-2px)}
+    .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.75rem}
+    .stat-card{background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--primary);border-radius:var(--r-lg);padding:1.25rem;display:flex;flex-direction:column;gap:.65rem;box-shadow:var(--shadow-sm);transition:all .25s var(--ease)}
+    .stat-card:hover{box-shadow:var(--shadow-md);transform:translateY(-3px)}
+    .stat-card:nth-child(1){border-left-color:#10b981}.stat-card:nth-child(2){border-left-color:var(--accent)}.stat-card:nth-child(3){border-left-color:var(--primary)}.stat-card:nth-child(4){border-left-color:#f59e0b}
+    .stat-card__header{display:flex;align-items:center;justify-content:space-between}
+    .stat-card__icon{width:42px;height:42px;border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;font-size:1rem}
+    .stat-card__icon--green{background:#d1fae5;color:#059669}.stat-card__icon--purple{background:var(--accent-light);color:var(--accent)}.stat-card__icon--blue{background:var(--primary-pale);color:var(--primary)}.stat-card__icon--amber{background:#fef3c7;color:#d97706}
+    .stat-card__trend{font-size:.72rem;font-weight:700;display:flex;align-items:center;gap:.2rem}
+    .stat-card__trend.up{color:#059669}.stat-card__trend.down{color:#dc2626}
+    .stat-card__value{font-family:var(--font-display);font-size:1.65rem;font-weight:800;color:var(--text-dark);line-height:1}
+    .stat-card__label{font-size:.8rem;color:var(--text-muted);font-weight:500}
+    .dash-row{display:grid;gap:1.25rem;margin-bottom:1.25rem}
+    .dash-row--2col{grid-template-columns:1fr 1fr}.dash-row--3col{grid-template-columns:2fr 1fr}
+    .dash-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-sm);transition:all .25s var(--ease)}
+    .dash-card:hover{box-shadow:var(--shadow-md)}
+    .dash-card__header{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 1.25rem;border-bottom:1px solid var(--border);gap:.75rem;flex-wrap:wrap}
+    .dash-card__title{font-family:var(--font-display);font-size:.95rem;font-weight:700;color:var(--text-dark)}
+    .dash-card__action{font-size:.78rem;font-weight:600;color:var(--primary);padding:.3rem .75rem;border-radius:var(--r-full);border:1px solid var(--primary-pale);background:var(--primary-pale);transition:all .18s var(--ease);white-space:nowrap}
+    .dash-card__action:hover{background:var(--primary);color:#fff}
+    .dash-card__body{padding:1.25rem}
+    .highlight-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+    .highlight-card{position:relative;border-radius:var(--r-lg);overflow:hidden;height:180px;cursor:default}
+    .highlight-card img{width:100%;height:100%;object-fit:cover;transition:transform .4s var(--ease)}
+    .highlight-card:hover img{transform:scale(1.05)}
+    .highlight-card__overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(3,8,20,0.85) 0%,rgba(3,8,20,0.1) 60%);display:flex;flex-direction:column;justify-content:flex-end;padding:1rem}
+    .highlight-card__title{font-family:var(--font-display);font-size:.95rem;font-weight:700;color:#fff;margin-bottom:.2rem}
+    .highlight-card__meta{font-size:.75rem;color:rgba(255,255,255,0.75)}
+    .dash-table-wrap{overflow-x:auto;scrollbar-width:thin}
+    .dash-table{width:100%;border-collapse:collapse;font-size:.85rem}
+    .dash-table th{text-align:left;padding:.85rem 1rem;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--primary);background:var(--primary-pale);border-bottom:2px solid var(--border);white-space:nowrap}
+    .dash-table td{padding:.85rem 1rem;border-bottom:1px solid var(--border);vertical-align:middle;white-space:nowrap}
+    .dash-table tr:last-child td{border-bottom:none}
+    .dash-table tr:hover td{background:rgba(14,165,233,0.03)}
+    .dash-table__name{display:flex;align-items:center;gap:.75rem}
+    .dash-table__avatar{width:36px;height:36px;border-radius:50%;background:var(--primary-pale);display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:700;color:var(--primary);flex-shrink:0}
+    .dash-table__name-text{font-weight:600;color:var(--text-dark)}.dash-table__email{font-size:.72rem;color:var(--text-muted)}
+    .badge{display:inline-flex;align-items:center;gap:.3rem;padding:.2rem .65rem;border-radius:var(--r-full);font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;white-space:nowrap}
+    .badge::before{content:'';width:5px;height:5px;border-radius:50%;background:currentColor}
+    .badge--green{background:#d1fae5;color:#059669}.badge--gold{background:#fef3c7;color:#b45309}.badge--red{background:#fee2e2;color:#dc2626}.badge--blue{background:var(--primary-pale);color:#0284c7}.badge--purple{background:var(--accent-light);color:var(--accent)}.badge--gray{background:#f1f5f9;color:#64748b}
+    .alert-list{display:flex;flex-direction:column;gap:.65rem}
+    .alert-card{display:flex;align-items:center;gap:.85rem;padding:.85rem 1rem;background:var(--bg);border:1px solid var(--border);border-radius:var(--r-md);transition:box-shadow .18s var(--ease)}
+    .alert-card:hover{box-shadow:var(--shadow-sm)}
+    .alert-card--urgent{border-left:3px solid #ef4444}.alert-card--pending{border-left:3px solid #f59e0b}.alert-card--done{border-left:3px solid #10b981;opacity:.85}
+    .alert-card__icon{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0}
+    .alert-card--urgent .alert-card__icon{background:#fee2e2;color:#dc2626}.alert-card--pending .alert-card__icon{background:#fef3c7;color:#d97706}.alert-card--done .alert-card__icon{background:#d1fae5;color:#059669}
+    .alert-card__body{flex:1;min-width:0}
+    .alert-card__title{font-size:.84rem;font-weight:600;color:var(--text-dark);margin-bottom:.15rem}
+    .alert-card__meta{font-size:.72rem;color:var(--text-muted)}
+    .quick-actions{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+    .quick-action-btn{display:flex;flex-direction:column;align-items:center;gap:.45rem;padding:1rem;background:var(--bg);border:1px solid var(--border);border-radius:var(--r-md);transition:all .18s var(--ease);text-align:center}
+    .quick-action-btn:hover{border-color:var(--primary);background:var(--primary-pale);transform:translateY(-2px)}
+    .quick-action-btn i{font-size:1.15rem;color:var(--primary)}.quick-action-btn span{font-size:.76rem;font-weight:600;color:var(--text-body);line-height:1.2}
+    .progress-section{display:flex;flex-direction:column;gap:1rem}
+    .progress-item{display:flex;align-items:center;gap:.75rem}
+    .progress-item__label{font-size:.8rem;font-weight:500;color:var(--text-body);width:120px;flex-shrink:0}
+    .progress-track{flex:1;height:14px;background:var(--bg-alt);border:1px solid var(--border);border-radius:0;overflow:hidden;box-shadow:inset 0 1px 4px rgba(0,0,0,0.5)}
+    .progress-fill{height:100%;border-radius:0;transition:width 1s var(--ease);border-right:2px solid #fff}
+    .progress-item__pct{font-size:.78rem;font-weight:700;color:var(--text-dark);width:38px;text-align:right;flex-shrink:0}
+    .section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;padding-bottom:.75rem;border-bottom:2px solid var(--primary-pale);flex-wrap:wrap;gap:1rem}
+    .section-header__title{font-family:var(--font-display);font-size:1.35rem;font-weight:700;color:var(--text-dark)}
+    .section-header__sub{font-size:.82rem;color:var(--text-muted);margin-top:.2rem}
+    .section-header__btn{display:inline-flex;align-items:center;gap:.45rem;padding:.55rem 1.1rem;background:var(--primary);color:#fff;border-radius:var(--r-full);font-size:.82rem;font-weight:700;transition:all .18s var(--ease)}
+    .section-header__btn:hover{background:#0284c7;transform:translateY(-2px)}
+    .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.5rem}
+    .kpi-tile{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.25rem;text-align:center;box-shadow:var(--shadow-sm)}
+    .kpi-tile__value{font-family:var(--font-display);font-size:1.5rem;font-weight:800;color:var(--text-dark)}
+    .kpi-tile__label{font-size:.78rem;color:var(--text-muted);margin-top:.25rem}
+    .kpi-tile__change{font-size:.72rem;font-weight:700;margin-top:.35rem}.kpi-tile__change.up{color:#059669}.kpi-tile__change.down{color:#dc2626}
+    .content-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-bottom:1.5rem}
+    .content-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;transition:all .25s var(--ease)}
+    .content-card:hover{box-shadow:var(--shadow-md);transform:translateY(-3px)}
+    .content-card__img{width:100%;height:160px;object-fit:cover}
+    #section-clients .content-card__img{height:220px;object-fit:cover;object-position:center 22%}
+    .content-card__body{padding:1rem}
+    .content-card__title{font-family:var(--font-display);font-size:.95rem;font-weight:700;color:var(--text-dark);margin-bottom:.25rem}
+    .content-card__meta{font-size:.75rem;color:var(--text-muted);margin-bottom:.5rem}
+    .content-card__text{font-size:.82rem;color:var(--text-body);line-height:1.5;margin-bottom:.75rem}
+    .content-card__footer{display:flex;align-items:center;justify-content:space-between}
+    .team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+    .team-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-sm)}
+    .team-card__media{width:100%;height:200px;overflow:hidden;background:linear-gradient(180deg,var(--primary-pale),var(--bg));display:flex;align-items:flex-end;justify-content:center}
+    .team-card__img{width:100%;height:100%;object-fit:cover;object-position:center 18%;display:block}
+    .team-card__body{padding:1rem}
+    .team-card__name{font-family:var(--font-display);font-weight:700;color:var(--text-dark);margin-bottom:.15rem}
+    .team-card__role{font-size:.78rem;color:var(--text-muted);margin-bottom:.75rem}
+    .team-card__tags{display:flex;flex-wrap:wrap;gap:.35rem}
+    .tag{font-size:.65rem;font-weight:700;padding:.15rem .5rem;border-radius:var(--r-full);background:var(--primary-pale);color:var(--primary)}
+    .activity-list{display:flex;flex-direction:column}
+    .activity-item{display:flex;gap:.85rem;padding:.85rem 0;border-bottom:1px solid var(--border);align-items:flex-start}
+    .activity-item:last-child{border-bottom:none}
+    .activity-item__icon{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.82rem;flex-shrink:0}
+    .activity-item__text{font-size:.82rem;line-height:1.5}.activity-item__text strong{color:var(--text-dark)}
+    .activity-item__time{font-size:.72rem;color:var(--text-muted);margin-top:.2rem}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+    .form-group{display:flex;flex-direction:column;gap:.35rem}.form-group--full{grid-column:span 2}
+    .form-group label{font-size:.78rem;font-weight:600;color:var(--text-dark)}
+    .form-control{padding:.65rem .85rem;border:1px solid var(--border);border-radius:var(--r-sm);font-size:.85rem;font-family:var(--font-body);background:var(--surface);color:var(--text-body);transition:border-color .18s}
+    .form-control:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(14,165,233,0.15)}
+    .form-group.has-error .form-control{border-color:#ef4444;box-shadow:0 0 0 3px rgba(239,68,68,0.12)}
+    .form-error{display:none;font-size:.72rem;color:#dc2626;font-weight:500}
+    .form-group.has-error .form-error{display:block}
+    .settings-form-alert{display:none;margin-bottom:1rem;padding:.75rem .9rem;border-radius:var(--r-sm);background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.25);color:#dc2626;font-size:.82rem;font-weight:600}
+    .settings-form-alert.show{display:block}
+    .settings-grid{display:grid;grid-template-columns:220px 1fr;gap:1.25rem}
+    .settings-nav{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:.75rem}
+    .settings-nav-item{display:flex;align-items:center;gap:.6rem;padding:.65rem .85rem;border-radius:var(--r-sm);font-size:.84rem;font-weight:500;color:var(--text-body);cursor:pointer;transition:all .18s}
+    .settings-nav-item:hover,.settings-nav-item.active{background:var(--primary-pale);color:var(--primary);font-weight:600}
+    .settings-nav-item i{width:18px;text-align:center}
+    .settings-content{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.5rem}
+    .settings-section-title{font-family:var(--font-display);font-size:1rem;font-weight:700;color:var(--text-dark);margin-bottom:1.25rem}
+    .table-action-btn{padding:.28rem .65rem;border-radius:var(--r-sm);font-size:.72rem;font-weight:600;border:1px solid transparent;transition:all .18s}
+    .table-action-btn--view{background:var(--primary-pale);color:var(--primary)}.table-action-btn--view:hover{background:var(--primary);color:#fff}
+    .table-action-btn--del{background:#fee2e2;color:#dc2626}.table-action-btn--del:hover{background:#dc2626;color:#fff}
+    .toast{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--sidebar-bg);color:#fff;padding:.85rem 1.25rem;border-radius:var(--r-md);font-size:.85rem;font-weight:500;box-shadow:var(--shadow-lg);z-index:9999;transform:translateY(120%);opacity:0;transition:all .32s var(--ease);border-left:3px solid var(--primary);max-width:320px}
+    .toast.show{transform:translateY(0);opacity:1}.toast--error{border-left-color:#ef4444}
+    .modal-backdrop{display:none;position:fixed;inset:0;background:rgba(3,8,20,0.7);z-index:5000;align-items:center;justify-content:center;padding:1rem}
+    .modal-backdrop.show{display:flex}
+    .modal{background:var(--surface);border-radius:var(--r-xl);padding:2rem;max-width:420px;width:100%;text-align:center;box-shadow:var(--shadow-md)}
+    .modal__icon{font-size:2.5rem;color:#f59e0b;margin-bottom:1rem}
+    .modal__title{font-family:var(--font-display);font-size:1.25rem;font-weight:700;color:var(--text-dark);margin-bottom:.5rem}
+    .modal__text{font-size:.85rem;color:var(--text-muted);margin-bottom:1.25rem;line-height:1.6}
+    .modal__btn{padding:.6rem 1.5rem;border-radius:var(--r-full);font-weight:600;font-size:.85rem}
+    .modal__btn--cancel{background:var(--bg);color:var(--text-body);border:1px solid var(--border)}
+    @media(max-width:1200px){.stats-grid,.kpi-grid{grid-template-columns:repeat(2,1fr)}.dash-row--3col,.highlight-grid,.content-grid,.team-grid{grid-template-columns:1fr 1fr}.settings-grid{grid-template-columns:1fr}}
+    @media(max-width:1024px){.sidebar{transform:translateX(-100%)}.sidebar.open{transform:translateX(0)}.dash-main{margin-left:0}.topbar__hamburger{display:flex}}
+    @media(max-width:768px){:root{--topbar-h:60px}.dash-row--2col,.dash-row--3col,.highlight-grid,.content-grid,.team-grid{grid-template-columns:1fr}.welcome-banner{flex-direction:column;align-items:flex-start}.welcome-banner__actions{width:100%}.welcome-banner__btn{flex:1;justify-content:center}.dash-content{padding:1.25rem 1rem 2rem}.topbar__logo-zone{width:auto;flex:1;min-width:0}.topbar__meta,.topbar__divider{display:none}.form-grid{grid-template-columns:1fr}.form-group--full{grid-column:span 1}.quick-actions{grid-template-columns:repeat(3,1fr)}}
+    @media(max-width:480px){.stats-grid,.kpi-grid{grid-template-columns:1fr}.quick-actions{grid-template-columns:repeat(2,1fr)}.topbar{padding:0 .875rem}}
+
+    .chart-wrap{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+    .svg-chart{width:100%;min-width:280px;height:auto;display:block}
+    .chart-legend{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1rem}
+    .chart-legend-item{display:flex;align-items:center;gap:.35rem;font-size:.72rem;color:var(--text-muted)}
+    .chart-legend-dot{width:10px;height:10px;border-radius:2px;flex-shrink:0}
+  </style>
+</head>
+<body>
+<script src="script.js"></script>
+
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+<div class="modal-backdrop" id="modal404">
+  <div class="modal">
+    <div class="modal__icon"><i class="fa-solid fa-circle-exclamation"></i></div>
+    <div class="modal__title">Page Not Found</div>
+    <p class="modal__text">This feature is currently unavailable or under construction. Error 404.</p>
+    <button class="modal__btn modal__btn--cancel" onclick="redirect404()">Close</button>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<div class="dash-layout">
+  <header class="topbar" id="topbar">
+    <button class="topbar__hamburger" id="hamburgerBtn" onclick="toggleSidebar()" aria-label="Toggle menu" aria-expanded="false">
+      <i class="fa-solid fa-bars" id="hamburgerIcon"></i>
+    </button>
+    <div class="topbar__logo-zone">
+      <a href="index.html" class="topbar__logo">
+        <img src="assets/logo.webp" alt="Stackly AI Agency" onerror="this.style.display='none'" />
+      </a>
+    </div>
+    <div class="topbar__divider"></div>
+    <div class="topbar__meta">
+      <div class="topbar__page-title" id="topbarTitle">Admin <span>Dashboard</span></div>
+      <div class="topbar__breadcrumb" id="topbarBreadcrumb">Home / Dashboard</div>
+    </div>
+    <div class="topbar__actions">
+      <button class="topbar__icon-btn" onclick="showSection('notifications')" title="Notifications"><i class="fa-solid fa-bell"></i><span class="topbar__notif-dot"></span></button>
+    </div>
+  </header>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar__user">
+      <div class="sidebar__user-inner">
+        <div class="sidebar__avatar" id="sidebarAvatarText">A</div>
+        <div class="sidebar__user-info">
+          <div class="sidebar__user-label">Welcome back</div>
+          <div class="sidebar__user-name" id="sidebarUserName">Admin User</div>
+          <div class="sidebar__user-email" id="sidebarUserEmail">admin@stackly.com</div>
+          <span class="sidebar__user-role"><i class="fa-solid fa-shield-halved"></i> Admin</span>
+        </div>
+      </div>
+    </div>
+    <nav class="sidebar__nav">
+      <div class="sidebar__nav-section">
+        <div class="sidebar__nav-section-label">Main</div>
+        <a class="sidebar__nav-item active" onclick="showSection('overview','Dashboard',this)" role="button" tabindex="0"><i class="fa-solid fa-house"></i> Overview</a>
+        <a class="sidebar__nav-item" onclick="showSection('analytics','Analytics',this)" role="button" tabindex="0"><i class="fa-solid fa-chart-line"></i> Analytics <span class="sidebar__nav-badge">New</span></a>
+        <a class="sidebar__nav-item" onclick="showSection('transactions','AI Projects',this)" role="button" tabindex="0"><i class="fa-solid fa-cart-shopping"></i> Orders <span class="sidebar__nav-badge red">8</span></a>
+        <a class="sidebar__nav-item" onclick="showSection('invoices','builds',this)" role="button" tabindex="0"><i class="fa-solid fa-screwdriver-wrench"></i> Inventory</a>
+      </div>
+      <div class="sidebar__nav-section">
+        <div class="sidebar__nav-section-label">Management</div>
+        <a class="sidebar__nav-item" onclick="showSection('users','Team Users',this)" role="button" tabindex="0"><i class="fa-solid fa-user-tie"></i> Users</a>
+        <a class="sidebar__nav-item" onclick="showSection('clients','Customers',this)" role="button" tabindex="0"><i class="fa-solid fa-users"></i> Customers</a>
+        <a class="sidebar__nav-item" onclick="showSection('reports','Sales Reports',this)" role="button" tabindex="0"><i class="fa-solid fa-clipboard-list"></i> Reports</a>
+        <a class="sidebar__nav-item" onclick="showSection('compliance','Stock Compliance',this)" role="button" tabindex="0"><i class="fa-solid fa-clipboard-check"></i> Compliance <span class="sidebar__nav-badge red">3</span></a>
+      </div>
+      <div class="sidebar__nav-section">
+        <div class="sidebar__nav-section-label">System</div>
+        <a class="sidebar__nav-item" onclick="showSection('settings','Settings',this)" role="button" tabindex="0"><i class="fa-solid fa-gears"></i> Settings</a>
+        <a class="sidebar__nav-item" onclick="showSection('notifications','Notifications',this)" role="button" tabindex="0"><i class="fa-solid fa-bell"></i> Notifications <span class="sidebar__nav-badge">5</span></a>
+        <a class="sidebar__nav-item" onclick="showSection('support','Help & Support',this)" role="button" tabindex="0"><i class="fa-solid fa-circle-question"></i> Help & Support</a>
+      </div>
+    </nav>
+    <div class="sidebar__bottom">
+      <button class="sidebar__logout" onclick="handleLogout()"><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></button>
+    </div>
+  </aside>
+
+  <div class="dash-main">
+    <div class="dash-content-wrap">
+      <div class="dash-content">
+
+        
+        <div class="section-panel active animate-up" id="section-overview">
+          <div class="welcome-banner">
+            <div class="welcome-banner__text">
+              <div class="welcome-banner__tag"><i class="fa-solid fa-user-shield"></i> Admin Portal</div>
+              <h1 class="welcome-banner__title">Welcome back, <span id="welcomeName">Admin</span>!</h1>
+              <p class="welcome-banner__sub" id="welcomeEmail">admin@stackly.com · Last login: Today, 9:42 AM</p>
+            </div>
+            <div class="welcome-banner__actions">
+              <button class="welcome-banner__btn welcome-banner__btn--outline" onclick="showToast('Generating report...')"><i class="fa-solid fa-download"></i> Export</button>
+              <button class="welcome-banner__btn welcome-banner__btn--primary" onclick="showSection('invoices')"><i class="fa-solid fa-plus"></i> Add Product</button>
+            </div>
+          </div>
+          <div class="stats-grid">
+            <div class="stat-card"><div class="stat-card__header"><div class="stat-card__icon stat-card__icon--green"><i class="fa-solid fa-cart-shopping"></i></div><div class="stat-card__trend up"><i class="fa-solid fa-arrow-trend-up"></i> +14%</div></div><div class="stat-card__value">1,284</div><div class="stat-card__label">Active Projects</div></div>
+            <div class="stat-card"><div class="stat-card__header"><div class="stat-card__icon stat-card__icon--purple"><i class="fa-solid fa-boxes-stacked"></i></div><div class="stat-card__trend up"><i class="fa-solid fa-arrow-trend-up"></i> +22%</div></div><div class="stat-card__value">8,420</div><div class="stat-card__label">Products Sold</div></div>
+            <div class="stat-card"><div class="stat-card__header"><div class="stat-card__icon stat-card__icon--blue"><i class="fa-solid fa-indian-rupee-sign"></i></div><div class="stat-card__trend up"><i class="fa-solid fa-arrow-trend-up"></i> +9.6%</div></div><div class="stat-card__value">₹18.4L</div><div class="stat-card__label">Monthly Revenue</div></div>
+            <div class="stat-card"><div class="stat-card__header"><div class="stat-card__icon stat-card__icon--amber"><i class="fa-solid fa-clock"></i></div><div class="stat-card__trend down"><i class="fa-solid fa-arrow-trend-down"></i> -3</div></div><div class="stat-card__value">17</div><div class="stat-card__label">Pending Requests</div></div>
+          </div>
+          <div class="dash-row">
+            <div class="highlight-grid">
+              <div class="highlight-card"><img src="assets/blog-1.webp" alt="NLP Chatbots" loading="lazy" /><div class="highlight-card__overlay"><div class="highlight-card__title">Keyboards &amp; Mice</div><div class="highlight-card__meta">842 units sold this month</div></div></div>
+              <div class="highlight-card"><img src="assets/service-automation.webp" alt="Automation Pipeline" loading="lazy" /><div class="highlight-card__overlay"><div class="highlight-card__title">Monitors &amp; Displays</div><div class="highlight-card__meta">516 orders this month</div></div></div>
+              <div class="highlight-card"><img src="assets/blog-2.webp" alt="Voice Synthesis Deployed" loading="lazy" /><div class="highlight-card__overlay"><div class="highlight-card__title">Audio &amp; Headsets</div><div class="highlight-card__meta">328 headsets shipped</div></div></div>
+            </div>
+          </div>
+          <div class="dash-row dash-row--3col">
+            <div class="dash-card">
+              <div class="dash-card__header"><div class="dash-card__title"><i class="fa-solid fa-screwdriver-wrench" style="color:var(--primary);margin-right:.4rem"></i> Recent Orders</div><button class="dash-card__action" onclick="showSection('invoices')">View All</button></div>
+              <div class="dash-card__body" style="padding:0">
+                <div class="dash-table-wrap"><table class="dash-table"><thead><tr><th>Customer</th><th>Service</th><th>Date</th><th>Status</th></tr></thead><tbody>
+                  <tr><td><div class="dash-table__name"><div class="dash-table__avatar">RK</div><div><div class="dash-table__name-text">Rahul Krishnan</div><div class="dash-table__email">rahul@email.com</div></div></div></td><td>Gaming Computer Accessories Kit</td><td>Jun 20</td><td><span class="badge badge--green">Completed</span></td></tr>
+                  <tr><td><div class="dash-table__name"><div class="dash-table__avatar">PN</div><div><div class="dash-table__name-text">Priya Nair</div><div class="dash-table__email">priya@email.com</div></div></div></td><td>Mechanical Keyboard Bundle</td><td>Jun 21</td><td><span class="badge badge--gold">Pending</span></td></tr>
+                  <tr><td><div class="dash-table__name"><div class="dash-table__avatar">VS</div><div><div class="dash-table__name-text">Vijay Sharma</div><div class="dash-table__email">vijay@email.com</div></div></div></td><td>4K Monitor + Stand</td><td>Jun 22</td><td><span class="badge badge--blue">In Progress</span></td></tr>
+                  <tr><td><div class="dash-table__name"><div class="dash-table__avatar">AM</div><div><div class="dash-table__name-text">Ananya Mehta</div><div class="dash-table__email">ananya@email.com</div></div></div></td><td>Wireless Headset Pro</td><td>Jun 22</td><td><span class="badge badge--purple">Scheduled</span></td></tr>
+                </tbody></table></div>
+              </div>
+            </div>
+            <div class="dash-card">
+              <div class="dash-card__header"><div class="dash-card__title"><i class="fa-solid fa-bolt" style="color:var(--primary);margin-right:.4rem"></i> Quick Actions</div></div>
+              <div class="dash-card__body"><div class="quick-actions">
+                <button class="quick-action-btn" onclick="showSection('invoices')"><i class="fa-solid fa-plus"></i><span>Add Product</span></button>
+                <button class="quick-action-btn" onclick="showSection('clients')"><i class="fa-solid fa-user-plus"></i><span>Add Customer</span></button>
+                <button class="quick-action-btn" onclick="showSection('reports')"><i class="fa-solid fa-file-lines"></i><span>Reports</span></button>
+                <button class="quick-action-btn" onclick="showSection('compliance')"><i class="fa-solid fa-shield-check"></i><span>Compliance</span></button>
+                <button class="quick-action-btn" onclick="showSection('transactions')"><i class="fa-solid fa-cart-shopping"></i><span>Orders</span></button>
+                <button class="quick-action-btn" onclick="showSection('settings')"><i class="fa-solid fa-gear"></i><span>Settings</span></button>
+              </div></div>
+            </div>
+          </div>
+          <div class="dash-row dash-row--2col">
+            <div class="dash-card">
+              <div class="dash-card__header"><div class="dash-card__title"><i class="fa-solid fa-bell" style="color:var(--primary);margin-right:.4rem"></i> Priority Alerts</div><button class="dash-card__action" onclick="showSection('compliance')">View All</button></div>
+              <div class="dash-card__body"><div class="alert-list">
+                <div class="alert-card alert-card--urgent"><div class="alert-card__icon"><i class="fa-solid fa-triangle-exclamation"></i></div><div class="alert-card__body"><div class="alert-card__title">Low stock alert · Logitech MX Keys — 3 units left</div><div class="alert-card__meta">Warehouse A · Reported 2h ago</div></div><span class="badge badge--red">Urgent</span></div>
+                <div class="alert-card alert-card--urgent"><div class="alert-card__icon"><i class="fa-solid fa-lock-open"></i></div><div class="alert-card__body"><div class="alert-card__title">Warranty expiring — bulk order</div><div class="alert-card__meta">Vijay Sharma · 12 monitors</div></div><span class="badge badge--red">Urgent</span></div>
+                <div class="alert-card alert-card--pending"><div class="alert-card__icon"><i class="fa-solid fa-clock"></i></div><div class="alert-card__body"><div class="alert-card__title">Shipping delay · Ananya Mehta</div><div class="alert-card__meta">HyperX Cloud II order · Due Jun 24</div></div><span class="badge badge--gold">Pending</span></div>
+                <div class="alert-card alert-card--done"><div class="alert-card__icon"><i class="fa-solid fa-check"></i></div><div class="alert-card__body"><div class="alert-card__title">Order fulfilled · Rahul Krishnan</div><div class="alert-card__meta">Razer DeathAdder V3 x24 shipped · Completed</div></div><span class="badge badge--green">Done</span></div>
+              </div></div>
+            </div>
+            <div class="dash-card">
+              <div class="dash-card__header"><div class="dash-card__title"><i class="fa-solid fa-gauge-high" style="color:var(--primary);margin-right:.4rem"></i> System Health</div></div>
+              <div class="dash-card__body"><div class="progress-section">
+                <div class="progress-item"><span class="progress-item__label">Order Fulfillment</span><div class="progress-track"><div class="progress-fill" style="width:99%;background:#10b981"></div></div><span class="progress-item__pct">99%</span></div>
+                <div class="progress-item"><span class="progress-item__label">Stock Accuracy</span><div class="progress-track"><div class="progress-fill" style="width:94%;background:var(--primary)"></div></div><span class="progress-item__pct">94%</span></div>
+                <div class="progress-item"><span class="progress-item__label">Client Sat.</span><div class="progress-track"><div class="progress-fill" style="width:96%;background:var(--accent)"></div></div><span class="progress-item__pct">96%</span></div>
+                <div class="progress-item"><span class="progress-item__label">Dispatch Rate</span><div class="progress-track"><div class="progress-fill" style="width:88%;background:#f59e0b"></div></div><span class="progress-item__pct">88%</span></div>
+                <div class="progress-item"><span class="progress-item__label">Return Rate</span><div class="progress-track"><div class="progress-fill" style="width:91%;background:#6366f1"></div></div><span class="progress-item__pct">91%</span></div>
+              </div></div>
+            </div>
+          </div>
+        </div>
+
+        
+        <div class="section-panel" id="section-analytics">
+          <div class="section-header"><div><div class="section-header__title">Analytics</div><div class="section-header__sub">Store sales performance, trends and forecasts</div></div><button class="section-header__btn" onclick="showToast('Exporting analytics report...')"><i class="fa-solid fa-download"></i> Export Report</button></div>
+          <div class="kpi-grid">
+            <div class="kpi-tile"><div class="kpi-tile__value">₹18.4L</div><div class="kpi-tile__label">Monthly Revenue</div><div class="kpi-tile__change up">↑ 9.6% vs last month</div></div>
+            <div class="kpi-tile"><div class="kpi-tile__value">342</div><div class="kpi-tile__label">Active Projects</div><div class="kpi-tile__change up">+ 186 new this month</div></div>
+            <div class="kpi-tile"><div class="kpi-tile__value">96%</div><div class="kpi-tile__label">Customer Satisfaction</div><div class="kpi-tile__change up">↑ 2.1%</div></div>
+            <div class="kpi-tile"><div class="kpi-tile__value">8,420</div><div class="kpi-tile__label">Products Sold</div><div class="kpi-tile__change up">+ 520 this week</div></div>
+          </div>
+          <div class="dash-row dash-row--2col">
+            <div class="dash-card"><div class="dash-card__header"><div class="dash-card__title">Category Sales (This Month)</div></div><div class="dash-card__body">
+              <div class="chart-wrap">
+                <svg class="svg-chart" viewBox="0 0 400 220" role="img" aria-label="Category sales bar chart">
+                  <line x1="40" y1="180" x2="380" y2="180" stroke="#334155" stroke-width="1"/>
+                  <rect x="55" y="40" width="45" height="140" rx="6" fill="#2563eb" opacity="0.9"/><text x="77" y="35" text-anchor="middle" fill="#94a3b8" font-size="11">38%</text><text x="77" y="198" text-anchor="middle" fill="#cbd5e1" font-size="10">Keyboards</text>
+                  <rect x="115" y="72" width="45" height="108" rx="6" fill="#10b981" opacity="0.9"/><text x="137" y="67" text-anchor="middle" fill="#94a3b8" font-size="11">28%</text><text x="137" y="198" text-anchor="middle" fill="#cbd5e1" font-size="10">Monitors</text>
+                  <rect x="175" y="88" width="45" height="92" rx="6" fill="#38bdf8" opacity="0.9"/><text x="197" y="83" text-anchor="middle" fill="#94a3b8" font-size="11">22%</text><text x="197" y="198" text-anchor="middle" fill="#cbd5e1" font-size="10">Audio</text>
+                  <rect x="235" y="120" width="45" height="60" rx="6" fill="#f59e0b" opacity="0.9"/><text x="257" y="115" text-anchor="middle" fill="#94a3b8" font-size="11">12%</text><text x="257" y="198" text-anchor="middle" fill="#cbd5e1" font-size="10">Mice</text>
+                  <rect x="295" y="140" width="45" height="40" rx="6" fill="#ec4899" opacity="0.9"/><text x="317" y="135" text-anchor="middle" fill="#94a3b8" font-size="11">8%</text><text x="317" y="198" text-anchor="middle" fill="#cbd5e1" font-size="10">Other</text>
+                </svg>
+              </div>
+              <div class="chart-legend">
+                <span class="chart-legend-item"><span class="chart-legend-dot" style="background:#2563eb"></span>NLP Models 38%</span>
+                <span class="chart-legend-item"><span class="chart-legend-dot" style="background:#10b981"></span>Computer Vision 28%</span>
+                <span class="chart-legend-item"><span class="chart-legend-dot" style="background:#38bdf8"></span>Voice AI 22%</span>
+              </div>
+            </div></div>
+            <div class="dash-card"><div class="dash-card__header"><div class="dash-card__title">Revenue Trend (6 Months)</div></div><div class="dash-card__body">
+              <div class="chart-wrap">
+                <svg class="svg-chart" viewBox="0 0 400 220" role="img" aria-label="Revenue line chart">
+                  <defs><linearGradient id="revGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2563eb" stop-opacity="0.35"/><stop offset="100%" stop-color="#2563eb" stop-opacity="0"/></linearGradient></defs>
+                  <line x1="40" y1="180" x2="380" y2="180" stroke="#334155" stroke-width="1"/>
+                  <line x1="40" y1="30" x2="40" y2="180" stroke="#334155" stroke-width="1"/>
+                  <path d="M40,150 L110,130 L180,115 L250,95 L320,70 L380,55 L380,180 L40,180 Z" fill="url(#revGrad)"/>
+                  <polyline points="40,150 110,130 180,115 250,95 320,70 380,55" fill="none" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                  <circle cx="40" cy="150" r="4" fill="#2563eb"/><circle cx="110" cy="130" r="4" fill="#2563eb"/><circle cx="180" cy="115" r="4" fill="#2563eb"/><circle cx="250" cy="95" r="4" fill="#2563eb"/><circle cx="320" cy="70" r="4" fill="#2563eb"/><circle cx="380" cy="55" r="4" fill="#2563eb"/>
+                  <text x="40" y="198" text-anchor="middle" fill="#94a3b8" font-size="9">Jan</text>
+                  <text x="110" y="198" text-anchor="middle" fill="#94a3b8" font-size="9">Feb</text>
+                  <text x="180" y="198" text-anchor="middle" fill="#94a3b8" font-size="9">Mar</text>
+                  <text x="250" y="198" text-anchor="middle" fill="#94a3b8" font-size="9">Apr</text>
+                  <text x="320" y="198" text-anchor="middle" fill="#94a3b8" font-size="9">May</text>
+                  <text x="380" y="198" text-anchor="middle" fill="#94a3b8" font-size="9">Jun</text>
+                </svg>
+              </div>
+              <div class="chart-legend">
+                <span class="chart-legend-item"><span class="chart-legend-dot" style="background:#38bdf8"></span>Monthly revenue up 9.6%</span>
+              </div>
+            </div></div>
+          </div>
+        </div>
+
+        
+        <div class="section-panel" id="section-transactions">
+          <div class="section-header"><div><div class="section-header__title">AI Projects</div><div class="section-header__sub">Product orders and accessory purchases</div></div><button class="section-header__btn" onclick="showToast('Creating new order...')"><i class="fa-solid fa-plus"></i> New Order</button></div>
+          <div class="dash-card"><div class="dash-card__body" style="padding:0"><div class="dash-table-wrap"><table class="dash-table"><thead><tr><th>Order ID</th><th>Customer</th><th>Package</th><th>Amount</th><th>Date</th><th>Status</th><th>Action</th></tr></thead><tbody>
+            <tr><td>#ORD-2841</td><td><div class="dash-table__name"><div class="dash-table__avatar">RK</div><div><div class="dash-table__name-text">Rahul Krishnan</div></div></div></td><td>Gaming Computer Accessories Kit</td><td>₹2,49,999</td><td>Jun 18</td><td><span class="badge badge--green">Delivered</span></td><td><button class="table-action-btn table-action-btn--view" onclick="showToast('Viewing order...')">View</button></td></tr>
+            <tr><td>#ORD-2840</td><td><div class="dash-table__name"><div class="dash-table__avatar">PN</div><div><div class="dash-table__name-text">Priya Nair</div></div></div></td><td>Mechanical Keyboard Pro</td><td>₹45,999</td><td>Jun 19</td><td><span class="badge badge--gold">Processing</span></td><td><button class="table-action-btn table-action-btn--view" onclick="showToast('Viewing order...')">View</button></td></tr>
+            <tr><td>#ORD-2839</td><td><div class="dash-table__name"><div class="dash-table__avatar">VS</div><div><div class="dash-table__name-text">Vijay Sharma</div></div></div></td><td>Monitor + Webcam Bundle</td><td>₹89,999</td><td>Jun 20</td><td><span class="badge badge--blue">Processing</span></td><td><button class="table-action-btn table-action-btn--view" onclick="showToast('Viewing order...')">View</button></td></tr>
+            <tr><td>#ORD-2838</td><td><div class="dash-table__name"><div class="dash-table__avatar">AM</div><div><div class="dash-table__name-text">Ananya Mehta</div></div></div></td><td>Wireless Headset Pro</td><td>₹62,500</td><td>Jun 21</td><td><span class="badge badge--purple">Scheduled</span></td><td><button class="table-action-btn table-action-btn--view" onclick="showToast('Viewing order...')">View</button></td></tr>
+            <tr><td>#ORD-2837</td><td><div class="dash-table__name"><div class="dash-table__avatar">KS</div><div><div class="dash-table__name-text">Karthik Sundaram</div></div></div></td><td>Gaming Mouse + Pad Kit</td><td>₹38,999</td><td>Jun 21</td><td><span class="badge badge--gold">Pending</span></td><td><button class="table-action-btn table-action-btn--view" onclick="showToast('Viewing order...')">View</button></td></tr>
+          </tbody></table></div></div></div>
+        </div>
+
+        
+        <div class="section-panel" id="section-invoices">
+          <div class="section-header"><div><div class="section-header__title">Inventory &amp; Restock</div><div class="section-header__sub">Stock records and warehouse restock logs</div></div><button class="section-header__btn" onclick="showToast('Creating restock record...')"><i class="fa-solid fa-plus"></i> New Restock</button></div>
+          <div class="content-grid">
+            <div class="content-card"><img class="content-card__img" src="assets/blog-1.webp" alt="NLP Model Deployed — Batch #2841" loading="lazy" /><div class="content-card__body"><div class="content-card__title">Keyboard Restock — Batch #2841</div><div class="content-card__meta">INV-2024 · Rahul Krishnan · Jun 18</div><div class="content-card__text">120 mechanical keyboards, 45 wireless mice restocked in Warehouse A.</div><div class="content-card__footer"><span class="badge badge--green">Completed</span><button class="table-action-btn table-action-btn--view" onclick="showToast('Opening invoice...')">View</button></div></div></div>
+            <div class="content-card"><img class="content-card__img" src="assets/service-automation.webp" alt="Data Pipeline Integrated" loading="lazy" /><div class="content-card__body"><div class="content-card__title">4K Monitor + Stand Setup</div><div class="content-card__meta">INV-2025 · Vijay Sharma · Jun 20</div><div class="content-card__text">64 curved monitors received and quality-checked for June dispatch.</div><div class="content-card__footer"><span class="badge badge--blue">In Progress</span><button class="table-action-btn table-action-btn--view" onclick="showToast('Opening invoice...')">View</button></div></div></div>
+            <div class="content-card"><img class="content-card__img" src="assets/blog-2.webp" alt="Voice Synthesis Deployed" loading="lazy" /><div class="content-card__body"><div class="content-card__title">Headset Inventory Audit</div><div class="content-card__meta">INV-2026 · Ananya Mehta · Jun 22</div><div class="content-card__text">Wireless headset stock count and barcode sync completed.</div><div class="content-card__footer"><span class="badge badge--gold">Scheduled</span><button class="table-action-btn table-action-btn--view" onclick="showToast('Opening invoice...')">View</button></div></div></div>
+          </div>
+        </div>
+
+        
+        <div class="section-panel" id="section-users">
+          <div class="section-header"><div><div class="section-header__title">Team Users</div><div class="section-header__sub">Manage system access and roles</div></div><button class="section-header__btn" onclick="showToast('Inviting team member...')"><i class="fa-solid fa-user-plus"></i> Invite User</button></div>
+          <div class="team-grid">
+            <div class="team-card"><div class="team-card__media"><img class="team-card__img" src="assets/male-admin.webp" alt="Arjun Mehta" loading="lazy" /></div><div class="team-card__body"><div class="team-card__name">Arjun Mehta</div><div class="team-card__role">Store Operations Manager</div><div class="team-card__tags"><span class="tag">Admin</span><span class="tag">Engineer</span></div></div></div>
+            <div class="team-card"><div class="team-card__media"><img class="team-card__img" src="assets/female1.webp" alt="Priya Rajan" loading="lazy" /></div><div class="team-card__body"><div class="team-card__name">Priya Rajan</div><div class="team-card__role">Inventory & Quality Lead</div><div class="team-card__tags"><span class="tag">Compliance</span></div></div></div>
+            <div class="team-card"><div class="team-card__media"><img class="team-card__img" src="assets/male3.webp" alt="Karthik Sundaram" loading="lazy" /></div><div class="team-card__body"><div class="team-card__name">Karthik Sundaram</div><div class="team-card__role">Sales Analytics Lead</div><div class="team-card__tags"><span class="tag">Analyst</span></div></div></div>
+            <div class="team-card"><div class="team-card__media"><img class="team-card__img" src="./assets/female4.webp" alt="Kavitha Nair" loading="lazy"></div><div class="team-card__body"><div class="team-card__name">Kavitha Nair</div><div class="team-card__role">Product Merchandiser</div><div class="team-card__tags"><span class="tag">Design</span></div></div></div>
+            <div class="team-card"><div class="team-card__media"><img class="team-card__img" src="assets/male2.webp" alt="Ravi Patel" loading="lazy"></div><div class="team-card__body"><div class="team-card__name">Ravi Patel</div><div class="team-card__role">Warehouse Supervisor</div><div class="team-card__tags"><span class="tag">Technician</span></div></div></div>
+            <div class="team-card"><div class="team-card__media"><img class="team-card__img" src="assets/female4.webp" alt="Meera Joshi" loading="lazy"></div><div class="team-card__body"><div class="team-card__name">Meera Joshi</div><div class="team-card__role">Customer Support Lead</div><div class="team-card__tags"><span class="tag">Support</span></div></div></div>
+          </div>
+        </div>
+
+        
+        <div class="section-panel" id="section-clients">
+          <div class="section-header"><div><div class="section-header__title">Customers</div><div class="section-header__sub">Registered customers and order history</div></div><button class="section-header__btn" onclick="showToast('Adding customer...')"><i class="fa-solid fa-user-plus"></i> Add Customer</button></div>
+          <div class="content-grid">
+            <div class="content-card"><img class="content-card__img" src="./assets/male2.webp" alt="Rahul Krishnan home" loading="lazy" /><div class="content-card__body"><div class="content-card__title">Rahul Krishnan</div><div class="content-card__meta">rahul@email.com · Bangalore · 24 orders</div><div class="content-card__text">Regular buyer — gaming keyboards, monitors, and PC components.</div><div class="content-card__footer"><span class="badge badge--green">Active</span><button class="table-action-btn table-action-btn--view" onclick="showToast('Viewing profile...')">Profile</button></div></div></div>
+            <div class="content-card"><img class="content-card__img" src="assets/female1.webp" alt="Priya Nair home" loading="lazy" /><div class="content-card__body"><div class="content-card__title">Priya Nair</div><div class="content-card__meta">priya@email.com · Mumbai · 8 orders</div><div class="content-card__text">Ordered mechanical keyboard bundle — awaiting delivery.</div><div class="content-card__footer"><span class="badge badge--gold">Pending Setup</span><button class="table-action-btn table-action-btn--view" onclick="showToast('Viewing profile...')">Profile</button></div></div></div>
+            <div class="content-card"><img class="content-card__img" src="assets/male1.webp" alt="Vijay Sharma home" loading="lazy" /><div class="content-card__body"><div class="content-card__title">Vijay Sharma</div><div class="content-card__meta">vijay@email.com · Delhi · 14 orders</div><div class="content-card__text">Purchased 4K monitor and gaming mouse — setting up at home.</div><div class="content-card__footer"><span class="badge badge--blue">Processing</span><button class="table-action-btn table-action-btn--view" onclick="showToast('Viewing profile...')">Profile</button></div></div></div>
+            <div class="content-card"><img class="content-card__img" src="assets/female2.webp" alt="Ananya Mehta home" loading="lazy" /><div class="content-card__body"><div class="content-card__title">Ananya Mehta</div><div class="content-card__meta">ananya@email.com · Hyderabad · 5 orders</div><div class="content-card__text">Headset and webcam order scheduled for dispatch.</div><div class="content-card__footer"><span class="badge badge--purple">Scheduled</span><button class="table-action-btn table-action-btn--view" onclick="showToast('Viewing profile...')">Profile</button></div></div></div>
+            <div class="content-card"><img class="content-card__img" src="assets/male3.webp" alt="Karthik Sundaram home" loading="lazy" /><div class="content-card__body"><div class="content-card__title">Karthik Sundaram</div><div class="content-card__meta">karthik@email.com · Chennai · 19 orders</div><div class="content-card__text">Full-stack components with remote monitoring and voice control.</div><div class="content-card__footer"><span class="badge badge--green">Active</span><button class="table-action-btn table-action-btn--view" onclick="showToast('Viewing profile...')">Profile</button></div></div></div>
+            <div class="content-card"><img class="content-card__img" src="assets/female3.webp" alt="Lakshmi Reddy home" loading="lazy" /><div class="content-card__body"><div class="content-card__title">Lakshmi Reddy</div><div class="content-card__meta">lakshmi@email.com · Pune · 2 orders</div><div class="content-card__text">New customer — starter accessory bundle in cart.</div><div class="content-card__footer"><span class="badge badge--gray">New Lead</span><button class="table-action-btn table-action-btn--view" onclick="showToast('Viewing profile...')">Profile</button></div></div></div>
+          </div>
+        </div>
+
+        
+        <div class="section-panel" id="section-reports">
+          <div class="section-header"><div><div class="section-header__title">Sales Reports</div><div class="section-header__sub">Monthly sales and inventory activity reports</div></div><button class="section-header__btn" onclick="showToast('Generating report...')"><i class="fa-solid fa-file-export"></i> Generate</button></div>
+          <div class="dash-row dash-row--2col">
+            <div class="dash-card"><div class="dash-card__header"><div class="dash-card__title">Report Alerts</div></div><div class="dash-card__body"><div class="alert-list">
+              <div class="alert-card alert-card--urgent"><div class="alert-card__icon"><i class="fa-solid fa-file-circle-exclamation"></i></div><div class="alert-card__body"><div class="alert-card__title">Q2 Sales Report · overdue submission</div><div class="alert-card__meta">Due Jun 30 · Assigned to Arjun Mehta</div></div><span class="badge badge--red">Urgent</span></div>
+              <div class="alert-card alert-card--pending"><div class="alert-card__icon"><i class="fa-solid fa-file-lines"></i></div><div class="alert-card__body"><div class="alert-card__title">Warehouse Stock Audit · May 2026</div><div class="alert-card__meta">In review · 2,140 SKUs catalogued</div></div><span class="badge badge--gold">Pending</span></div>
+              <div class="alert-card alert-card--pending"><div class="alert-card__icon"><i class="fa-solid fa-file-lines"></i></div><div class="alert-card__body"><div class="alert-card__title">Customer Satisfaction Survey · June</div><div class="alert-card__meta">142 responses collected · 68% complete</div></div><span class="badge badge--gold">Pending</span></div>
+              <div class="alert-card alert-card--done"><div class="alert-card__icon"><i class="fa-solid fa-file-circle-check"></i></div><div class="alert-card__body"><div class="alert-card__title">Monthly Revenue Report · May 2026</div><div class="alert-card__meta">₹16.8L recorded · Approved by admin</div></div><span class="badge badge--green">Done</span></div>
+            </div></div></div>
+            <div class="dash-card"><div class="dash-card__header"><div class="dash-card__title">Recent Activity</div></div><div class="dash-card__body"><div class="activity-list">
+              <div class="activity-item"><div class="activity-item__icon" style="background:var(--primary-pale);color:var(--primary)"><i class="fa-solid fa-file-export"></i></div><div><div class="activity-item__text"><strong>Arjun Mehta</strong> exported Bangalore sales report</div><div class="activity-item__time">2 hours ago</div></div></div>
+              <div class="activity-item"><div class="activity-item__icon" style="background:#d1fae5;color:#059669"><i class="fa-solid fa-check"></i></div><div><div class="activity-item__text"><strong>Priya Rajan</strong> approved device compliance audit</div><div class="activity-item__time">5 hours ago</div></div></div>
+              <div class="activity-item"><div class="activity-item__icon" style="background:var(--accent-light);color:var(--accent)"><i class="fa-solid fa-chart-line"></i></div><div><div class="activity-item__text"><strong>Karthik Sundaram</strong> updated analytics dashboard</div><div class="activity-item__time">Yesterday</div></div></div>
+            </div></div></div>
+          </div>
+        </div>
+
+        
+        <div class="section-panel" id="section-compliance">
+          <div class="section-header"><div><div class="section-header__title">Stock Compliance</div><div class="section-header__sub">Stock levels, supplier certifications and quality checks</div></div><button class="section-header__btn" onclick="showToast('Running compliance scan...')"><i class="fa-solid fa-shield-check"></i> Run Scan</button></div>
+          <div class="alert-list" style="margin-bottom:1.25rem">
+            <div class="alert-card alert-card--urgent"><div class="alert-card__icon"><i class="fa-solid fa-microchip"></i></div><div class="alert-card__body"><div class="alert-card__title">Supplier recall notice · 45 gaming mice affected</div><div class="alert-card__meta">Critical security patch required · 3 customer sites</div></div><span class="badge badge--red">Urgent</span></div>
+            <div class="alert-card alert-card--urgent"><div class="alert-card__icon"><i class="fa-solid fa-temperature-half"></i></div><div class="alert-card__body"><div class="alert-card__title">Monitor panel defect batch · Samsung Odyssey series</div><div class="alert-card__meta">5 orders across 4 builds · Exceeds tolerance</div></div><span class="badge badge--red">Urgent</span></div>
+            <div class="alert-card alert-card--pending"><div class="alert-card__icon"><i class="fa-solid fa-certificate"></i></div><div class="alert-card__body"><div class="alert-card__title">BIS certification renewal · Stackly Pro Keyboard v2</div><div class="alert-card__meta">Expires Jul 15, 2026 · Documentation in progress</div></div><span class="badge badge--gold">Pending</span></div>
+            <div class="alert-card alert-card--pending"><div class="alert-card__icon"><i class="fa-solid fa-boxes-stacked"></i></div><div class="alert-card__body"><div class="alert-card__title">USB-C cable compatibility audit</div><div class="alert-card__meta">Q2 FY26 · 89 cables pending QC</div></div><span class="badge badge--gold">Pending</span></div>
+            <div class="alert-card alert-card--done"><div class="alert-card__icon"><i class="fa-solid fa-shield-check"></i></div><div class="alert-card__body"><div class="alert-card__title">Annual safety inspection · Stackly Gaming Mouse Gen 2</div><div class="alert-card__meta">All 340 units passed QC · Certified Jun 10</div></div><span class="badge badge--green">Done</span></div>
+            <div class="alert-card alert-card--done"><div class="alert-card__icon"><i class="fa-solid fa-check-double"></i></div><div class="alert-card__body"><div class="alert-card__title">GDPR data handling review · Customer portals</div><div class="alert-card__meta">Compliant · Reviewed by Priya Rajan · May 2026</div></div><span class="badge badge--green">Done</span></div>
+          </div>
+        </div>
+
+        
+        <div class="section-panel" id="section-settings">
+          <div class="section-header"><div><div class="section-header__title">Settings</div><div class="section-header__sub">Configure your Stackly store admin portal</div></div></div>
+          <div class="settings-grid">
+            <div class="settings-nav">
+              <div class="settings-nav-item active"><i class="fa-solid fa-building"></i> Company Profile</div>
+              <div class="settings-nav-item" onclick="redirect404()" role="button" tabindex="0"><i class="fa-solid fa-bell"></i> Notifications</div>
+              <div class="settings-nav-item" onclick="redirect404()" role="button" tabindex="0"><i class="fa-solid fa-lock"></i> Security</div>
+              <div class="settings-nav-item" onclick="redirect404()" role="button" tabindex="0"><i class="fa-solid fa-plug"></i> Integrations</div>
+              <div class="settings-nav-item" onclick="redirect404()" role="button" tabindex="0"><i class="fa-solid fa-palette"></i> Branding</div>
+            </div>
+            <div class="settings-content">
+              <div class="settings-section-title">Company Profile</div>
+              <form id="adminSettingsForm" onsubmit="handleAdminSettingsSave(event)" novalidate>
+                <div id="adminSettingsAlert" class="settings-form-alert" role="alert"></div>
+                <div class="form-grid">
+                  <div class="form-group" id="adminCompanyNameGroup">
+                    <label for="adminCompanyName">Company Name <span style="color:#ef4444">*</span></label>
+                    <input class="form-control" id="adminCompanyName" type="text" value="" placeholder="Enter company name" required autocomplete="organization" />
+                    <span class="form-error">Company name is required</span>
+                  </div>
+                  <div class="form-group" id="adminSupportEmailGroup">
+                    <label for="adminSupportEmail">Support Email <span style="color:#ef4444">*</span></label>
+                    <input class="form-control" id="adminSupportEmail" type="email" value="" placeholder="Enter support email address" required autocomplete="email" />
+                    <span class="form-error">Support email is required</span>
+                  </div>
+                  <div class="form-group" id="adminPhoneGroup">
+                    <label for="adminPhone">Phone <span style="color:#ef4444">*</span></label>
+                    <input class="form-control" id="adminPhone" type="tel" value="" placeholder="Enter 10-digit phone number" required autocomplete="tel" />
+                    <span class="form-error">Phone number is required</span>
+                  </div>
+                  <div class="form-group" id="adminHubRegionGroup">
+                    <label for="adminHubRegion">Default Warehouse <span style="color:#ef4444">*</span></label>
+                    <select class="form-control" id="adminHubRegion" required>
+                      <option value="" selected disabled>Select warehouse</option>
+                      <option value="south">South India (Bangalore)</option>
+                      <option value="west">West India (Mumbai)</option>
+                      <option value="north">North India (Delhi)</option>
+                    </select>
+                    <span class="form-error">Please select a warehouse</span>
+                  </div>
+                  <div class="form-group form-group--full" id="adminAddressGroup">
+                    <label for="adminBusinessAddress">Business Address <span style="color:#ef4444">*</span></label>
+                    <input class="form-control" id="adminBusinessAddress" type="text" value="" placeholder="Enter full business address" required autocomplete="street-address" />
+                    <span class="form-error">Business address is required</span>
+                  </div>
+                </div>
+                <div style="margin-top:1.25rem"><button type="submit" class="section-header__btn"><i class="fa-solid fa-floppy-disk"></i> Save Changes</button></div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        
+        <div class="section-panel" id="section-notifications">
+          <div class="section-header"><div><div class="section-header__title">Notifications</div><div class="section-header__sub">System alerts and admin notifications</div></div><button class="section-header__btn" onclick="showToast('All notifications marked read')"><i class="fa-solid fa-check-double"></i> Mark All Read</button></div>
+          <div class="dash-card"><div class="dash-card__body"><div class="activity-list">
+            <div class="activity-item"><div class="activity-item__icon" style="background:#fee2e2;color:#dc2626"><i class="fa-solid fa-triangle-exclamation"></i></div><div><div class="activity-item__text"><strong>Device Alert:</strong> Low stock alert at Logitech MX Keys — 3 units left · Warehouse A unresponsive for 2 hours</div><div class="activity-item__time">12 min ago · Urgent</div></div></div>
+            <div class="activity-item"><div class="activity-item__icon" style="background:var(--primary-pale);color:var(--primary)"><i class="fa-solid fa-cart-shopping"></i></div><div><div class="activity-item__text"><strong>New Order:</strong> Karthik Sundaram ordered Gaming Mouse + Pad Kit · ₹38,999</div><div class="activity-item__time">45 min ago</div></div></div>
+            <div class="activity-item"><div class="activity-item__icon" style="background:#d1fae5;color:#059669"><i class="fa-solid fa-check-circle"></i></div><div><div class="activity-item__text"><strong>Order Delivered:</strong> Rahul Krishnan's Gaming PC Build Kit order delivered successfully</div><div class="activity-item__time">3 hours ago</div></div></div>
+            <div class="activity-item"><div class="activity-item__icon" style="background:#fef3c7;color:#d97706"><i class="fa-solid fa-clock"></i></div><div><div class="activity-item__text"><strong>Reminder:</strong> Dispatch scheduled for Ananya Mehta · Wireless Headset Pro tomorrow 10 AM</div><div class="activity-item__time">5 hours ago</div></div></div>
+            <div class="activity-item"><div class="activity-item__icon" style="background:var(--accent-light);color:var(--accent)"><i class="fa-solid fa-clipboard-check"></i></div><div><div class="activity-item__text"><strong>Stock Alert:</strong> Supplier recall notice affects 45 gaming mice — replacement stock required</div><div class="activity-item__time">Yesterday · Urgent</div></div></div>
+          </div></div></div>
+        </div>
+
+        
+        <div class="section-panel" id="section-support">
+          <div class="section-header"><div><div class="section-header__title">Help &amp; Support</div><div class="section-header__sub">Admin support resources and ticket management</div></div></div>
+          <div class="dash-row dash-row--2col">
+            <div class="dash-card"><div class="dash-card__header"><div class="dash-card__title">Quick Help</div></div><div class="dash-card__body"><div class="quick-actions">
+              <button class="quick-action-btn" onclick="showToast('Opening documentation...')"><i class="fa-solid fa-book"></i><span>Documentation</span></button>
+              <button class="quick-action-btn" onclick="showToast('Opening API guide...')"><i class="fa-solid fa-code"></i><span>API Guide</span></button>
+              <button class="quick-action-btn" onclick="showToast('Opening video tutorials...')"><i class="fa-solid fa-video"></i><span>Tutorials</span></button>
+              <button class="quick-action-btn" onclick="showToast('Contacting support...')"><i class="fa-solid fa-headset"></i><span>Live Chat</span></button>
+            </div></div></div>
+            <div class="dash-card"><div class="dash-card__header"><div class="dash-card__title">Submit Support Ticket</div></div><div class="dash-card__body">
+              <div class="form-grid">
+                <div class="form-group"><label>Subject</label><input class="form-control" type="text" placeholder="e.g. Stock sync issue in warehouse" /></div>
+                <div class="form-group"><label>Priority</label><select class="form-control"><option>Low</option><option selected>Medium</option><option>High</option><option>Critical</option></select></div>
+                <div class="form-group form-group--full"><label>Describe your issue</label><textarea class="form-control" style="resize:vertical;min-height:80px" placeholder="Describe the problem in detail..."></textarea></div>
+              </div>
+              <div style="margin-top:1rem"><button class="section-header__btn" onclick="showToast('Support ticket submitted! Ticket #TKT-0412 created.')"><i class="fa-solid fa-paper-plane"></i> Submit Ticket</button></div>
+            </div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const session = localStorage.getItem('stackly_user') || sessionStorage.getItem('stackly_user');
+  if (!session) { window.location.href = 'signin.html'; return; }
+  const user = JSON.parse(session);
+  if (user.role !== 'admin') { window.location.href = 'customer-dashboard.html'; return; }
+  populateUser(user);
+})();
+
+function populateUser(user) {
+  const name = user.name || 'Admin';
+  const email = user.email || 'admin@stackly.com';
+  const initials = name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+  const el = id => document.getElementById(id);
+  if (el('sidebarUserName')) el('sidebarUserName').textContent = name;
+  if (el('sidebarUserEmail')) el('sidebarUserEmail').textContent = email;
+  if (el('sidebarAvatarText')) el('sidebarAvatarText').textContent = initials;
+  if (el('welcomeName')) el('welcomeName').textContent = name.split(' ')[0];
+  if (el('welcomeEmail')) el('welcomeEmail').textContent = email + ' · Last login: Today, 9:42 AM';
+  document.title = 'Admin Dashboard | Stackly AI Agency';
+}
+
+let sidebarOpen = false;
+
+function toggleSidebar() {
+  sidebarOpen ? closeSidebar() : openSidebar();
+}
+
+function openSidebar() {
+  sidebarOpen = true;
+  document.getElementById('sidebar').classList.add('open');
+  document.getElementById('sidebarOverlay').classList.add('active');
+  const icon = document.getElementById('hamburgerIcon');
+  if (icon) icon.className = 'fa-solid fa-xmark';
+  const btn = document.getElementById('hamburgerBtn');
+  if (btn) btn.setAttribute('aria-expanded', 'true');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeSidebar() {
+  sidebarOpen = false;
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('sidebarOverlay').classList.remove('active');
+  const icon = document.getElementById('hamburgerIcon');
+  if (icon) icon.className = 'fa-solid fa-bars';
+  const btn = document.getElementById('hamburgerBtn');
+  if (btn) btn.setAttribute('aria-expanded', 'false');
+  document.body.style.overflow = '';
+}
+
+function showSection(sectionId, titleText, navEl) {
+  document.querySelectorAll('.section-panel').forEach(p => p.classList.remove('active'));
+  const target = document.getElementById('section-' + sectionId);
+  if (target) {
+    target.classList.add('active');
+    target.style.animation = 'none';
+    target.offsetHeight;
+    target.style.animation = '';
+  }
+  document.querySelectorAll('.sidebar__nav-item').forEach(i => i.classList.remove('active'));
+  if (navEl) navEl.classList.add('active');
+  const titleMap = {
+    overview: 'Dashboard', analytics: 'Analytics', transactions: 'AI Projects',
+    invoices: 'Inventory', users: 'Team Users', clients: 'Customers',
+    reports: 'Sales Reports', compliance: 'Stock Compliance',
+    settings: 'Settings', notifications: 'Notifications', support: 'Help & Support'
+  };
+  const label = titleText || titleMap[sectionId] || sectionId;
+  const titleEl = document.getElementById('topbarTitle');
+  const bcEl = document.getElementById('topbarBreadcrumb');
+  if (titleEl) titleEl.innerHTML = 'Admin <span>' + label + '</span>';
+  if (bcEl) bcEl.textContent = 'Home / ' + label;
+  if (window.innerWidth <= 1024) closeSidebar();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function redirect404() { window.location.href = '404.html'; }
+
+function showToast() { redirect404(); }
+
+function validateAdminName(name) {
+  return /^[a-zA-Z0-9\s&.,'-]+$/.test(name) && name.trim().length >= 2;
+}
+
+function validateAdminEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+function validateAdminPhone(phone) {
+  return phone.replace(/\D/g, '').length === 10;
+}
+
+function validateAdminAddress(address) {
+  return address.trim().length >= 10;
+}
+
+function validateAdminField(value, emptyMsg, invalidMsg, validator) {
+  const trimmed = (value || '').trim();
+  if (!trimmed) return emptyMsg;
+  if (validator && !validator(trimmed)) return invalidMsg;
+  return '';
+}
+
+function setAdminFieldError(group, message) {
+  if (!group) return;
+  const errEl = group.querySelector('.form-error');
+  if (message) {
+    group.classList.add('has-error');
+    if (errEl) errEl.textContent = message;
+  } else {
+    group.classList.remove('has-error');
+  }
+}
+
+function handleAdminSettingsSave(e) {
+  e.preventDefault();
+
+  const companyEl = document.getElementById('adminCompanyName');
+  const emailEl = document.getElementById('adminSupportEmail');
+  const phoneEl = document.getElementById('adminPhone');
+  const regionEl = document.getElementById('adminHubRegion');
+  const addressEl = document.getElementById('adminBusinessAddress');
+  const alertEl = document.getElementById('adminSettingsAlert');
+
+  const errors = [
+    { group: document.getElementById('adminCompanyNameGroup'), message: validateAdminField(companyEl.value, 'Company name is required', 'Enter a valid company name (min 2 characters)', validateAdminName) },
+    { group: document.getElementById('adminSupportEmailGroup'), message: validateAdminField(emailEl.value, 'Support email is required', 'Please enter a valid email address', validateAdminEmail) },
+    { group: document.getElementById('adminPhoneGroup'), message: validateAdminField(phoneEl.value, 'Phone number is required', 'Please enter a valid 10-digit phone number', validateAdminPhone) },
+    { group: document.getElementById('adminHubRegionGroup'), message: regionEl.value ? '' : 'Please select a warehouse' },
+    { group: document.getElementById('adminAddressGroup'), message: validateAdminField(addressEl.value, 'Business address is required', 'Please enter a complete address (min 10 characters)', validateAdminAddress) }
+  ];
+
+  let firstInvalid = null;
+  errors.forEach(function(item) {
+    setAdminFieldError(item.group, item.message);
+    if (item.message && !firstInvalid) firstInvalid = item.group;
+  });
+
+  if (errors.some(function(item) { return item.message; })) {
+    if (alertEl) {
+      alertEl.textContent = 'Please fill all required fields correctly before saving.';
+      alertEl.classList.add('show');
+    }
+    if (firstInvalid) firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
+
+  if (alertEl) alertEl.classList.remove('show');
+  redirect404();
+}
+
+['adminCompanyName', 'adminSupportEmail', 'adminPhone', 'adminBusinessAddress'].forEach(function(id) {
+  const input = document.getElementById(id);
+  if (!input) return;
+  input.addEventListener('input', function() {
+    const group = input.closest('.form-group');
+    if (group) group.classList.remove('has-error');
+    const alertEl = document.getElementById('adminSettingsAlert');
+    if (alertEl) alertEl.classList.remove('show');
+  });
+});
+
+const regionSelect = document.getElementById('adminHubRegion');
+if (regionSelect) {
+  regionSelect.addEventListener('change', function() {
+    const group = regionSelect.closest('.form-group');
+    if (group) group.classList.remove('has-error');
+    const alertEl = document.getElementById('adminSettingsAlert');
+    if (alertEl) alertEl.classList.remove('show');
+  });
+}
+
+function handleLogout() {
+  localStorage.removeItem('stackly_user');
+  sessionStorage.removeItem('stackly_user');
+  window.location.href = 'signin.html';
+}
+
+function show404Modal() { redirect404(); }
+
+document.getElementById('modal404').addEventListener('click', function(e) {
+  if (e.target === this) redirect404();
+});
+
+history.pushState(null, '', location.href);
+window.addEventListener('popstate', function() {
+  const user = JSON.parse(localStorage.getItem('stackly_user') || sessionStorage.getItem('stackly_user') || 'null');
+  if (!user || !user.loggedIn) {
+    window.location.replace('signin.html');
+  } else {
+    history.pushState(null, '', location.href);
+  }
+});
+
+window.addEventListener('resize', function() {
+  if (window.innerWidth > 1024) closeSidebar();
+});
+
+document.querySelectorAll('.sidebar__nav-item').forEach(function(item) {
+  item.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      item.click();
+    }
+  });
+});
+</script>
+
+</body>
+</html>
+
+
+

@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Sign In to Stackly — AI Agency & Technology Platform" />
+  <meta name="theme-color" content="#2563eb" />
+  <title>Sign In - Stackly</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    :root {
+      --clr-primary: #e24c4a;        /* Coral Red primary */
+      --clr-primary-light: rgba(226, 76, 74, 0.2);
+      --clr-primary-pale: rgba(226, 76, 74, 0.05);
+      --clr-accent: #ff4f44;         /* Vibrant Neon Red accent */
+      --clr-bg: #0F0F12;             /* Dark body background */
+      --clr-white: #ffffff;
+      --clr-border: #2D3748;         /* Border color */
+      --clr-text-dark: #FFFFFF;      /* White text in dark mode */
+      --clr-text-body: #A0AEC0;      /* Secondary text */
+      --clr-text-muted: #6C7289;
+      --clr-text-light: #A0AEC0;
+      
+      --r-md: 12px;                  /* Rounded corners for inputs/inner cards */
+      --r-lg: 16px;                  /* Rounded corners for outer cards */
+      --r-full: 9999px;
+      
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
+      --dur-base: 0.25s;
+    }
+
+    .signin-page {
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      overflow: hidden;
+    }
+
+    .signin-visual {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start; padding-top: 15%;
+      padding: 3rem;
+      overflow: hidden;
+      background: linear-gradient(160deg, var(--clr-primary-pale) 0%, var(--clr-bg) 100%);
+    }
+
+    .signin-visual__bg {
+      position: absolute;
+      inset: 0;
+      background: url('assets/hero_fluid_bg.webp') center/cover no-repeat !important;
+      opacity: 2.0;
+      z-index: 0;
+    }
+
+    .signin-visual__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(8, 15, 25, 0.95), rgba(8, 15, 25, 0.8));
+      z-index: 1;
+    }
+    .signin-visual__pattern {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,0,0,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,0.02) 1px, transparent 1px);
+      background-size: 48px 48px;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .signin-visual__decor-circle {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .signin-visual__decor-circle--1 {
+      width: 400px;
+      height: 400px;
+      top: -100px;
+      right: -100px;
+      background: radial-gradient(circle, rgba(37,99,235,0.08) 0%, transparent 70%);
+      animation: float-slow 12s ease-in-out infinite;
+    }
+
+    .signin-visual__decor-circle--2 {
+      width: 280px;
+      height: 280px;
+      bottom: -60px;
+      left: -60px;
+      background: radial-gradient(circle, rgba(56,189,248,0.08) 0%, transparent 70%);
+      animation: float-slow 16s ease-in-out infinite reverse;
+    }
+
+    .signin-visual__content {
+      position: relative;
+      z-index: 3;
+      max-width: 420px;
+      transform: translateY(-20px); 
+    }
+
+    .signin-visual__logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      margin-bottom: 0;
+      text-decoration: none;
+      width: fit-content;
+    }
+
+    .signin-visual__logo img {
+      width: 120px;
+      height: 120px;
+      object-fit: contain;
+      filter: none;
+    }
+
+    .signin-visual__logo-text {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--clr-text-dark);
+    }
+
+    .signin-visual__logo-text span {
+      color: var(--clr-primary);
+    }
+
+    .signin-visual .logo-brand,
+    .signin-form-side .logo-brand {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #fff;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+    }
+    .signin-visual .logo-brand .logo-accent,
+    .signin-form-side .logo-brand .logo-accent { color: #38bdf8; }
+    .signin-visual .logo-brand i,
+    .signin-form-side .logo-brand i { color: #38bdf8; font-size: 1.2rem; }
+
+    .signin-visual__tagline {
+      font-family: var(--font-heading);
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 700;
+      color: #ffffff;
+        text-shadow: 0 4px 16px rgba(0,0,0,1), 0 0 24px rgba(0,0,0,0.9);
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .signin-visual__tagline em {
+      color: var(--clr-primary);
+      font-style: normal;
+      position: relative;
+    }
+
+    .signin-visual__tagline em::after {
+      content: '';
+      position: absolute;
+      bottom: 2px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--clr-primary), var(--clr-accent));
+      border-radius: var(--r-full);
+      opacity: 0.3;
+    }
+
+    .signin-visual__text {
+      font-size: 0.95rem;
+      color: #ffffff;
+        text-shadow: 0 3px 12px rgba(0,0,0,1), 0 0 16px rgba(0,0,0,0.9);
+        font-weight: 500;
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+    }
+
+    .signin-visual__stats {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .signin-visual__stat {
+      text-align: left;
+    }
+
+    .signin-visual__stat-num {
+      font-family: var(--font-heading);
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #ffffff;
+        text-shadow: 0 3px 12px rgba(0,0,0,1), 0 0 16px rgba(0,0,0,0.9);
+      line-height: 1;
+    }
+
+    .signin-visual__stat-label {
+      font-size: 0.78rem;
+      color: #ffffff;
+        text-shadow: 0 2px 8px rgba(0,0,0,1);
+        font-weight: 600;
+      margin-top: 0.3rem;
+    }
+
+    .signin-visual__stat-divider {
+      width: 1.5px;
+      background: rgba(255, 255, 255, 0.25);
+      align-self: stretch;
+    }
+
+    .form-back-btn {
+      padding: 0.45rem 1rem;
+      border-radius: var(--r-full);
+      background: rgba(255, 255, 255, 0.08);
+      border: 1.5px solid rgba(255, 255, 255, 0.15);
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--clr-white);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all var(--dur-base) var(--ease);
+      width: fit-content;
+      margin-top: 4.5rem;
+    }
+    .form-back-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+    .form-back-btn i {
+      font-size: 0.8rem;
+      transition: transform var(--dur-base) var(--ease);
+    }
+    .form-back-btn:hover i {
+      transform: translateX(-3px);
+    }
+
+    .signin-form-side {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 3rem 3.5rem;
+      background: linear-gradient(160deg, rgba(15, 23, 42, 0.98) 0%, rgba(30, 41, 59, 0.99) 60%, rgba(15, 23, 42, 1) 100%);
+      overflow-y: auto;
+      position: relative;
+    }
+
+    .signin-form-side__inner {
+      width: 100%;
+      max-width: 440px;
+    }
+
+    .signin-form-box__header {
+      margin-bottom: 2rem;
+    }
+
+    .signin-form-box__logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      width: fit-content;
+    }
+
+    .signin-form-box__logo img {
+      width: 120px;
+      height: 120px;
+      object-fit: contain;
+    }
+
+    .signin-form-box__title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--clr-text-dark);
+      margin-bottom: 0.4rem;
+    }
+
+    .signin-form-box__sub {
+      font-size: 0.9rem;
+      color: var(--clr-text-muted);
+      line-height: 1.6;
+    }
+
+    .role-selector {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .role-option {
+      position: relative;
+      cursor: pointer;
+    }
+
+    .role-option input {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .role-option__card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1.25rem 0.75rem;
+      background: var(--clr-white);
+      border: 2px solid var(--clr-border);
+      border-radius: var(--r-lg);
+      transition: all var(--dur-base) var(--ease);
+      text-align: center;
+    }
+
+    .role-option__card i {
+      font-size: 1.6rem;
+      color: var(--clr-text-muted);
+      transition: color var(--dur-base) var(--ease), transform var(--dur-base) var(--ease-bounce);
+    }
+
+    .role-option__card span {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--clr-text-body);
+      transition: color var(--dur-base) var(--ease);
+    }
+
+    .role-option input:checked + .role-option__card {
+      border-color: var(--clr-primary);
+      background: var(--clr-primary-pale);
+      box-shadow: 0 0 0 2px var(--clr-primary);
+      transform: translateY(-2px);
+    }
+
+    .role-option input:checked + .role-option__card i {
+      color: var(--clr-primary);
+      transform: scale(1.1);
+    }
+
+    .role-option input:checked + .role-option__card span {
+      color: var(--clr-primary);
+      font-weight: 700;
+    }
+
+    .role-option__card:hover {
+      border-color: var(--clr-primary-light);
+      transform: translateY(-2px);
+    }
+
+    .signin-form-group {
+      margin-bottom: 1.1rem;
+      position: relative;
+    }
+
+    .signin-form-label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--clr-text-dark);
+      margin-bottom: 0.4rem;
+    }
+
+    .signin-form-label .required {
+      color: #E53E3E;
+      margin-left: 2px;
+    }
+
+    .signin-form-input {
+      width: 100%;
+      padding: 0.85rem 1rem 0.85rem 2.75rem;
+      background: var(--clr-white);
+      border: 1.5px solid var(--clr-border);
+      border-radius: var(--r-md);
+      font-size: 0.9rem;
+      color: var(--clr-text-dark);
+      transition: border-color var(--dur-base) var(--ease), box-shadow var(--dur-base) var(--ease);
+    }
+
+    .signin-form-input:focus {
+      border-color: var(--clr-primary);
+      box-shadow: 0 0 0 3.5px rgba(37, 99, 235, 0.10);
+      outline: none;
+    }
+
+    .signin-form-input::placeholder {
+      color: var(--clr-text-light);
+    }
+
+    .signin-form-input.error {
+      border-color: #E53E3E;
+      box-shadow: 0 0 0 3.5px rgba(229, 62, 62, 0.10);
+    }
+
+    .signin-form-group__icon {
+      position: absolute;
+      left: 1rem;
+      bottom: 0.9rem;
+      color: var(--clr-text-muted);
+      font-size: 0.95rem;
+      transition: color var(--dur-base) var(--ease);
+      pointer-events: none;
+    }
+
+    .signin-form-input:focus + .signin-form-group__icon,
+    .signin-form-group:focus-within .signin-form-group__icon {
+      color: var(--clr-primary);
+    }
+
+    .signin-form-error {
+      font-size: 0.78rem;
+      color: #E53E3E;
+      margin-top: 0.3rem;
+      display: none;
+      animation: slide-down 0.2s var(--ease);
+    }
+
+    .signin-form-group.has-error .signin-form-error {
+      display: block;
+    }
+
+    .signin-form-group.has-error .signin-form-input {
+      border-color: #E53E3E;
+      box-shadow: 0 0 0 3.5px rgba(229, 62, 62, 0.10);
+    }
+
+    .password-wrap {
+      position: relative;
+    }
+
+    .password-toggle {
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--clr-text-muted);
+      cursor: pointer;
+      font-size: 0.9rem;
+      padding: 0.25rem;
+      transition: color var(--dur-base) var(--ease);
+    }
+
+    .password-toggle:hover {
+      color: var(--clr-primary);
+    }
+
+    
+    input[type="password"]::-ms-reveal,
+    input[type="password"]::-ms-clear {
+      display: none;
+    }
+
+    .signin-options {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .remember-me {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+    }
+
+    .remember-me input {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--clr-primary);
+      cursor: pointer;
+    }
+
+    .remember-me span {
+      font-size: 0.85rem;
+      color: var(--clr-text-muted);
+    }
+
+    .forgot-link {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--clr-primary);
+      transition: color var(--dur-base) var(--ease);
+    }
+
+    .forgot-link:hover {
+      color: var(--clr-accent);
+    }
+
+    .signin-submit {
+      width: 100%;
+      padding: 0.9rem;
+      background: var(--clr-accent);
+      color: var(--clr-white);
+      border: none;
+      border-radius: var(--r-full);
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all var(--dur-base) var(--ease);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .signin-submit::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(255,255,255,0.25) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity var(--dur-fast) var(--ease);
+      pointer-events: none;
+    }
+
+    .signin-submit:hover::after {
+      opacity: 1;
+    }
+
+    .signin-submit:hover {
+      background: var(--clr-primary-light);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-green);
+    }
+
+    .signin-submit:active {
+      transform: scale(0.98);
+    }
+
+    .signin-submit:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .signin-divider {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-block: 1.5rem;
+      font-size: 0.82rem;
+      color: var(--clr-text-muted);
+    }
+
+    .signin-divider::before,
+    .signin-divider::after {
+      content: '';
+      flex: 1;
+      height: 1.5px;
+      background: var(--clr-border);
+    }
+
+    .social-auth {
+      display: flex;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .social-auth-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.7rem;
+      background: var(--clr-white);
+      border: 1.5px solid var(--clr-border);
+      border-radius: var(--r-md);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--clr-text-dark);
+      cursor: pointer;
+      transition: all var(--dur-base) var(--ease);
+    }
+
+    .social-auth-btn:hover {
+      border-color: var(--clr-primary);
+      box-shadow: var(--shadow-sm);
+      transform: translateY(-2px);
+    }
+
+    .social-auth-btn i {
+      font-size: 1rem;
+    }
+
+    .social-auth-btn.google i { color: #DB4437; }
+    .social-auth-btn.facebook i { color: #1877F2; }
+
+    .signin-footer {
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--clr-text-muted);
+      margin-top: 1.5rem;
+    }
+
+    .signin-footer a {
+      color: var(--clr-primary);
+      font-weight: 600;
+      transition: color var(--dur-base) var(--ease);
+    }
+
+    .signin-footer a:hover {
+      color: var(--clr-accent);
+    }
+
+    .role-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.35rem 0.85rem;
+      border-radius: var(--r-full);
+      font-size: 0.78rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      animation: slide-down 0.3s var(--ease);
+    }
+
+    .role-badge--admin {
+      background: linear-gradient(135deg, #E8F5FF 0%, #D4EDFF 100%);
+      color: #1976D2;
+      border: 1.5px solid #BBDEFB;
+    }
+
+    .role-badge--customer {
+      background: linear-gradient(135deg, var(--clr-primary-pale) 0%, #D4EDDA 100%);
+      color: var(--clr-primary);
+      border: 1.5px solid #C8E6C9;
+    }
+
+    .spinner {
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: var(--clr-white);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      display: none;
+    }
+
+    .signin-submit.loading .spinner {
+      display: block;
+    }
+
+    .signin-submit.loading .btn-text {
+      display: none;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .signin-toast {
+      position: fixed;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: #1c1d24; /* Solid high-contrast dark background */
+      border: 1.5px solid var(--clr-border);
+      border-left: 4px solid var(--clr-primary);
+      border-radius: var(--r-md);
+      padding: 1rem 1.25rem;
+      box-shadow: var(--shadow-lg);
+      font-size: 0.88rem;
+      color: #ffffff; /* Bright white text */
+      z-index: 9999;
+      max-width: 320px;
+      transform: translateX(120%);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: transform var(--dur-base) var(--ease-bounce), opacity var(--dur-base) var(--ease), visibility var(--dur-base) var(--ease);
+    }
+
+    .signin-toast.show {
+      transform: translateX(0);
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .signin-toast--success { border-left-color: var(--clr-primary); }
+    .signin-toast--error { border-left-color: #E53E3E; }
+
+    .signin-form-side .signin-form-box__title { color: var(--clr-white); }
+    .signin-form-side .signin-form-box__sub { color: rgba(255,255,255,0.7); }
+    .signin-form-side .signin-form-label { color: rgba(255,255,255,0.9); }
+    .signin-form-side .remember-me span { color: rgba(255,255,255,0.7); }
+    .signin-form-side .signin-footer { color: rgba(255,255,255,0.65); }
+    .signin-form-side .signin-footer a { color: var(--clr-accent); }
+    .signin-form-side .forgot-link { color: var(--clr-accent); }
+    .signin-form-side .signin-divider { color: rgba(255,255,255,0.5); }
+    .signin-form-side .signin-divider::before,
+    .signin-form-side .signin-divider::after { background: rgba(255,255,255,0.15); }
+
+    .signin-form-side .signin-form-input {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.15);
+      color: var(--clr-white);
+    }
+    .signin-form-side .signin-form-input::placeholder {
+      color: rgba(255, 255, 255, 0.4);
+    }
+    .signin-form-side .signin-form-input:focus {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: var(--clr-accent);
+      box-shadow: 0 0 0 3.5px rgba(56, 189, 248, 0.15);
+    }
+    .signin-form-side .signin-form-group__icon {
+      color: rgba(255, 255, 255, 0.4);
+    }
+    .signin-form-side .signin-form-input:focus + .signin-form-group__icon,
+    .signin-form-side .signin-form-group:focus-within .signin-form-group__icon {
+      color: var(--clr-accent);
+    }
+
+    .signin-form-side .password-toggle {
+      color: rgba(255, 255, 255, 0.6);
+    }
+    .signin-form-side .password-toggle:hover,
+    .signin-form-side .password-toggle:focus {
+      color: var(--clr-accent);
+    }
+
+    .signin-form-side .role-option__card {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+    .signin-form-side .role-option__card span {
+      color: rgba(255, 255, 255, 0.8);
+    }
+    .signin-form-side .role-option__card i {
+      color: rgba(255, 255, 255, 0.6);
+    }
+    .signin-form-side .role-option input:checked + .role-option__card {
+      background: rgba(226, 76, 74, 0.25);
+      border-color: var(--clr-primary);
+      box-shadow: 0 0 0 2px var(--clr-primary);
+    }
+    .signin-form-side .role-option input:checked + .role-option__card i {
+      color: var(--clr-primary);
+    }
+    .signin-form-side .role-option input:checked + .role-option__card span {
+      color: var(--clr-primary);
+    }
+    .signin-form-side .role-option__card:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: var(--clr-primary-light);
+      transform: translateY(-2px);
+    }
+    .signin-form-side .signin-submit:hover {
+      background: var(--clr-accent);
+      color: #ffffff;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(226, 76, 74, 0.35);
+    }
+
+    .signin-form-side .social-auth-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.15);
+      color: var(--clr-white);
+    }
+    .signin-form-side .social-auth-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    @media (max-width: 1024px) {
+      .signin-page { grid-template-columns: 1fr; }
+      .signin-visual { display: none; }
+      .signin-form-side { padding: 2.5rem 2rem; }
+      .signin-mobile-back { display: inline-flex; color: var(--clr-accent); }
+    }
+
+    @media (max-width: 480px) {
+      .signin-form-side { padding: 1.75rem 1.25rem; }
+      .signin-form-box__title { font-size: 1.4rem; }
+      .role-selector { gap: 0.5rem; }
+      .role-option__card { padding: 1rem 0.5rem; }
+      .social-auth { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+<div id="stackly-preloader" class="stackly-preloader" role="status" aria-live="polite" aria-label="Loading Stackly">
+  <div class="stackly-preloader__aurora" aria-hidden="true"></div>
+  <div class="stackly-preloader__particles" aria-hidden="true">
+    <span></span><span></span><span></span><span></span><span></span><span></span>
+  </div>
+  <div class="stackly-preloader__core">
+    <div class="stackly-preloader__ring stackly-preloader__ring--1"></div>
+    <div class="stackly-preloader__ring stackly-preloader__ring--2"></div>
+    <div class="stackly-preloader__ring stackly-preloader__ring--3"></div>
+    <div class="stackly-preloader__logo-glow" aria-hidden="true"></div>
+    <img src="assets/logo.webp" alt="Stackly" class="stackly-preloader__logo" width="140" height="48" decoding="sync">
+  </div>
+  <div class="stackly-preloader__progress" aria-hidden="true"><span></span></div>
+</div>
+<script src="script.js"></script>
+
+
+
+<div class="signin-toast" id="signinToast" role="alert" aria-live="polite"></div>
+
+<div class="signin-page">
+
+  <div class="signin-visual" aria-hidden="true">
+    <div class="signin-visual__bg"></div>
+    <div class="signin-visual__overlay"></div>
+    <div class="signin-visual__pattern"></div>
+    <div class="signin-visual__decor-circle signin-visual__decor-circle--1"></div>
+    <div class="signin-visual__decor-circle signin-visual__decor-circle--2"></div>
+
+    <div class="signin-visual__content">
+      <div class="signin-logo-wrap" style="width: 100%; display: flex; flex-direction: column; align-items: flex-start; margin-bottom: 2.5rem; gap: 0.75rem;">
+        <a href="index.html" class="logo-brand"><img src="assets/logo.webp" alt="Stackly Logo" style="height: 36px; width: auto;" /></a>
+      </div>
+
+      <h2 class="signin-visual__tagline">
+        Welcome Back to<br><em>Stackly AI</em>
+      </h2>
+      <p class="signin-visual__text">
+        Sign in to access your dashboard, manage your AI projects, track service requests, and get support from our machine learning specialists — all in one place.
+      </p>
+
+      <div class="signin-visual__stats">
+        <div class="signin-visual__stat">
+          <div class="signin-visual__stat-num">50k+</div>
+          <div class="signin-visual__stat-label">Happy Clients</div>
+        </div>
+        <div class="signin-visual__stat-divider"></div>
+        <div class="signin-visual__stat">
+          <div class="signin-visual__stat-num">200+</div>
+          <div class="signin-visual__stat-label">AI Models</div>
+        </div>
+        <div class="signin-visual__stat-divider"></div>
+        <div class="signin-visual__stat">
+          <div class="signin-visual__stat-num">98%</div>
+          <div class="signin-visual__stat-label">Satisfaction</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="signin-form-side">
+    <div class="signin-form-side__inner">
+
+      <div class="signin-form-box__header">
+        <div style="display: flex; align-items: center; justify-content: flex-end; width: 100%; margin-bottom: 1.5rem;">
+          <a href="index.html" class="form-back-btn" style="margin-top: 0;">
+            <i class="fa-solid fa-arrow-left"></i> Back to Home
+          </a>
+        </div>
+        <h1 class="signin-form-box__title">Sign In to Your Account</h1>
+        <p class="signin-form-box__sub">Choose your role and enter your credentials to access the dashboard.</p>
+      </div>
+
+      <div class="role-selector" id="roleSelector">
+        <label class="role-option">
+          <input type="radio" name="role" value="admin" id="roleAdmin" />
+          <div class="role-option__card">
+            <i class="fa-solid fa-user-shield"></i>
+            <span>Admin</span>
+          </div>
+        </label>
+        <label class="role-option">
+          <input type="radio" name="role" value="customer" id="roleCustomer" checked />
+          <div class="role-option__card">
+            <i class="fa-solid fa-user"></i>
+            <span>Customer</span>
+          </div>
+        </label>
+      </div>
+
+      <div id="roleBadge" class="role-badge role-badge--customer">
+        <i class="fa-solid fa-user"></i> Signing in as <strong>Customer</strong>
+      </div>
+
+      <form id="signinForm" onsubmit="handleSignin(event)" novalidate>
+
+        <div class="signin-form-group" id="nameGroup">
+          <label class="signin-form-label" for="fullName">Full Name <span class="required">*</span></label>
+          <div style="position:relative;">
+            <input 
+              class="signin-form-input" 
+              type="text" 
+              id="fullName" 
+              name="fullName" 
+              placeholder="Enter your name" 
+              required
+              autocomplete="name"
+            />
+            <i class="fa-solid fa-user signin-form-group__icon"></i>
+          </div>
+          <span class="signin-form-error">Name contains only alphabets</span>
+        </div>
+
+        <div class="signin-form-group" id="emailGroup">
+          <label class="signin-form-label" for="email">Email Address <span class="required">*</span></label>
+          <div style="position:relative;">
+            <input 
+              class="signin-form-input" 
+              type="email" 
+              id="email" 
+              name="email" 
+              placeholder="example@mail.com" 
+              required
+              autocomplete="email"
+            />
+            <i class="fa-solid fa-envelope signin-form-group__icon"></i>
+          </div>
+          <span class="signin-form-error">Please enter a valid email address</span>
+        </div>
+
+        <div class="signin-form-group" id="passwordGroup">
+          <label class="signin-form-label" for="password">Password <span class="required">*</span></label>
+          <div class="password-wrap" style="position:relative;">
+            <input 
+              class="signin-form-input" 
+              type="password" 
+              id="password" 
+              name="password" 
+              placeholder="Enter your password" 
+              required
+              minlength="8"
+              maxlength="8"
+              autocomplete="current-password"
+              style="padding-right:2.75rem;"
+            />
+            <i class="fa-solid fa-lock signin-form-group__icon"></i>
+            <button type="button" class="password-toggle" id="passwordToggle" aria-label="Toggle password visibility">
+              <i class="fa-solid fa-eye"></i>
+            </button>
+          </div>
+          <span class="signin-form-error">Password must be exactly 8 characters</span>
+        </div>
+
+        <div class="signin-options">
+          <label class="remember-me">
+            <input type="checkbox" id="rememberMe" name="rememberMe" />
+            <span>Remember me</span>
+          </label>
+          <a href="404.html" class="forgot-link">Forgot password?</a>
+        </div>
+
+        <button type="submit" class="signin-submit" id="signinSubmit">
+          <span class="spinner"></span>
+          <span class="btn-text"><i class="fa-solid fa-right-to-bracket"></i> Sign In</span>
+        </button>
+
+      </form>
+
+      <div class="signin-divider">or continue with</div>
+
+      <div class="social-auth">
+        <button type="button" class="social-auth-btn google" onclick="window.location.href='404.html'">
+          <i class="fa-brands fa-google" style="color: #ea4335; font-size: 1.1rem; margin-right: 8px;"></i> Google
+        </button>
+        <button type="button" class="social-auth-btn facebook" onclick="window.location.href='404.html'">
+          <i class="fa-brands fa-facebook"></i> Facebook
+        </button>
+      </div>
+
+      <p class="signin-footer">
+        Don't have an account? <a href="signup.html">Get Started Free</a>
+      </p>
+
+    </div>
+  </div>
+
+</div>
+
+<script>
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  if (typeof AOS !== 'undefined') {
+    AOS.init({ duration: 700, once: true, offset: 60, easing: 'ease-out-cubic' });
+  }
+});
+</script>
+<script>
+
+function showSigninToast(msg, type = 'success') {
+  const t = document.getElementById('signinToast');
+  t.textContent = msg;
+  t.className = 'signin-toast signin-toast--' + type + ' show';
+  setTimeout(() => t.classList.remove('show'), 3500);
+}
+
+
+const roleInputs = document.querySelectorAll('input[name="role"]');
+const roleBadge = document.getElementById('roleBadge');
+
+roleInputs.forEach(input => {
+  input.addEventListener('change', () => {
+    const role = input.value;
+    const isAdmin = role === 'admin';
+    roleBadge.className = 'role-badge ' + (isAdmin ? 'role-badge--admin' : 'role-badge--customer');
+    roleBadge.innerHTML = isAdmin 
+      ? '<i class="fa-solid fa-user-shield"></i> Signing in as <strong>Admin</strong>'
+      : '<i class="fa-solid fa-user"></i> Signing in as <strong>Customer</strong>';
+  });
+});
+
+
+document.getElementById('passwordToggle').addEventListener('click', function() {
+  const pw = document.getElementById('password');
+  const icon = this.querySelector('i');
+  if (pw.type === 'password') {
+    pw.type = 'text';
+    icon.className = 'fa-solid fa-eye-slash';
+  } else {
+    pw.type = 'password';
+    icon.className = 'fa-solid fa-eye';
+  }
+});
+
+
+function validateName(name) {
+  return /^[a-zA-Z\s]+$/.test(name) && name.trim().length >= 1;
+}
+
+function validateEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+function validatePassword(pw) {
+  return pw.length === 8;
+}
+
+
+function handleSignin(e) {
+  e.preventDefault();
+
+  const submitBtn = document.getElementById('signinSubmit');
+  const nameGroup = document.getElementById('nameGroup');
+  const emailGroup = document.getElementById('emailGroup');
+  const passwordGroup = document.getElementById('passwordGroup');
+
+  const name = document.getElementById('fullName').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value;
+  const role = document.querySelector('input[name="role"]:checked').value;
+
+  let isValid = true;
+
+  
+  if (!validateName(name)) {
+    nameGroup.classList.add('has-error');
+    isValid = false;
+  } else {
+    nameGroup.classList.remove('has-error');
+  }
+
+  
+  if (!validateEmail(email)) {
+    emailGroup.classList.add('has-error');
+    isValid = false;
+  } else {
+    emailGroup.classList.remove('has-error');
+  }
+
+  
+  if (!validatePassword(password)) {
+    passwordGroup.classList.add('has-error');
+    isValid = false;
+  } else {
+    passwordGroup.classList.remove('has-error');
+  }
+
+  if (!isValid) {
+    showSigninToast('Please fix the errors in the form.', 'error');
+    return;
+  }
+
+  
+  submitBtn.classList.add('loading');
+  submitBtn.disabled = true;
+
+  
+  setTimeout(() => {
+    submitBtn.classList.remove('loading');
+    submitBtn.disabled = false;
+
+    
+    localStorage.setItem('stackly_user', JSON.stringify({
+      name: name,
+      email: email,
+      role: role,
+      loggedIn: true,
+      loginTime: new Date().toISOString()
+    }));
+
+    showSigninToast('Welcome back, ' + name + '! Redirecting to dashboard...', 'success');
+
+    
+    setTimeout(() => {
+      window.location.href = role === 'admin' ? 'admin-dashboard.html' : 'customer-dashboard.html';
+    }, 1500);
+
+  }, 1500);
+}
+
+
+function handleSocialSignin(provider) {
+  showSigninToast('Signing in with ' + provider + '...', 'success');
+
+  setTimeout(() => {
+    const role = document.querySelector('input[name="role"]:checked').value;
+    localStorage.setItem('stackly_user', JSON.stringify({
+      name: 'Social User',
+      email: 'user@' + provider.toLowerCase() + '.com',
+      role: role,
+      loggedIn: true,
+      loginTime: new Date().toISOString(),
+      provider: provider
+    }));
+    window.location.href = role === 'admin' ? 'admin-dashboard.html' : 'customer-dashboard.html';
+  }, 1500);
+}
+
+
+document.getElementById('fullName').addEventListener('blur', function() {
+  const group = document.getElementById('nameGroup');
+  if (this.value.trim() && !validateName(this.value.trim())) {
+    group.classList.add('has-error');
+  } else {
+    group.classList.remove('has-error');
+  }
+});
+
+document.getElementById('email').addEventListener('blur', function() {
+  const group = document.getElementById('emailGroup');
+  if (this.value.trim() && !validateEmail(this.value.trim())) {
+    group.classList.add('has-error');
+  } else {
+    group.classList.remove('has-error');
+  }
+});
+
+document.getElementById('password').addEventListener('blur', function() {
+  const group = document.getElementById('passwordGroup');
+  if (this.value && !validatePassword(this.value)) {
+    group.classList.add('has-error');
+  } else {
+    group.classList.remove('has-error');
+  }
+});
+
+
+document.querySelectorAll('.signin-form-input').forEach(input => {
+  input.addEventListener('input', function() {
+    this.closest('.signin-form-group').classList.remove('has-error');
+  });
+});
+</script>
+
+  </body>
+</html>
+
+
+

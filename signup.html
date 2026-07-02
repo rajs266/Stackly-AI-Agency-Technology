@@ -1,0 +1,1459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Sign Up for Stackly — Create your free account and start building premium AI agency and automation solutions." />
+  <meta name="theme-color" content="#2563eb" />
+  <title>Sign Up - Stackly</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    :root {
+      --clr-primary: #e24c4a;        /* Coral Red primary */
+      --clr-primary-light: rgba(226, 76, 74, 0.2);
+      --clr-primary-pale: rgba(226, 76, 74, 0.05);
+      --clr-accent: #ff4f44;         /* Vibrant Neon Red accent */
+      --clr-bg: #0F0F12;             /* Dark body background */
+      --clr-white: #ffffff;
+      --clr-border: #2D3748;         /* Border color */
+      --clr-text-dark: #FFFFFF;      /* White text in dark mode */
+      --clr-text-body: #A0AEC0;      /* Secondary text */
+      --clr-text-muted: #6C7289;
+      --clr-text-light: #A0AEC0;
+      
+      --r-md: 12px;                  /* Rounded corners for inputs/inner cards */
+      --r-lg: 16px;                  /* Rounded corners for outer cards */
+      --r-full: 9999px;
+      
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
+      --dur-base: 0.25s;
+    }
+
+    .signup-page {
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      overflow: hidden;
+    }
+
+    .signup-visual {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start; padding-top: 15%;
+      padding: 3rem;
+      overflow: hidden; background: linear-gradient(160deg, var(--clr-primary-pale) 0%, var(--clr-bg) 100%);
+    }
+
+    .signup-visual__bg {
+      position: absolute;
+      inset: 0;
+      background: url('assets/hero_fluid_bg.webp') center/cover no-repeat !important;
+      opacity: 2.8;
+      z-index: 0;
+    }
+
+    .signup-visual__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(8, 15, 25, 0.95), rgba(8, 15, 25, 0.8));
+      z-index: 1;
+    }
+    .signup-visual__pattern {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,0,0,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,0.02) 1px, transparent 1px);
+      background-size: 48px 48px;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .signup-visual__decor-circle {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .signup-visual__decor-circle--1 {
+      width: 400px;
+      height: 400px;
+      top: -100px;
+      right: -100px;
+      background: radial-gradient(circle, rgba(37,99,235,0.08) 0%, transparent 70%);
+      animation: float-slow 12s ease-in-out infinite;
+    }
+
+    .signup-visual__decor-circle--2 {
+      width: 280px;
+      height: 280px;
+      bottom: -60px;
+      left: -60px;
+      background: radial-gradient(circle, rgba(56,189,248,0.08) 0%, transparent 70%);
+      animation: float-slow 16s ease-in-out infinite reverse;
+    }
+
+    .signup-visual__content {
+      position: relative;
+      z-index: 3;
+      max-width: 420px;
+      transform: translateY(-20px); 
+    }
+
+    .signup-visual__logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      margin-bottom: 0;
+      text-decoration: none;
+      width: fit-content;
+    }
+
+    .signup-visual__logo img {
+      width: 120px;
+      height: 120px;
+      object-fit: contain;
+      filter: none;
+    }
+
+    .signup-visual__logo-text {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--clr-text-dark);
+    }
+
+    .signup-visual__logo-text span {
+      color: var(--clr-primary);
+    }
+
+    .signup-visual .logo-brand,
+    .signup-form-side .logo-brand {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #fff;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+    }
+    .signup-visual .logo-brand .logo-accent,
+    .signup-form-side .logo-brand .logo-accent { color: #38bdf8; }
+    .signup-visual .logo-brand i,
+    .signup-form-side .logo-brand i { color: #38bdf8; font-size: 1.2rem; }
+
+    .signup-visual__tagline {
+      font-family: var(--font-heading);
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 700;
+      color: #ffffff;
+        text-shadow: 0 4px 16px rgba(0,0,0,1), 0 0 24px rgba(0,0,0,0.9);
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .signup-visual__tagline em {
+      color: var(--clr-primary);
+      font-style: normal;
+      position: relative;
+    }
+
+    .signup-visual__tagline em::after {
+      content: '';
+      position: absolute;
+      bottom: 2px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--clr-primary), var(--clr-accent));
+      border-radius: var(--r-full);
+      opacity: 0.3;
+    }
+
+    .signup-visual__text {
+      font-size: 0.95rem;
+      color: #ffffff;
+        text-shadow: 0 3px 12px rgba(0,0,0,1), 0 0 16px rgba(0,0,0,0.9);
+        font-weight: 500;
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+    }
+
+    .signup-visual__testimonial {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      border: 1.5px solid rgba(255, 255, 255, 0.2);
+      border-radius: var(--r-xl);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      margin-top: 1.5rem;
+    }
+
+    .signup-visual__testimonial-stars {
+      color: var(--clr-accent);
+      font-size: 0.85rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .signup-visual__testimonial-text {
+      font-size: 0.88rem;
+      color: #ffffff;
+        text-shadow: 0 2px 8px rgba(0,0,0,1);
+      line-height: 1.6;
+      font-style: italic;
+      margin-bottom: 1rem;
+    }
+
+    .signup-visual__testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .signup-visual__testimonial-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--clr-primary-pale);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--clr-primary);
+      font-size: 0.9rem;
+    }
+
+    .signup-visual__testimonial-name {
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: #ffffff;
+        text-shadow: 0 2px 8px rgba(0,0,0,1);
+    }
+
+    .signup-visual__testimonial-role {
+      font-size: 0.75rem;
+      color: #ffffff;
+        text-shadow: 0 2px 8px rgba(0,0,0,1);
+        font-weight: 600;
+    }
+
+    .form-back-btn {
+      padding: 0.45rem 1rem;
+      border-radius: var(--r-full);
+      background: rgba(255, 255, 255, 0.08);
+      border: 1.5px solid rgba(255, 255, 255, 0.15);
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--clr-white);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all var(--dur-base) var(--ease);
+      width: fit-content;
+      margin-top: 4.5rem;
+    }
+    .form-back-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+    .form-back-btn i {
+      font-size: 0.8rem;
+      transition: transform var(--dur-base) var(--ease);
+    }
+    .form-back-btn:hover i {
+      transform: translateX(-3px);
+    }
+    
+    .signup-form-side {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 3rem 3.5rem;
+      background: linear-gradient(160deg, rgba(15, 23, 42, 0.98) 0%, rgba(30, 41, 59, 0.99) 60%, rgba(15, 23, 42, 1) 100%);
+      overflow-y: auto;
+      position: relative;
+    }
+
+    .signup-form-side__inner {
+      width: 100%;
+      max-width: 480px;
+    }
+
+    .signup-form-box__header {
+      margin-bottom: 2rem;
+    }
+
+    .signup-form-box__logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      width: fit-content;
+    }
+
+    .signup-form-box__logo img {
+      width: 120px;
+      height: 120px;
+      object-fit: contain;
+    }
+
+    .signup-form-box__title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--clr-text-dark);
+      margin-bottom: 0.4rem;
+    }
+
+    .signup-form-box__sub {
+      font-size: 0.9rem;
+      color: var(--clr-text-muted);
+      line-height: 1.6;
+    }
+
+    .role-selector {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .role-option {
+      position: relative;
+      cursor: pointer;
+    }
+
+    .role-option input {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .role-option__card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1.25rem 0.75rem;
+      background: var(--clr-white);
+      border: 2px solid var(--clr-border);
+      border-radius: var(--r-lg);
+      transition: all var(--dur-base) var(--ease);
+      text-align: center;
+    }
+
+    .role-option__card i {
+      font-size: 1.6rem;
+      color: var(--clr-text-muted);
+      transition: color var(--dur-base) var(--ease), transform var(--dur-base) var(--ease-bounce);
+    }
+
+    .role-option__card span {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--clr-text-body);
+      transition: color var(--dur-base) var(--ease);
+    }
+
+    .role-option input:checked + .role-option__card {
+      border-color: var(--clr-primary);
+      background: var(--clr-primary-pale);
+      box-shadow: 0 0 0 2px var(--clr-primary);
+      transform: translateY(-2px);
+    }
+
+    .role-option input:checked + .role-option__card i {
+      color: var(--clr-primary);
+      transform: scale(1.1);
+    }
+
+    .role-option input:checked + .role-option__card span {
+      color: var(--clr-primary);
+      font-weight: 700;
+    }
+
+    .role-option__card:hover {
+      border-color: var(--clr-primary-light);
+      transform: translateY(-2px);
+    }
+
+    .role-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.35rem 0.85rem;
+      border-radius: var(--r-full);
+      font-size: 0.78rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      animation: slide-down 0.3s var(--ease);
+    }
+
+    .role-badge--admin {
+      background: linear-gradient(135deg, #E8F5FF 0%, #D4EDFF 100%);
+      color: #1976D2;
+      border: 1.5px solid #BBDEFB;
+    }
+
+    .role-badge--customer {
+      background: linear-gradient(135deg, var(--clr-primary-pale) 0%, #D4EDDA 100%);
+      color: var(--clr-primary);
+      border: 1.5px solid #C8E6C9;
+    }
+
+    .signup-form-group {
+      margin-bottom: 1.1rem;
+      position: relative;
+    }
+
+    .signup-form-label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--clr-text-dark);
+      margin-bottom: 0.4rem;
+    }
+
+    .signup-form-label .required {
+      color: #E53E3E;
+      margin-left: 2px;
+    }
+
+    .signup-form-input {
+      width: 100%;
+      padding: 0.85rem 1rem 0.85rem 2.75rem;
+      background: var(--clr-white);
+      border: 1.5px solid var(--clr-border);
+      border-radius: var(--r-md);
+      font-size: 0.9rem;
+      color: var(--clr-text-dark);
+      transition: border-color var(--dur-base) var(--ease), box-shadow var(--dur-base) var(--ease);
+    }
+
+    .signup-form-input:focus {
+      border-color: var(--clr-primary);
+      box-shadow: 0 0 0 3.5px rgba(37, 99, 235, 0.10);
+      outline: none;
+    }
+
+    .signup-form-input::placeholder {
+      color: var(--clr-text-light);
+    }
+
+    .signup-form-input.error {
+      border-color: #E53E3E;
+      box-shadow: 0 0 0 3.5px rgba(229, 62, 62, 0.10);
+    }
+
+    .signup-form-group__icon {
+      position: absolute;
+      left: 1rem;
+      bottom: 0.9rem;
+      color: var(--clr-text-muted);
+      font-size: 0.95rem;
+      transition: color var(--dur-base) var(--ease);
+      pointer-events: none;
+    }
+
+    .signup-form-input:focus + .signup-form-group__icon,
+    .signup-form-group:focus-within .signup-form-group__icon {
+      color: var(--clr-primary);
+    }
+
+    .signup-form-error {
+      font-size: 0.78rem;
+      color: #E53E3E;
+      margin-top: 0.3rem;
+      display: none;
+      animation: slide-down 0.2s var(--ease);
+    }
+
+    .signup-form-group.has-error .signup-form-error {
+      display: block;
+    }
+
+    .signup-form-group.has-error .signup-form-input {
+      border-color: #E53E3E;
+      box-shadow: 0 0 0 3.5px rgba(229, 62, 62, 0.10);
+    }
+
+    .password-wrap {
+      position: relative;
+    }
+
+    .password-toggle {
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--clr-text-muted);
+      cursor: pointer;
+      font-size: 0.9rem;
+      padding: 0.25rem;
+      transition: color var(--dur-base) var(--ease);
+    }
+
+    .password-toggle:hover {
+      color: var(--clr-primary);
+    }
+
+    
+    input[type="password"]::-ms-reveal,
+    input[type="password"]::-ms-clear {
+      display: none;
+    }
+
+    .password-strength {
+      margin-top: 0.5rem;
+      display: none;
+    }
+
+    .password-strength.show {
+      display: block;
+    }
+
+    .password-strength__bar {
+      height: 4px;
+      background: var(--clr-border);
+      border-radius: var(--r-full);
+      overflow: hidden;
+      margin-bottom: 0.35rem;
+    }
+
+    .password-strength__fill {
+      height: 100%;
+      border-radius: var(--r-full);
+      transition: width 0.3s var(--ease), background 0.3s var(--ease);
+      width: 0%;
+    }
+
+    .password-strength__fill.weak { background: #E53E3E; width: 33%; }
+    .password-strength__fill.medium { background: var(--clr-accent); width: 66%; }
+    .password-strength__fill.strong { background: var(--clr-primary); width: 100%; }
+
+    .password-strength__text {
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .password-strength__text.weak { color: #E53E3E; }
+    .password-strength__text.medium { color: var(--clr-accent); }
+    .password-strength__text.strong { color: var(--clr-primary); }
+
+    .signup-form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .terms-group {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.65rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .terms-group input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--clr-primary);
+      margin-top: 2px;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+
+    .terms-group label {
+      font-size: 0.82rem;
+      color: var(--clr-text-muted);
+      line-height: 1.5;
+      cursor: pointer;
+    }
+
+    .terms-group label a {
+      color: var(--clr-primary);
+      font-weight: 600;
+      transition: color var(--dur-base) var(--ease);
+    }
+
+    .terms-group label a:hover {
+      color: var(--clr-accent);
+    }
+
+    .signup-submit {
+      width: 100%;
+      padding: 0.9rem;
+      background: var(--clr-accent);
+      color: var(--clr-white);
+      border: none;
+      border-radius: var(--r-full);
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all var(--dur-base) var(--ease);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .signup-submit::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(255,255,255,0.25) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity var(--dur-fast) var(--ease);
+      pointer-events: none;
+    }
+
+    .signup-submit:hover::after {
+      opacity: 1;
+    }
+
+    .signup-submit:hover {
+      background: var(--clr-primary-light);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-green);
+    }
+
+    .signup-submit:active {
+      transform: scale(0.98);
+    }
+
+    .signup-submit:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .signup-divider {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-block: 1.5rem;
+      font-size: 0.82rem;
+      color: var(--clr-text-muted);
+    }
+
+    .signup-divider::before,
+    .signup-divider::after {
+      content: '';
+      flex: 1;
+      height: 1.5px;
+      background: var(--clr-border);
+    }
+
+    .social-auth {
+      display: flex;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .social-auth-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.7rem;
+      background: var(--clr-white);
+      border: 1.5px solid var(--clr-border);
+      border-radius: var(--r-md);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--clr-text-dark);
+      cursor: pointer;
+      transition: all var(--dur-base) var(--ease);
+    }
+
+    .social-auth-btn:hover {
+      border-color: var(--clr-primary);
+      box-shadow: var(--shadow-sm);
+      transform: translateY(-2px);
+    }
+
+    .social-auth-btn i {
+      font-size: 1rem;
+    }
+
+    .social-auth-btn.google i { color: #DB4437; }
+    .social-auth-btn.facebook i { color: #1877F2; }
+
+    .signup-footer {
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--clr-text-muted);
+      margin-top: 1.5rem;
+    }
+
+    .signup-footer a {
+      color: var(--clr-primary);
+      font-weight: 600;
+      transition: color var(--dur-base) var(--ease);
+    }
+
+    .signup-footer a:hover {
+      color: var(--clr-accent);
+    }
+
+    .spinner {
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: var(--clr-white);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      display: none;
+    }
+
+    .signup-submit.loading .spinner {
+      display: block;
+    }
+
+    .signup-submit.loading .btn-text {
+      display: none;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .signup-toast {
+      position: fixed;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: #1c1d24; /* Solid high-contrast dark background */
+      border: 1.5px solid var(--clr-border);
+      border-left: 4px solid var(--clr-primary);
+      border-radius: var(--r-md);
+      padding: 1rem 1.25rem;
+      box-shadow: var(--shadow-lg);
+      font-size: 0.88rem;
+      color: #ffffff; /* Bright white text */
+      z-index: 9999;
+      max-width: 320px;
+      transform: translateX(120%);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: transform var(--dur-base) var(--ease-bounce), opacity var(--dur-base) var(--ease), visibility var(--dur-base) var(--ease);
+    }
+
+    .signup-toast.show {
+      transform: translateX(0);
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .signup-toast--success { border-left-color: var(--clr-primary); }
+    .signup-toast--error { border-left-color: #E53E3E; }
+
+    .signup-benefits {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .signup-benefit {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      font-size: 0.85rem;
+      color: var(--clr-text-muted);
+    }
+
+    .signup-benefit i {
+      width: 22px;
+      height: 22px;
+      background: var(--clr-primary-pale);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+      color: var(--clr-primary);
+      flex-shrink: 0;
+    }
+
+    .signup-form-side .signup-form-box__title { color: var(--clr-white); }
+    .signup-form-side .signup-form-box__sub { color: rgba(255,255,255,0.7); }
+    .signup-form-side .signup-form-label { color: rgba(255,255,255,0.9); }
+    .signup-form-side .remember-me span { color: rgba(255,255,255,0.7); }
+    .signup-form-side .signup-footer { color: rgba(255,255,255,0.65); }
+    .signup-form-side .signup-footer a { color: var(--clr-accent); }
+    .signup-form-side .signup-benefit { color: rgba(255,255,255,0.8); }
+    .signup-form-side .signup-benefit i { background: rgba(255,255,255,0.15); color: var(--clr-accent); }
+    .signup-form-side .signup-divider { color: rgba(255,255,255,0.5); }
+    .signup-form-side .signup-divider::before,
+    .signup-form-side .signup-divider::after { background: rgba(255,255,255,0.15); }
+    .signup-form-side .form-checkbox-group label { color: rgba(255,255,255,0.7); }
+    .signup-form-side .form-checkbox-group label a { color: var(--clr-accent); }
+    .signup-form-side .terms-group label { color: rgba(255, 255, 255, 0.9); }
+    .signup-form-side .terms-group label a { color: #38bdf8; }
+
+    .signup-form-side .signup-form-input {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.15);
+      color: var(--clr-white);
+    }
+    .signup-form-side .signup-form-input::placeholder {
+      color: rgba(255, 255, 255, 0.4);
+    }
+    .signup-form-side .signup-form-input:focus {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: var(--clr-accent);
+      box-shadow: 0 0 0 3.5px rgba(56, 189, 248, 0.15);
+    }
+    .signup-form-side .signup-form-group__icon {
+      color: rgba(255, 255, 255, 0.4);
+    }
+    .signup-form-side .signup-form-input:focus + .signup-form-group__icon,
+    .signup-form-side .signup-form-group:focus-within .signup-form-group__icon {
+      color: var(--clr-accent);
+    }
+
+    .signup-form-side .password-toggle {
+      color: rgba(255, 255, 255, 0.6);
+    }
+    .signup-form-side .password-toggle:hover,
+    .signup-form-side .password-toggle:focus {
+      color: var(--clr-accent);
+    }
+
+    .signup-form-side .role-option__card {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(240, 165, 0, 0.4);
+    }
+    .signup-form-side .role-option__card span {
+      color: rgba(255, 255, 255, 0.8);
+    }
+    .signup-form-side .role-option__card i {
+      color: rgba(255, 255, 255, 0.6);
+    }
+    .signup-form-side .role-option input:checked + .role-option__card {
+      background: rgba(226, 76, 74, 0.25);
+      border-color: var(--clr-primary);
+      box-shadow: 0 0 0 2px var(--clr-primary);
+    }
+    .signup-form-side .role-option input:checked + .role-option__card i {
+      color: var(--clr-primary);
+    }
+    .signup-form-side .role-option input:checked + .role-option__card span {
+      color: var(--clr-primary);
+    }
+    .signup-form-side .role-option__card:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: var(--clr-primary-light);
+      transform: translateY(-2px);
+    }
+    .signup-form-side .signup-submit:hover {
+      background: var(--clr-accent);
+      color: #ffffff;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(226, 76, 74, 0.35);
+    }
+
+    .signup-form-side .social-auth-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.15);
+      color: var(--clr-white);
+    }
+    .signup-form-side .social-auth-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    @media (max-width: 1024px) {
+      .signup-page { grid-template-columns: 1fr; }
+      .signup-visual { display: none; }
+      .signup-form-side { padding: 2.5rem 2rem; }
+      .signup-mobile-back { display: inline-flex; color: var(--clr-accent); }
+    }
+
+    @media (max-width: 768px) {
+      .signup-form-row { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      .signup-form-side { padding: 1.75rem 1.25rem; }
+      .signup-form-box__title { font-size: 1.4rem; }
+      .role-selector { gap: 0.5rem; }
+      .role-option__card { padding: 1rem 0.5rem; }
+      .social-auth { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+<div id="stackly-preloader" class="stackly-preloader" role="status" aria-live="polite" aria-label="Loading Stackly">
+  <div class="stackly-preloader__aurora" aria-hidden="true"></div>
+  <div class="stackly-preloader__particles" aria-hidden="true">
+    <span></span><span></span><span></span><span></span><span></span><span></span>
+  </div>
+  <div class="stackly-preloader__core">
+    <div class="stackly-preloader__ring stackly-preloader__ring--1"></div>
+    <div class="stackly-preloader__ring stackly-preloader__ring--2"></div>
+    <div class="stackly-preloader__ring stackly-preloader__ring--3"></div>
+    <div class="stackly-preloader__logo-glow" aria-hidden="true"></div>
+    <img src="assets/logo.webp" alt="Stackly" class="stackly-preloader__logo" width="140" height="48" decoding="sync">
+  </div>
+  <div class="stackly-preloader__progress" aria-hidden="true"><span></span></div>
+</div>
+<script src="script.js"></script>
+
+
+
+<div class="signup-toast" id="signupToast" role="alert" aria-live="polite"></div>
+
+<div class="signup-page">
+
+  <div class="signup-visual" aria-hidden="true">
+    <div class="signup-visual__bg"></div>
+    <div class="signup-visual__overlay"></div>
+    <div class="signup-visual__pattern"></div>
+    <div class="signup-visual__decor-circle signup-visual__decor-circle--1"></div>
+    <div class="signup-visual__decor-circle signup-visual__decor-circle--2"></div>
+
+    <div class="signup-visual__content">
+      <div class="signup-logo-wrap" style="width: 100%; display: flex; flex-direction: column; align-items: flex-start; margin-bottom: 2.5rem; gap: 0.75rem;">
+        <a href="index.html" class="logo-brand"><img src="assets/logo.webp" alt="Stackly Logo" style="height: 36px; width: auto;" /></a>
+      </div>
+
+      <h2 class="signup-visual__tagline">
+        Build the Future<br><em>with Stackly AI</em>
+      </h2>
+      <p class="signup-visual__text">
+        Join 50,000+ enterprises and developers who trust Stackly for custom machine learning models, neural networks, and automation solutions. Create your free account in under 2 minutes.
+      </p>
+
+      <div class="signup-visual__testimonial">
+        <div class="signup-visual__testimonial-stars">⭐⭐⭐⭐⭐</div>
+        <p class="signup-visual__testimonial-text">"Stackly's custom NLP model and automated workflows transformed our customer operations. Exceptional accuracy and 24/7 technical support."</p>
+        <div class="signup-visual__testimonial-author">
+          <div class="signup-visual__testimonial-avatar">
+            <i class="fa-solid fa-user"></i>
+          </div>
+          <div>
+            <div class="signup-visual__testimonial-name">Arjun Mehta</div>
+            <div class="signup-visual__testimonial-role">CTO, TechLabs</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="signup-form-side">
+    <div class="signup-form-side__inner">
+
+      <div class="signup-form-box__header">
+        <div style="display: flex; align-items: center; justify-content: flex-end; width: 100%; margin-bottom: 1.5rem;">
+          <a href="index.html" class="form-back-btn" style="margin-top: 0;">
+            <i class="fa-solid fa-arrow-left"></i> Back to Home
+          </a>
+        </div>
+        <h1 class="signup-form-box__title">Create Your Free Account</h1>
+        <p class="signup-form-box__sub">Get started with premium AI agency solutions. No credit card required.</p>
+      </div>
+
+      <div class="role-selector" id="roleSelector">
+        <label class="role-option">
+          <input type="radio" name="role" value="admin" id="roleAdmin" />
+          <div class="role-option__card">
+            <i class="fa-solid fa-user-shield"></i>
+            <span>Admin</span>
+          </div>
+        </label>
+        <label class="role-option">
+          <input type="radio" name="role" value="customer" id="roleCustomer" checked />
+          <div class="role-option__card">
+            <i class="fa-solid fa-user"></i>
+            <span>Customer</span>
+          </div>
+        </label>
+      </div>
+
+      <div id="roleBadge" class="role-badge role-badge--customer">
+        <i class="fa-solid fa-user"></i> Creating account as <strong>Customer</strong>
+      </div>
+
+      <form id="signupForm" onsubmit="handleSignup(event)" novalidate>
+
+        <div class="signup-form-row">
+          <div class="signup-form-group" id="fnameGroup">
+            <label class="signup-form-label" for="firstName">First Name <span class="required">*</span></label>
+            <div style="position:relative;">
+              <input 
+                class="signup-form-input" 
+                type="text" 
+                id="firstName" 
+                name="firstName" 
+                placeholder="First Name" 
+                required
+                autocomplete="given-name"
+              />
+              <i class="fa-solid fa-user signup-form-group__icon"></i>
+            </div>
+            <span class="signup-form-error">Name contains only alphabets</span>
+          </div>
+
+          <div class="signup-form-group" id="lnameGroup">
+            <label class="signup-form-label" for="lastName">Last Name <span class="required">*</span></label>
+            <div style="position:relative;">
+              <input 
+                class="signup-form-input" 
+                type="text" 
+                id="lastName" 
+                name="lastName" 
+                placeholder="Last Name" 
+                required
+                autocomplete="family-name"
+              />
+              <i class="fa-solid fa-user signup-form-group__icon"></i>
+            </div>
+            <span class="signup-form-error">Name contains only alphabets</span>
+          </div>
+        </div>
+
+        <div class="signup-form-group" id="emailGroup">
+          <label class="signup-form-label" for="email">Email Address <span class="required">*</span></label>
+          <div style="position:relative;">
+            <input 
+              class="signup-form-input" 
+              type="email" 
+              id="email" 
+              name="email" 
+              placeholder="example@mail.com" 
+              required
+              autocomplete="email"
+            />
+            <i class="fa-solid fa-envelope signup-form-group__icon"></i>
+          </div>
+          <span class="signup-form-error">Please enter a valid email address</span>
+        </div>
+
+        <div class="signup-form-group" id="phoneGroup">
+          <label class="signup-form-label" for="phone">Phone Number <span class="required">*</span></label>
+          <div style="position:relative;">
+            <input 
+              class="signup-form-input" 
+              type="tel" 
+              id="phone" 
+              name="phone" 
+              placeholder="+91 98765 43210" 
+              required
+              autocomplete="tel"
+            />
+            <i class="fa-solid fa-phone signup-form-group__icon"></i>
+          </div>
+          <span class="signup-form-error">Please enter a valid 10-digit phone number</span>
+        </div>
+
+        <div class="signup-form-group" id="companyGroup">
+          <label class="signup-form-label" for="company">Company Name (Optional)</label>
+          <div style="position:relative;">
+            <input 
+              class="signup-form-input" 
+              type="text" 
+              id="company" 
+              name="company" 
+              placeholder="e.g. Tech Solutions Inc" 
+              autocomplete="organization"
+            />
+            <i class="fa-solid fa-building signup-form-group__icon"></i>
+          </div>
+        </div>
+
+        <div class="signup-form-group" id="passwordGroup">
+          <label class="signup-form-label" for="password">Password <span class="required">*</span></label>
+          <div class="password-wrap" style="position:relative;">
+            <input 
+              class="signup-form-input" 
+              type="password" 
+              id="password" 
+              name="password" 
+              placeholder="Create a strong password" 
+              required
+              minlength="8"
+              maxlength="8"
+              autocomplete="new-password"
+              style="padding-right:2.75rem;"
+            />
+            <i class="fa-solid fa-lock signup-form-group__icon"></i>
+            <button type="button" class="password-toggle" id="passwordToggle" aria-label="Toggle password visibility">
+              <i class="fa-solid fa-eye"></i>
+            </button>
+          </div>
+          <div class="password-strength" id="passwordStrength">
+            <div class="password-strength__bar">
+              <div class="password-strength__fill" id="strengthFill"></div>
+            </div>
+            <span class="password-strength__text" id="strengthText">Enter a password</span>
+          </div>
+          <span class="signup-form-error">Password must be exactly 8 characters</span>
+        </div>
+
+        <div class="signup-form-group" id="confirmPasswordGroup">
+          <label class="signup-form-label" for="confirmPassword">Confirm Password <span class="required">*</span></label>
+          <div class="password-wrap" style="position:relative;">
+            <input 
+              class="signup-form-input" 
+              type="password" 
+              id="confirmPassword" 
+              name="confirmPassword" 
+              placeholder="Re-enter your password" 
+              required
+              autocomplete="new-password"
+              style="padding-right:2.75rem;"
+            />
+            <i class="fa-solid fa-lock signup-form-group__icon"></i>
+            <button type="button" class="password-toggle" id="confirmToggle" aria-label="Toggle confirm password visibility">
+              <i class="fa-solid fa-eye"></i>
+            </button>
+          </div>
+          <span class="signup-form-error">Passwords do not match</span>
+        </div>
+
+        <div class="terms-group" id="termsGroup">
+          <input type="checkbox" id="terms" name="terms" required />
+          <label for="terms">
+            I agree to the <a href="404.html">Terms of Service</a> and <a href="404.html">Privacy Policy</a>. I consent to Stackly contacting me about my account and services.
+          </label>
+        </div>
+        <span class="signup-form-error" id="termsError" style="display:none;margin-top:-1rem;margin-bottom:1rem;">You must agree to the terms to continue</span>
+
+        <button type="submit" class="signup-submit" id="signupSubmit">
+          <span class="spinner"></span>
+          <span class="btn-text"><i class="fa-solid fa-user-plus"></i> Create Free Account</span>
+        </button>
+
+      </form>
+
+      <div class="signup-divider">or sign up with</div>
+
+      <div class="social-auth">
+        <button type="button" class="social-auth-btn google" onclick="window.location.href='404.html'">
+          <i class="fa-brands fa-google" style="color: #ea4335; font-size: 1.1rem; margin-right: 8px;"></i> Google
+        </button>
+        <button type="button" class="social-auth-btn facebook" onclick="window.location.href='404.html'">
+          <i class="fa-brands fa-facebook"></i> Facebook
+        </button>
+      </div>
+
+      <p class="signup-footer">
+        Already have an account? <a href="signin.html">Sign In</a>
+      </p>
+
+    </div>
+  </div>
+
+</div>
+
+  <script>
+
+document.addEventListener('DOMContentLoaded', () => {
+  
+  if (typeof AOS !== 'undefined') {
+    AOS.init({ duration: 700, once: true, offset: 60, easing: 'ease-out-cubic' });
+  }
+});
+
+function showSignupToast(msg, type = 'success') {
+  const t = document.getElementById('signupToast');
+  t.textContent = msg;
+  t.className = 'signup-toast signup-toast--' + type + ' show';
+  setTimeout(() => t.classList.remove('show'), 3500);
+}
+
+
+const roleInputs = document.querySelectorAll('input[name="role"]');
+const roleBadge = document.getElementById('roleBadge');
+
+roleInputs.forEach(input => {
+  input.addEventListener('change', () => {
+    const role = input.value;
+    const isAdmin = role === 'admin';
+    roleBadge.className = 'role-badge ' + (isAdmin ? 'role-badge--admin' : 'role-badge--customer');
+    roleBadge.innerHTML = isAdmin 
+      ? '<i class="fa-solid fa-user-shield"></i> Creating account as <strong>Admin</strong>'
+      : '<i class="fa-solid fa-user"></i> Creating account as <strong>Customer</strong>';
+  });
+});
+
+
+document.getElementById('passwordToggle').addEventListener('click', function() {
+  const pw = document.getElementById('password');
+  const icon = this.querySelector('i');
+  if (pw.type === 'password') {
+    pw.type = 'text';
+    icon.className = 'fa-solid fa-eye-slash';
+  } else {
+    pw.type = 'password';
+    icon.className = 'fa-solid fa-eye';
+  }
+});
+
+document.getElementById('confirmToggle').addEventListener('click', function() {
+  const pw = document.getElementById('confirmPassword');
+  const icon = this.querySelector('i');
+  if (pw.type === 'password') {
+    pw.type = 'text';
+    icon.className = 'fa-solid fa-eye-slash';
+  } else {
+    pw.type = 'password';
+    icon.className = 'fa-solid fa-eye';
+  }
+});
+
+
+const passwordInput = document.getElementById('password');
+const passwordStrength = document.getElementById('passwordStrength');
+const strengthFill = document.getElementById('strengthFill');
+const strengthText = document.getElementById('strengthText');
+
+passwordInput.addEventListener('input', function() {
+  const val = this.value;
+  if (!val) {
+    passwordStrength.className = 'password-strength';
+    strengthText.textContent = 'Enter a password';
+    strengthText.className = 'password-strength__text';
+    return;
+  }
+  
+  passwordStrength.className = 'password-strength show';
+  
+  let score = 0;
+  if (val.length >= 8) score++;
+  if (val.length >= 10) score++;
+  if (/[a-z]/.test(val) && /[A-Z]/.test(val)) score++;
+  if (/[0-9]/.test(val)) score++;
+  if (/[^A-Za-z0-9]/.test(val)) score++;
+  
+  if (val.length < 8) {
+    strengthFill.className = 'password-strength__fill weak';
+    strengthText.textContent = 'Weak Password';
+    strengthText.className = 'password-strength__text weak';
+  } else if (score <= 3) {
+    strengthFill.className = 'password-strength__fill medium';
+    strengthText.textContent = 'Medium Strength';
+    strengthText.className = 'password-strength__text medium';
+  } else {
+    strengthFill.className = 'password-strength__fill strong';
+    strengthText.textContent = 'Strong Password';
+    strengthText.className = 'password-strength__text strong';
+  }
+});
+
+
+function validateName(name) {
+  return /^[a-zA-Z\s]+$/.test(name) && name.trim().length >= 1;
+}
+
+function validateEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+function validatePhone(phone) {
+  return /^[0-9]{10}$/.test(phone.replace(/[\s-+]/g, ''));
+}
+
+function validatePassword(pw) {
+  return pw.length === 8;
+}
+
+
+function handleSignup(e) {
+  e.preventDefault();
+  
+  const submitBtn = document.getElementById('signupSubmit');
+  
+  const fnameGroup = document.getElementById('fnameGroup');
+  const lnameGroup = document.getElementById('lnameGroup');
+  const emailGroup = document.getElementById('emailGroup');
+  const phoneGroup = document.getElementById('phoneGroup');
+  const passwordGroup = document.getElementById('passwordGroup');
+  const confirmPasswordGroup = document.getElementById('confirmPasswordGroup');
+  const termsError = document.getElementById('termsError');
+  
+  const firstName = document.getElementById('firstName').value.trim();
+  const lastName = document.getElementById('lastName').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+  const password = document.getElementById('password').value;
+  const confirmPassword = document.getElementById('confirmPassword').value;
+  const termsChecked = document.getElementById('terms').checked;
+  const role = document.querySelector('input[name="role"]:checked').value;
+  
+  let isValid = true;
+  
+  if (!validateName(firstName)) {
+    fnameGroup.classList.add('has-error');
+    isValid = false;
+  } else {
+    fnameGroup.classList.remove('has-error');
+  }
+  
+  if (!validateName(lastName)) {
+    lnameGroup.classList.add('has-error');
+    isValid = false;
+  } else {
+    lnameGroup.classList.remove('has-error');
+  }
+  
+  if (!validateEmail(email)) {
+    emailGroup.classList.add('has-error');
+    isValid = false;
+  } else {
+    emailGroup.classList.remove('has-error');
+  }
+  
+  if (!validatePhone(phone)) {
+    phoneGroup.classList.add('has-error');
+    isValid = false;
+  } else {
+    phoneGroup.classList.remove('has-error');
+  }
+  
+  if (!validatePassword(password)) {
+    passwordGroup.classList.add('has-error');
+    isValid = false;
+  } else {
+    passwordGroup.classList.remove('has-error');
+  }
+  
+  if (confirmPassword !== password || !confirmPassword) {
+    confirmPasswordGroup.classList.add('has-error');
+    isValid = false;
+  } else {
+    confirmPasswordGroup.classList.remove('has-error');
+  }
+  
+  if (!termsChecked) {
+    termsError.style.display = 'block';
+    isValid = false;
+  } else {
+    termsError.style.display = 'none';
+  }
+  
+  if (!isValid) {
+    showSignupToast('Please fix the errors in the form.', 'error');
+    return;
+  }
+  
+  submitBtn.classList.add('loading');
+  submitBtn.disabled = true;
+  
+  setTimeout(() => {
+    submitBtn.classList.remove('loading');
+    submitBtn.disabled = false;
+    
+    
+    const fullName = firstName + ' ' + lastName;
+    localStorage.setItem('stackly_user', JSON.stringify({
+      name: fullName,
+      email: email,
+      role: role,
+      loggedIn: false,
+      loginTime: new Date().toISOString()
+    }));
+    
+    showSignupToast('Account created successfully! Redirecting to sign in...', 'success');
+    
+    setTimeout(() => {
+      window.location.href = 'signin.html';
+    }, 1500);
+    
+  }, 1500);
+}
+
+
+document.getElementById('firstName').addEventListener('blur', function() {
+  const group = document.getElementById('fnameGroup');
+  if (this.value.trim() && !validateName(this.value.trim())) {
+    group.classList.add('has-error');
+  } else {
+    group.classList.remove('has-error');
+  }
+});
+
+document.getElementById('lastName').addEventListener('blur', function() {
+  const group = document.getElementById('lnameGroup');
+  if (this.value.trim() && !validateName(this.value.trim())) {
+    group.classList.add('has-error');
+  } else {
+    group.classList.remove('has-error');
+  }
+});
+
+document.getElementById('email').addEventListener('blur', function() {
+  const group = document.getElementById('emailGroup');
+  if (this.value.trim() && !validateEmail(this.value.trim())) {
+    group.classList.add('has-error');
+  } else {
+    group.classList.remove('has-error');
+  }
+});
+
+document.getElementById('phone').addEventListener('blur', function() {
+  const group = document.getElementById('phoneGroup');
+  if (this.value.trim() && !validatePhone(this.value.trim())) {
+    group.classList.add('has-error');
+  } else {
+    group.classList.remove('has-error');
+  }
+});
+
+document.getElementById('password').addEventListener('blur', function() {
+  const group = document.getElementById('passwordGroup');
+  if (this.value && !validatePassword(this.value)) {
+    group.classList.add('has-error');
+  } else {
+    group.classList.remove('has-error');
+  }
+});
+
+document.getElementById('confirmPassword').addEventListener('blur', function() {
+  const group = document.getElementById('confirmPasswordGroup');
+  const passwordVal = document.getElementById('password').value;
+  if (this.value && this.value !== passwordVal) {
+    group.classList.add('has-error');
+  } else {
+    group.classList.remove('has-error');
+  }
+});
+
+document.getElementById('terms').addEventListener('change', function() {
+  const err = document.getElementById('termsError');
+  if (this.checked) {
+    err.style.display = 'none';
+  }
+});
+
+document.querySelectorAll('.signup-form-input').forEach(input => {
+  input.addEventListener('input', function() {
+    this.closest('.signup-form-group').classList.remove('has-error');
+  });
+});
+</script>
+</body>
+</html>
+
+
+

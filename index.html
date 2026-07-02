@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Stackly — AI Agency & Technology. Empowering the future with intelligent AI solutions. Machine Learning, Data Analytics, Automation & more.">
+  <meta name="keywords" content="AI, Artificial Intelligence, Machine Learning, Technology, Agency, Stackly">
+  <meta name="author" content="Stackly">
+  <meta name="theme-color" content="#e24c4a">
+  <title>Stackly — AI Agency & Technology</title>
+
+  <link rel="icon" type="image/webp" href="assets/top-logo.webp">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Preloader -->
+  <div class="preloader">
+    <div class="preloader-content">
+      <div class="preloader-circle">
+        <div class="preloader-ring"></div>
+        <img src="assets/logo.webp" alt="Loading..." class="preloader-logo">
+      </div>
+      <div class="preloader-text">Loading Stackly...</div>
+    </div>
+  </div>
+
+  <!-- Menu Overlay -->
+  <div class="menu-overlay"></div>
+
+  <!-- ═══ Navbar ═══ -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="navbar-logo">
+        <img src="assets/logo.webp" alt="Stackly">
+      </a>
+      <div class="navbar-menu">
+        <a href="index.html" class="active">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="blog.html">Blog</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="navbar-actions">
+        <a href="signin.html" class="btn-signin">Sign In</a>
+        <a href="signup.html" class="btn btn-primary btn-sm">Get Started <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <button class="hamburger" aria-label="Toggle Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ═══ Hero Section ═══ -->
+  <section class="hero" id="hero">
+    <!-- Canvas layers for Anti-Gravity Aquarium & WebGL Ripples -->
+    <div class="hero-canvas-container">
+      <img id="hero-bg-image" class="hero-bg-image is-ready" src="assets/hero-aquarium.webp" alt="" aria-hidden="true">
+      <canvas id="hero-ripple-canvas"></canvas>
+      <canvas id="hero-aquarium-canvas"></canvas>
+    </div>
+
+    <!-- Floating shapes -->
+    <div class="floating-shape shape-1"></div>
+    <div class="floating-shape shape-2"></div>
+    <div class="floating-shape shape-3"></div>
+    <div class="floating-shape shape-4"></div>
+    <div class="floating-shape shape-5"></div>
+
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="pulse-dot"></span>
+          AI-Powered Innovation
+        </div>
+        <h1 class="hero-title">
+          Empowering the Future with <span class="highlight">Intelligent AI</span> Solutions
+        </h1>
+        <p class="hero-subtitle">
+          We build <span class="typing-text" data-phrases='["Machine Learning Models", "AI-Powered Products", "Intelligent Automation", "Data-Driven Solutions", "Next-Gen Experiences"]'></span>
+        </p>
+        <div class="hero-btns">
+          <a href="signup.html" class="btn btn-primary btn-lg">Get Started <i class="fas fa-arrow-right"></i></a>
+          <a href="about.html" class="btn btn-secondary btn-lg"><i class="fas fa-play-circle"></i> Learn More</a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <h3><span data-count="200" data-suffix="+">0</span></h3>
+            <p>Projects Delivered</p>
+          </div>
+          <div class="hero-stat">
+            <h3><span data-count="150" data-suffix="+">0</span></h3>
+            <p>Happy Clients</p>
+          </div>
+          <div class="hero-stat">
+            <h3><span data-count="99" data-suffix="%">0</span></h3>
+            <p>Success Rate</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Partners / Marquee ═══ -->
+  <section class="partners">
+    <div class="container">
+      <p class="partners-label">Trusted by Industry Leaders</p>
+    </div>
+    <div class="marquee-container">
+      <div class="marquee-track">
+        <div class="partner-item"><i class="fab fa-google"></i> Google Cloud</div>
+        <div class="partner-item"><i class="fab fa-microsoft"></i> Microsoft Azure</div>
+        <div class="partner-item"><i class="fab fa-aws"></i> Amazon AWS</div>
+        <div class="partner-item"><i class="fab fa-slack"></i> Slack</div>
+        <div class="partner-item"><i class="fab fa-stripe"></i> Stripe</div>
+        <div class="partner-item"><i class="fab fa-spotify"></i> Spotify</div>
+        <div class="partner-item"><i class="fab fa-docker"></i> Docker</div>
+        <div class="partner-item"><i class="fab fa-github"></i> GitHub</div>
+        <div class="partner-item"><i class="fab fa-figma"></i> Figma</div>
+        <div class="partner-item"><i class="fab fa-shopify"></i> Shopify</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ About Preview ═══ -->
+  <section class="section" id="about-preview">
+    <div class="container">
+      <div class="split-section">
+        <div class="split-image reveal-left">
+          <img src="assets/about-team.webp" alt="Stackly Team">
+        </div>
+        <div class="split-content reveal-right">
+          <span class="section-badge"><i class="fas fa-info-circle"></i> About Stackly</span>
+          <h2>We Transform Ideas into <span class="gradient-text">Intelligent Realities</span></h2>
+          <p>At Stackly, we combine cutting-edge artificial intelligence with deep industry expertise to deliver transformative solutions that drive growth and innovation for businesses worldwide.</p>
+          <div class="feature-list">
+            <div class="feature-item">
+              <i class="fas fa-check-circle"></i>
+              <span>Custom AI solutions tailored to your business needs</span>
+            </div>
+            <div class="feature-item">
+              <i class="fas fa-check-circle"></i>
+              <span>Expert team with 10+ years in AI & Machine Learning</span>
+            </div>
+            <div class="feature-item">
+              <i class="fas fa-check-circle"></i>
+              <span>End-to-end development from strategy to deployment</span>
+            </div>
+            <div class="feature-item">
+              <i class="fas fa-check-circle"></i>
+              <span>24/7 support and continuous model optimization</span>
+            </div>
+          </div>
+          <a href="about.html" class="btn btn-primary">Learn More <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ AI Video Showcase ═══ -->
+  <section class="ai-video-section" id="ai-video-production">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-badge"><i class="fas fa-video"></i> AI Video Studio</span>
+        <h2 class="section-title">Create Cinematic Videos with <span class="gradient-text">Generative AI</span></h2>
+        <p class="section-desc">Transform scripts and ideas into cinematic AI videos in minutes — no studio, no crew, just intelligent automation. Hover the frame, click to play with sound, and watch live AI-powered keywords flow like a premium brand campaign.</p>
+      </div>
+    </div>
+    <div class="ai-video-showcase reveal">
+      <svg class="video-filter-defs" aria-hidden="true" focusable="false">
+        <defs>
+          <filter id="video-uhd-enhance" color-interpolation-filters="sRGB">
+            <feConvolveMatrix order="3" kernelMatrix="0 -0.6 0 -0.6 3.4 -0.6 0 -0.6 0" result="sharp"/>
+            <feColorMatrix in="sharp" type="saturate" values="1.22" result="saturated"/>
+            <feComponentTransfer in="saturated" result="bright">
+              <feFuncR type="linear" slope="1.1" intercept="0.015"/>
+              <feFuncG type="linear" slope="1.1" intercept="0.015"/>
+              <feFuncB type="linear" slope="1.1" intercept="0.015"/>
+            </feComponentTransfer>
+            <feComponentTransfer in="bright" result="contrast">
+              <feFuncR type="linear" slope="1.08" intercept="-0.04"/>
+              <feFuncG type="linear" slope="1.08" intercept="-0.04"/>
+              <feFuncB type="linear" slope="1.08" intercept="-0.04"/>
+            </feComponentTransfer>
+          </filter>
+        </defs>
+      </svg>
+      <div class="ai-video-container" id="aiVideoContainer">
+        <div class="ai-video-media">
+          <video id="aiVideoFile" src="assets/section 3.mp4" loop playsinline preload="auto"></video>
+        </div>
+        <div class="ai-word-overlay" id="aiWordStage" aria-hidden="true"></div>
+        <div class="video-cursor-tracker" id="videoCursorTracker">Play</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Services ═══ -->
+  <section class="section" id="services" style="background: var(--bg-secondary);">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-badge"><i class="fas fa-cogs"></i> Our Services</span>
+        <h2 class="section-title">Comprehensive AI <span class="gradient-text">Solutions</span></h2>
+        <p class="section-desc">From concept to deployment, we deliver end-to-end AI solutions that transform how businesses operate and innovate.</p>
+      </div>
+
+      <div class="grid-3 stagger-children">
+        <!-- Service 1 -->
+        <div class="card card-3d">
+          <div class="card-icon"><i class="fas fa-brain"></i></div>
+          <h4 class="card-title">AI Development</h4>
+          <p class="card-text">Build intelligent applications powered by state-of-the-art artificial intelligence algorithms and deep learning models.</p>
+          <a href="services.html" class="card-link">Learn More <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <!-- Service 2 -->
+        <div class="card card-3d">
+          <div class="card-icon"><i class="fas fa-robot"></i></div>
+          <h4 class="card-title">Machine Learning</h4>
+          <p class="card-text">Leverage predictive models and ML pipelines that learn from your data to automate decisions and uncover insights.</p>
+          <a href="services.html" class="card-link">Learn More <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <!-- Service 3 -->
+        <div class="card card-3d">
+          <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+          <h4 class="card-title">Data Analytics</h4>
+          <p class="card-text">Transform raw data into actionable insights with advanced analytics, visualization dashboards, and BI solutions.</p>
+          <a href="services.html" class="card-link">Learn More <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <!-- Service 4 -->
+        <div class="card card-3d">
+          <div class="card-icon"><i class="fas fa-language"></i></div>
+          <h4 class="card-title">Natural Language Processing</h4>
+          <p class="card-text">Enable your applications to understand, interpret, and generate human language with cutting-edge NLP solutions.</p>
+          <a href="services.html" class="card-link">Learn More <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <!-- Service 5 -->
+        <div class="card card-3d">
+          <div class="card-icon"><i class="fas fa-eye"></i></div>
+          <h4 class="card-title">Computer Vision</h4>
+          <p class="card-text">Implement image recognition, object detection, and visual AI systems that see and understand the world.</p>
+          <a href="services.html" class="card-link">Learn More <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <!-- Service 6 -->
+        <div class="card card-3d">
+          <div class="card-icon"><i class="fas fa-cogs"></i></div>
+          <h4 class="card-title">Process Automation</h4>
+          <p class="card-text">Streamline operations with intelligent automation, RPA bots, and AI-driven workflow optimization.</p>
+          <a href="services.html" class="card-link">Learn More <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ How It Works ═══ -->
+  <section class="section" id="how-it-works">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-badge"><i class="fas fa-route"></i> How It Works</span>
+        <h2 class="section-title">Our Proven <span class="gradient-text">Process</span></h2>
+        <p class="section-desc">A streamlined approach that takes you from initial concept to a deployed, production-ready AI solution.</p>
+      </div>
+
+      <div class="process-steps-grid stagger-children">
+        <div class="process-step">
+          <div class="process-step-number">01</div>
+          <h4>Discovery & Research</h4>
+          <p>We analyze your business challenges, data landscape, and objectives to identify the best AI opportunities.</p>
+        </div>
+        <div class="process-step">
+          <div class="process-step-number">02</div>
+          <h4>Strategy & Planning</h4>
+          <p>Our experts design a comprehensive AI roadmap with clear milestones, timelines, and success metrics.</p>
+        </div>
+        <div class="process-step">
+          <div class="process-step-number">03</div>
+          <h4>Development & Testing</h4>
+          <p>We build, train, and rigorously test your AI models using industry-leading frameworks and best practices.</p>
+        </div>
+        <div class="process-step">
+          <div class="process-step-number">04</div>
+          <h4>Launch & Support</h4>
+          <p>Deploy to production with continuous monitoring, optimization, and dedicated support for peak performance.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Stats ═══ -->
+  <section class="section" style="background: var(--gradient-primary); padding: 4rem 0;">
+    <div class="container">
+      <div class="stats-row reveal">
+        <div class="stat-item" style="background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.15);">
+          <div class="stat-number" style="color: white; -webkit-text-fill-color: white;"><span data-count="200" data-suffix="+">0</span></div>
+          <div class="stat-label" style="color: rgba(255,255,255,0.8);">Projects Completed</div>
+        </div>
+        <div class="stat-item" style="background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.15);">
+          <div class="stat-number" style="color: white; -webkit-text-fill-color: white;"><span data-count="150" data-suffix="+">0</span></div>
+          <div class="stat-label" style="color: rgba(255,255,255,0.8);">Happy Clients</div>
+        </div>
+        <div class="stat-item" style="background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.15);">
+          <div class="stat-number" style="color: white; -webkit-text-fill-color: white;"><span data-count="50" data-suffix="+">0</span></div>
+          <div class="stat-label" style="color: rgba(255,255,255,0.8);">Team Members</div>
+        </div>
+        <div class="stat-item" style="background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.15);">
+          <div class="stat-number" style="color: white; -webkit-text-fill-color: white;"><span data-count="15" data-suffix="+">0</span></div>
+          <div class="stat-label" style="color: rgba(255,255,255,0.8);">Awards Won</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Portfolio / Case Studies ═══ -->
+  <section class="section" id="portfolio">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-badge"><i class="fas fa-briefcase"></i> Case Studies</span>
+        <h2 class="section-title">Our Success <span class="gradient-text">Stories</span></h2>
+        <p class="section-desc">Explore how we've helped businesses transform with our AI-powered solutions.</p>
+      </div>
+
+      <div class="grid-3 stagger-children">
+        <div class="blog-card">
+          <div class="blog-card-image">
+            <img src="assets/blog-1.webp" alt="AI Healthcare Case Study">
+            <span class="blog-card-category">Healthcare</span>
+          </div>
+          <div class="blog-card-body">
+            <div class="blog-card-meta">
+              <span><i class="fas fa-calendar"></i> 2025</span>
+              <span><i class="fas fa-chart-bar"></i> 300% ROI</span>
+            </div>
+            <h4 class="blog-card-title">AI-Powered Diagnostic System for MedTech Corp</h4>
+            <p class="blog-card-excerpt">Developed an AI diagnostic platform that reduced diagnosis time by 60% and improved accuracy to 97.5%.</p>
+            <a href="404.html" class="blog-card-link">View Case Study <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <div class="blog-card">
+          <div class="blog-card-image">
+            <img src="assets/blog-2.webp" alt="Smart City Case Study">
+            <span class="blog-card-category">Smart City</span>
+          </div>
+          <div class="blog-card-body">
+            <div class="blog-card-meta">
+              <span><i class="fas fa-calendar"></i> 2024</span>
+              <span><i class="fas fa-chart-bar"></i> 250% ROI</span>
+            </div>
+            <h4 class="blog-card-title">Smart Traffic Management for Metro City</h4>
+            <p class="blog-card-excerpt">Implemented ML-driven traffic optimization reducing congestion by 40% across 200+ intersections.</p>
+            <a href="404.html" class="blog-card-link">View Case Study <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <div class="blog-card">
+          <div class="blog-card-image">
+            <img src="assets/blog-3.webp" alt="NLP Chatbot Case Study">
+            <span class="blog-card-category">FinTech</span>
+          </div>
+          <div class="blog-card-body">
+            <div class="blog-card-meta">
+              <span><i class="fas fa-calendar"></i> 2025</span>
+              <span><i class="fas fa-chart-bar"></i> 400% ROI</span>
+            </div>
+            <h4 class="blog-card-title">Intelligent Chatbot for Global Banking</h4>
+            <p class="blog-card-excerpt">Built an NLP-powered chatbot handling 1M+ queries monthly with 95% resolution rate.</p>
+            <a href="404.html" class="blog-card-link">View Case Study <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Testimonials ═══ -->
+  <section class="section" style="background: var(--bg-tertiary);">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-badge"><i class="fas fa-quote-left"></i> Testimonials</span>
+        <h2 class="section-title">What Our Clients <span class="gradient-text">Say</span></h2>
+        <p class="section-desc">Hear from the businesses we've helped transform with our AI solutions.</p>
+      </div>
+
+      <div class="grid-3 stagger-children">
+        <div class="testimonial-card">
+          <i class="fas fa-quote-right quote-icon"></i>
+          <p class="testimonial-text">"Stackly transformed our data operations completely. Their AI solutions increased our efficiency by 300% and the team was incredibly professional throughout."</p>
+          <div class="testimonial-author">
+            <img src="assets/team-1.webp" alt="Client">
+            <div class="testimonial-author-info">
+              <h5>Vikram Mehta</h5>
+              <p>CTO, TechVista Solutions</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <i class="fas fa-quote-right quote-icon"></i>
+          <p class="testimonial-text">"The machine learning models Stackly built for us have been game-changing. Prediction accuracy went from 72% to 96% in just three months."</p>
+          <div class="testimonial-author">
+            <img src="assets/team-2.webp" alt="Client">
+            <div class="testimonial-author-info">
+              <h5>Ananya Reddy</h5>
+              <p>VP Data Science, FinCore</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <i class="fas fa-quote-right quote-icon"></i>
+          <p class="testimonial-text">"Outstanding work on our computer vision project. Stackly delivered ahead of schedule and the results exceeded all our expectations. Highly recommended!"</p>
+          <div class="testimonial-author">
+            <img src="assets/team-3.webp" alt="Client">
+            <div class="testimonial-author-info">
+              <h5>David Chen</h5>
+              <p>CEO, VisionAI Labs</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Blog Preview ═══ -->
+  <section class="section" id="blog-preview">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-badge"><i class="fas fa-pen-fancy"></i> Latest Insights</span>
+        <h2 class="section-title">From Our <span class="gradient-text">Blog</span></h2>
+        <p class="section-desc">Stay updated with the latest trends, research, and insights in artificial intelligence and technology.</p>
+      </div>
+
+      <div class="grid-3 stagger-children">
+        <div class="blog-card">
+          <div class="blog-card-image">
+            <img src="assets/blog-1.webp" alt="AI Healthcare Blog">
+            <span class="blog-card-category">AI</span>
+          </div>
+          <div class="blog-card-body">
+            <div class="blog-card-meta">
+              <span><i class="fas fa-calendar"></i> Jan 15, 2026</span>
+              <span><i class="fas fa-clock"></i> 5 min read</span>
+            </div>
+            <h4 class="blog-card-title">How AI is Revolutionizing Healthcare Diagnostics</h4>
+            <p class="blog-card-excerpt">Explore how artificial intelligence is transforming medical diagnostics with unprecedented accuracy and speed.</p>
+            <a href="blog.html" class="blog-card-link">Read More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <div class="blog-card">
+          <div class="blog-card-image">
+            <img src="assets/blog-2.webp" alt="Smart Cities Blog">
+            <span class="blog-card-category">Technology</span>
+          </div>
+          <div class="blog-card-body">
+            <div class="blog-card-meta">
+              <span><i class="fas fa-calendar"></i> Feb 8, 2026</span>
+              <span><i class="fas fa-clock"></i> 7 min read</span>
+            </div>
+            <h4 class="blog-card-title">Smart Cities: The Role of Machine Learning</h4>
+            <p class="blog-card-excerpt">Discover how machine learning algorithms are making cities smarter, safer, and more sustainable.</p>
+            <a href="blog.html" class="blog-card-link">Read More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <div class="blog-card">
+          <div class="blog-card-image">
+            <img src="assets/blog-3.webp" alt="NLP Blog">
+            <span class="blog-card-category">NLP</span>
+          </div>
+          <div class="blog-card-body">
+            <div class="blog-card-meta">
+              <span><i class="fas fa-calendar"></i> Mar 12, 2026</span>
+              <span><i class="fas fa-clock"></i> 6 min read</span>
+            </div>
+            <h4 class="blog-card-title">NLP Breakthroughs Shaping 2026</h4>
+            <p class="blog-card-excerpt">The latest advances in Natural Language Processing are redefining how machines understand human communication.</p>
+            <a href="blog.html" class="blog-card-link">Read More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-4 reveal">
+        <a href="blog.html" class="btn btn-outline">View All Articles <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CTA Banner ═══ -->
+  <section class="cta-banner">
+    <div class="container">
+      <h2 class="reveal">Ready to Transform Your Business with AI?</h2>
+      <p class="reveal">Let's discuss how our AI solutions can drive innovation and growth for your organization.</p>
+      <div class="reveal" style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <a href="signup.html" class="btn btn-white btn-lg">Get Started Free <i class="fas fa-arrow-right"></i></a>
+        <a href="contact.html" class="btn btn-outline btn-lg" style="border-color: rgba(255,255,255,0.3); color: white;">Contact Us <i class="fas fa-envelope"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Footer ═══ -->
+  <footer class="footer">
+    <div class="container">
+        <!-- Newsletter Row -->
+        <div class="footer-newsletter-row">
+          <div class="newsletter-info">
+            <h4>Subscribe to our newsletter</h4>
+            <p>Stay updated with the latest trends and insights in artificial intelligence.</p>
+          </div>
+          <form class="newsletter-form">
+            <input type="email" placeholder="Your email address" required>
+            <button type="submit" aria-label="Subscribe">Subscribe <i class="fas fa-paper-plane"></i></button>
+          </form>
+        </div>
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="assets/logo.webp" alt="Stackly">
+          <p>Empowering businesses with cutting-edge AI solutions. We transform ideas into intelligent realities that drive growth and innovation.</p>
+          <div class="footer-socials">
+            <a href="404.html" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="404.html" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="404.html" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="404.html" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="404.html" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul class="footer-links">
+            <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+            <li><a href="services.html"><i class="fas fa-chevron-right"></i> Services</a></li>
+            <li><a href="blog.html"><i class="fas fa-chevron-right"></i> Blog</a></li>
+            <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
+            <li><a href="404.html"><i class="fas fa-chevron-right"></i> Careers</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul class="footer-links">
+            <li><a href="services.html"><i class="fas fa-chevron-right"></i> AI Development</a></li>
+            <li><a href="services.html"><i class="fas fa-chevron-right"></i> Machine Learning</a></li>
+            <li><a href="services.html"><i class="fas fa-chevron-right"></i> Data Analytics</a></li>
+            <li><a href="services.html"><i class="fas fa-chevron-right"></i> Cloud Solutions</a></li>
+            <li><a href="services.html"><i class="fas fa-chevron-right"></i> Automation</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Get in Touch</h4>
+          <ul class="footer-contact">
+            <li><i class="fas fa-map-marker-alt"></i> MMR Complex, Chinna Thirupathi, near Chinna Muniyappan Kovil, Salem, Tamil Nadu 636008</li>
+            <li><i class="fas fa-phone"></i> +91 98765 43210</li>
+            <li><i class="fas fa-envelope"></i> hello@stackly.ai</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 Stackly. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="404.html">Privacy Policy</a>
+          <a href="404.html">Terms of Service</a>
+          <a href="404.html">Cookie Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll to Top -->
+  <button class="scroll-top" aria-label="Scroll to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <script src="script.js"></script>
+</body>
+</html>
