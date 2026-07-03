@@ -8,7 +8,6 @@
   <meta name="author" content="Stackly">
   <meta name="theme-color" content="#e24c4a">
   <title>Stackly — AI Agency & Technology</title>
-
   <link rel="icon" type="image/webp" href="assets/top-logo.webp">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,8 +16,6 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-  <!-- Preloader -->
   <div class="preloader">
     <div class="preloader-content">
       <div class="preloader-circle">
@@ -28,11 +25,7 @@
       <div class="preloader-text">Loading Stackly...</div>
     </div>
   </div>
-
-  <!-- Menu Overlay -->
   <div class="menu-overlay"></div>
-
-  <!-- ═══ Navbar ═══ -->
   <nav class="navbar">
     <div class="container">
       <a href="index.html" class="navbar-logo">
@@ -68,23 +61,17 @@
       </button>
     </div>
   </nav>
-
-  <!-- ═══ Hero Section ═══ -->
   <section class="hero" id="hero">
-    <!-- Canvas layers for Anti-Gravity Aquarium & WebGL Ripples -->
     <div class="hero-canvas-container">
-      <img id="hero-bg-image" class="hero-bg-image is-ready" src="assets/hero-aquarium.webp" alt="" aria-hidden="true">
+      <video id="hero-bg-video" class="hero-bg-video is-ready" src="assets/aquarium.mp4" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
       <canvas id="hero-ripple-canvas"></canvas>
       <canvas id="hero-aquarium-canvas"></canvas>
     </div>
-
-    <!-- Floating shapes -->
     <div class="floating-shape shape-1"></div>
     <div class="floating-shape shape-2"></div>
     <div class="floating-shape shape-3"></div>
     <div class="floating-shape shape-4"></div>
     <div class="floating-shape shape-5"></div>
-
     <div class="container">
       <div class="hero-content">
         <div class="hero-badge">
@@ -118,8 +105,6 @@
       </div>
     </div>
   </section>
-
-  <!-- ═══ Partners / Marquee ═══ -->
   <section class="partners">
     <div class="container">
       <p class="partners-label">Trusted by Industry Leaders</p>
@@ -139,8 +124,6 @@
       </div>
     </div>
   </section>
-
-  <!-- ═══ About Preview ═══ -->
   <section class="section" id="about-preview">
     <div class="container">
       <div class="split-section">
@@ -174,14 +157,12 @@
       </div>
     </div>
   </section>
-
-  <!-- ═══ AI Video Showcase ═══ -->
   <section class="ai-video-section" id="ai-video-production">
     <div class="container">
       <div class="section-header reveal">
         <span class="section-badge"><i class="fas fa-video"></i> AI Video Studio</span>
         <h2 class="section-title">Create Cinematic Videos with <span class="gradient-text">Generative AI</span></h2>
-        <p class="section-desc">Transform scripts and ideas into cinematic AI videos in minutes — no studio, no crew, just intelligent automation. Hover the frame, click to play with sound, and watch live AI-powered keywords flow like a premium brand campaign.</p>
+        <p class="section-desc">Transform scripts and ideas into cinematic AI videos in minutes — no studio, no crew, just intelligent automation. Hover the frame to explore, click to play or pause, and watch live AI-powered keywords flow like a premium brand campaign.</p>
       </div>
     </div>
     <div class="ai-video-showcase reveal">
@@ -205,15 +186,13 @@
       </svg>
       <div class="ai-video-container" id="aiVideoContainer">
         <div class="ai-video-media">
-          <video id="aiVideoFile" src="assets/section 3.mp4" loop playsinline preload="auto"></video>
+          <video id="aiVideoFile" src="assets/section 3.mp4" loop muted playsinline preload="auto"></video>
         </div>
         <div class="ai-word-overlay" id="aiWordStage" aria-hidden="true"></div>
         <div class="video-cursor-tracker" id="videoCursorTracker">Play</div>
       </div>
     </div>
   </section>
-
-  <!-- ═══ Services ═══ -->
   <section class="section" id="services" style="background: var(--bg-secondary);">
     <div class="container">
       <div class="section-header reveal">
@@ -221,49 +200,37 @@
         <h2 class="section-title">Comprehensive AI <span class="gradient-text">Solutions</span></h2>
         <p class="section-desc">From concept to deployment, we deliver end-to-end AI solutions that transform how businesses operate and innovate.</p>
       </div>
-
       <div class="grid-3 stagger-children">
-        <!-- Service 1 -->
         <div class="card card-3d">
           <div class="card-icon"><i class="fas fa-brain"></i></div>
           <h4 class="card-title">AI Development</h4>
           <p class="card-text">Build intelligent applications powered by state-of-the-art artificial intelligence algorithms and deep learning models.</p>
           <a href="services.html" class="card-link">Learn More <i class="fas fa-arrow-right"></i></a>
         </div>
-
-        <!-- Service 2 -->
         <div class="card card-3d">
           <div class="card-icon"><i class="fas fa-robot"></i></div>
           <h4 class="card-title">Machine Learning</h4>
           <p class="card-text">Leverage predictive models and ML pipelines that learn from your data to automate decisions and uncover insights.</p>
           <a href="services.html" class="card-link">Learn More <i class="fas fa-arrow-right"></i></a>
         </div>
-
-        <!-- Service 3 -->
         <div class="card card-3d">
           <div class="card-icon"><i class="fas fa-chart-line"></i></div>
           <h4 class="card-title">Data Analytics</h4>
           <p class="card-text">Transform raw data into actionable insights with advanced analytics, visualization dashboards, and BI solutions.</p>
           <a href="services.html" class="card-link">Learn More <i class="fas fa-arrow-right"></i></a>
         </div>
-
-        <!-- Service 4 -->
         <div class="card card-3d">
           <div class="card-icon"><i class="fas fa-language"></i></div>
           <h4 class="card-title">Natural Language Processing</h4>
           <p class="card-text">Enable your applications to understand, interpret, and generate human language with cutting-edge NLP solutions.</p>
           <a href="services.html" class="card-link">Learn More <i class="fas fa-arrow-right"></i></a>
         </div>
-
-        <!-- Service 5 -->
         <div class="card card-3d">
           <div class="card-icon"><i class="fas fa-eye"></i></div>
           <h4 class="card-title">Computer Vision</h4>
           <p class="card-text">Implement image recognition, object detection, and visual AI systems that see and understand the world.</p>
           <a href="services.html" class="card-link">Learn More <i class="fas fa-arrow-right"></i></a>
         </div>
-
-        <!-- Service 6 -->
         <div class="card card-3d">
           <div class="card-icon"><i class="fas fa-cogs"></i></div>
           <h4 class="card-title">Process Automation</h4>
@@ -273,8 +240,6 @@
       </div>
     </div>
   </section>
-
-  <!-- ═══ How It Works ═══ -->
   <section class="section" id="how-it-works">
     <div class="container">
       <div class="section-header reveal">
@@ -282,7 +247,6 @@
         <h2 class="section-title">Our Proven <span class="gradient-text">Process</span></h2>
         <p class="section-desc">A streamlined approach that takes you from initial concept to a deployed, production-ready AI solution.</p>
       </div>
-
       <div class="process-steps-grid stagger-children">
         <div class="process-step">
           <div class="process-step-number">01</div>
@@ -307,8 +271,6 @@
       </div>
     </div>
   </section>
-
-  <!-- ═══ Stats ═══ -->
   <section class="section" style="background: var(--gradient-primary); padding: 4rem 0;">
     <div class="container">
       <div class="stats-row reveal">
@@ -331,8 +293,6 @@
       </div>
     </div>
   </section>
-
-  <!-- ═══ Portfolio / Case Studies ═══ -->
   <section class="section" id="portfolio">
     <div class="container">
       <div class="section-header reveal">
@@ -340,7 +300,6 @@
         <h2 class="section-title">Our Success <span class="gradient-text">Stories</span></h2>
         <p class="section-desc">Explore how we've helped businesses transform with our AI-powered solutions.</p>
       </div>
-
       <div class="grid-3 stagger-children">
         <div class="blog-card">
           <div class="blog-card-image">
@@ -357,7 +316,6 @@
             <a href="404.html" class="blog-card-link">View Case Study <i class="fas fa-arrow-right"></i></a>
           </div>
         </div>
-
         <div class="blog-card">
           <div class="blog-card-image">
             <img src="assets/blog-2.webp" alt="Smart City Case Study">
@@ -373,7 +331,6 @@
             <a href="404.html" class="blog-card-link">View Case Study <i class="fas fa-arrow-right"></i></a>
           </div>
         </div>
-
         <div class="blog-card">
           <div class="blog-card-image">
             <img src="assets/blog-3.webp" alt="NLP Chatbot Case Study">
@@ -392,8 +349,6 @@
       </div>
     </div>
   </section>
-
-  <!-- ═══ Testimonials ═══ -->
   <section class="section" style="background: var(--bg-tertiary);">
     <div class="container">
       <div class="section-header reveal">
@@ -401,7 +356,6 @@
         <h2 class="section-title">What Our Clients <span class="gradient-text">Say</span></h2>
         <p class="section-desc">Hear from the businesses we've helped transform with our AI solutions.</p>
       </div>
-
       <div class="grid-3 stagger-children">
         <div class="testimonial-card">
           <i class="fas fa-quote-right quote-icon"></i>
@@ -414,7 +368,6 @@
             </div>
           </div>
         </div>
-
         <div class="testimonial-card">
           <i class="fas fa-quote-right quote-icon"></i>
           <p class="testimonial-text">"The machine learning models Stackly built for us have been game-changing. Prediction accuracy went from 72% to 96% in just three months."</p>
@@ -426,7 +379,6 @@
             </div>
           </div>
         </div>
-
         <div class="testimonial-card">
           <i class="fas fa-quote-right quote-icon"></i>
           <p class="testimonial-text">"Outstanding work on our computer vision project. Stackly delivered ahead of schedule and the results exceeded all our expectations. Highly recommended!"</p>
@@ -441,8 +393,6 @@
       </div>
     </div>
   </section>
-
-  <!-- ═══ Blog Preview ═══ -->
   <section class="section" id="blog-preview">
     <div class="container">
       <div class="section-header reveal">
@@ -450,7 +400,6 @@
         <h2 class="section-title">From Our <span class="gradient-text">Blog</span></h2>
         <p class="section-desc">Stay updated with the latest trends, research, and insights in artificial intelligence and technology.</p>
       </div>
-
       <div class="grid-3 stagger-children">
         <div class="blog-card">
           <div class="blog-card-image">
@@ -467,7 +416,6 @@
             <a href="blog.html" class="blog-card-link">Read More <i class="fas fa-arrow-right"></i></a>
           </div>
         </div>
-
         <div class="blog-card">
           <div class="blog-card-image">
             <img src="assets/blog-2.webp" alt="Smart Cities Blog">
@@ -483,7 +431,6 @@
             <a href="blog.html" class="blog-card-link">Read More <i class="fas fa-arrow-right"></i></a>
           </div>
         </div>
-
         <div class="blog-card">
           <div class="blog-card-image">
             <img src="assets/blog-3.webp" alt="NLP Blog">
@@ -500,14 +447,11 @@
           </div>
         </div>
       </div>
-
       <div class="text-center mt-4 reveal">
         <a href="blog.html" class="btn btn-outline">View All Articles <i class="fas fa-arrow-right"></i></a>
       </div>
     </div>
   </section>
-
-  <!-- ═══ CTA Banner ═══ -->
   <section class="cta-banner">
     <div class="container">
       <h2 class="reveal">Ready to Transform Your Business with AI?</h2>
@@ -518,11 +462,8 @@
       </div>
     </div>
   </section>
-
-  <!-- ═══ Footer ═══ -->
   <footer class="footer">
     <div class="container">
-        <!-- Newsletter Row -->
         <div class="footer-newsletter-row">
           <div class="newsletter-info">
             <h4>Subscribe to our newsletter</h4>
@@ -535,7 +476,9 @@
         </div>
       <div class="footer-grid">
         <div class="footer-brand">
-          <img src="assets/logo.webp" alt="Stackly">
+          <a href="index.html" class="footer-logo" aria-label="Stackly Home">
+            <img src="assets/logo.webp" alt="Stackly">
+          </a>
           <p>Empowering businesses with cutting-edge AI solutions. We transform ideas into intelligent realities that drive growth and innovation.</p>
           <div class="footer-socials">
             <a href="404.html" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
@@ -545,29 +488,26 @@
             <a href="404.html" aria-label="GitHub"><i class="fab fa-github"></i></a>
           </div>
         </div>
-
         <div class="footer-col">
-          <h4>Company</h4>
+          <h4>Quick Links</h4>
           <ul class="footer-links">
-            <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+            <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+            <li><a href="about.html"><i class="fas fa-chevron-right"></i> About</a></li>
             <li><a href="services.html"><i class="fas fa-chevron-right"></i> Services</a></li>
             <li><a href="blog.html"><i class="fas fa-chevron-right"></i> Blog</a></li>
             <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
-            <li><a href="404.html"><i class="fas fa-chevron-right"></i> Careers</a></li>
           </ul>
         </div>
-
         <div class="footer-col">
-          <h4>Services</h4>
+          <h4>Resources</h4>
           <ul class="footer-links">
-            <li><a href="services.html"><i class="fas fa-chevron-right"></i> AI Development</a></li>
-            <li><a href="services.html"><i class="fas fa-chevron-right"></i> Machine Learning</a></li>
-            <li><a href="services.html"><i class="fas fa-chevron-right"></i> Data Analytics</a></li>
-            <li><a href="services.html"><i class="fas fa-chevron-right"></i> Cloud Solutions</a></li>
-            <li><a href="services.html"><i class="fas fa-chevron-right"></i> Automation</a></li>
+            <li><a href="404.html"><i class="fas fa-chevron-right"></i> Careers</a></li>
+            <li><a href="404.html"><i class="fas fa-chevron-right"></i> FAQ</a></li>
+            <li><a href="404.html"><i class="fas fa-chevron-right"></i> Portfolio</a></li>
+            <li><a href="404.html"><i class="fas fa-chevron-right"></i> Case Studies</a></li>
+            <li><a href="404.html"><i class="fas fa-chevron-right"></i> Documentation</a></li>
           </ul>
         </div>
-
         <div class="footer-col">
           <h4>Get in Touch</h4>
           <ul class="footer-contact">
@@ -577,7 +517,6 @@
           </ul>
         </div>
       </div>
-
       <div class="footer-bottom">
         <p>&copy; 2026 Stackly. All rights reserved.</p>
         <div class="footer-bottom-links">
@@ -588,12 +527,9 @@
       </div>
     </div>
   </footer>
-
-  <!-- Scroll to Top -->
   <button class="scroll-top" aria-label="Scroll to top">
     <i class="fas fa-arrow-up"></i>
   </button>
-
   <script src="script.js"></script>
 </body>
 </html>

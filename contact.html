@@ -6,7 +6,6 @@
   <meta name="description" content="Contact Us — Stackly. Get in touch with our team in Salem, Tamil Nadu. Submit an AI development project request.">
   <meta name="theme-color" content="#e24c4a">
   <title>Contact Us — Stackly</title>
-
   <link rel="icon" type="image/webp" href="assets/top-logo.webp">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,8 +14,6 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-  <!-- Preloader -->
   <div class="preloader">
     <div class="preloader-content">
       <div class="preloader-circle">
@@ -26,11 +23,7 @@
       <div class="preloader-text">Loading Stackly...</div>
     </div>
   </div>
-
-  <!-- Menu Overlay -->
   <div class="menu-overlay"></div>
-
-  <!-- ═══ Navbar ═══ -->
   <nav class="navbar">
     <div class="container">
       <a href="index.html" class="navbar-logo">
@@ -66,11 +59,9 @@
       </button>
     </div>
   </nav>
-
-  <!-- ═══ Page Hero Banner ═══ -->
   <section class="page-hero">
     <div class="page-hero-bg" aria-hidden="true">
-      <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1600&q=80" alt="">
+      <img src="assets/contact-meeting.webp" alt="">
     </div>
     <div class="page-hero-overlay"></div>
     <div class="container page-hero-inner">
@@ -89,28 +80,21 @@
       </div>
     </div>
   </section>
-
-  <!-- ═══ Contact Info Cards ═══ -->
   <section class="section">
     <div class="container">
       <div class="grid-3 stagger-children">
-        <!-- Card 1 -->
         <div class="contact-card">
           <div class="contact-card-icon"><i class="fas fa-phone-alt"></i></div>
           <h4>Call Us</h4>
           <p>Talk to our support team.</p>
           <p style="color:var(--primary); font-weight:700; margin-top:0.5rem;">+91 98765 43210</p>
         </div>
-
-        <!-- Card 2 -->
         <div class="contact-card">
           <div class="contact-card-icon"><i class="fas fa-envelope"></i></div>
           <h4>Email Us</h4>
           <p>We typically respond within 12 hours.</p>
           <p style="color:var(--primary); font-weight:700; margin-top:0.5rem;">hello@stackly.ai</p>
         </div>
-
-        <!-- Card 3 -->
         <div class="contact-card">
           <div class="contact-card-icon"><i class="fas fa-map-marker-alt"></i></div>
           <h4>Office Location</h4>
@@ -120,8 +104,6 @@
       </div>
     </div>
   </section>
-
-  <!-- ═══ Office Visuals ═══ -->
   <section class="section" style="padding-top: 0;">
     <div class="container">
       <div class="section-header reveal">
@@ -129,24 +111,23 @@
         <h2 class="section-title">Visit Stackly in <span class="gradient-text">Salem</span></h2>
         <p class="section-desc">Our office is open for client meetings, product demos, and AI workshops — walk in or book a slot online.</p>
       </div>
-
       <div class="contact-visual-grid stagger-children">
         <div class="contact-visual-card">
-          <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1600&q=80" alt="Stackly office workspace">
+          <img src="assets/about-mission.webp" alt="Stackly office workspace">
           <div class="contact-visual-card__overlay">
             <h4>Headquarters</h4>
             <p>MMR Complex, Chinna Thirupathi, Salem 636008</p>
           </div>
         </div>
         <div class="contact-visual-card">
-          <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1600&q=80" alt="Stackly team meeting room">
+          <img src="assets/contact-meeting.webp" alt="Stackly team meeting room">
           <div class="contact-visual-card__overlay">
             <h4>Client Demo Room</h4>
             <p>Live AI model walkthroughs and architecture reviews.</p>
           </div>
         </div>
         <div class="contact-visual-card">
-          <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1600&q=80" alt="Stackly automation lab">
+          <img src="assets/contact-lab.webp" alt="Stackly automation lab">
           <div class="contact-visual-card__overlay">
             <h4>Automation Lab</h4>
             <p>Hands-on RPA and workflow integration testing.</p>
@@ -155,11 +136,9 @@
       </div>
     </div>
   </section>
-
-  <!-- ═══ Why Contact Us ═══ -->
   <section class="section" style="background: var(--bg-secondary);">
     <div class="container">
-      <div class="split-section">
+      <div class="split-section split-section--equal">
         <div class="split-content reveal-left">
           <span class="section-badge"><i class="fas fa-comments"></i> Let's Talk</span>
           <h2>Start Your AI Journey <span class="gradient-text">Today</span></h2>
@@ -180,21 +159,18 @@
           </div>
         </div>
         <div class="split-image reveal-right">
-          <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80" alt="Stackly cloud AI solutions">
+          <img src="assets/blog-4.webp" alt="Stackly cloud AI solutions">
         </div>
       </div>
     </div>
   </section>
-
-  <!-- ═══ Split Form & Map ═══ -->
   <section class="section" style="border-top: 1px solid var(--border-light);">
     <div class="container">
-      <div class="split-section">
-        <!-- Left form -->
+      <div class="contact-split">
         <div class="contact-form-card reveal-left">
           <h3>Send Us a Message</h3>
-          <p>Have an inquiry or project spec ready? Fill out the details below.</p>
-          <form data-validate>
+          <p>Have an inquiry or project spec ready? Fill out the details below and our team will respond within 12 hours.</p>
+          <form id="contactForm" data-validate>
             <div class="form-group">
               <label class="form-label" for="contact-name">Full Name *</label>
               <input type="text" id="contact-name" class="form-input" placeholder="Your name" required>
@@ -204,31 +180,49 @@
               <input type="email" id="contact-email" class="form-input" placeholder="Your email address" required>
             </div>
             <div class="form-group">
-              <label class="form-label" for="contact-subject">Subject</label>
-              <input type="text" id="contact-subject" class="form-input" placeholder="Project or inquiry topic">
+              <label class="form-label" for="contact-subject">Subject *</label>
+              <input type="text" id="contact-subject" class="form-input" placeholder="Project or inquiry topic" required>
             </div>
             <div class="form-group">
               <label class="form-label" for="contact-message">Message *</label>
               <textarea id="contact-message" class="form-textarea" placeholder="Describe your project needs..." required></textarea>
             </div>
-            <button type="submit" class="btn btn-primary btn-lg" style="width:100%;">Submit Message <i class="fas fa-paper-plane"></i></button>
+            <button type="submit" class="btn btn-primary btn-lg" style="width:100%;">Send Message <i class="fas fa-paper-plane"></i></button>
           </form>
+          <div class="contact-form-extra">
+            <div class="contact-form-extra-item">
+              <i class="fas fa-clock"></i>
+              <span><strong>Response Time:</strong> We reply to all inquiries within 12 business hours.</span>
+            </div>
+            <div class="contact-form-extra-item">
+              <i class="fas fa-shield-alt"></i>
+              <span><strong>Secure &amp; Confidential:</strong> Your project details are protected under NDA on request.</span>
+            </div>
+          </div>
         </div>
-
-        <!-- Right map -->
-        <div class="map-container reveal-right">
-          <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3912.012543598555!2d78.169123!3d11.688123!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3babf0c5a2b3c457%3A0x7d192be432e185c!2sChinna+Muniyappan+Kovil%2C+Salem%2C+Tamil+Nadu!5e0!3m2!1sen!2sin!4v1782984926900!5m2!1sen!2sin" 
-            allowfullscreen="" 
-            loading="lazy" 
-            referrerpolicy="no-referrer-when-downgrade">
-          </iframe>
+        <div class="contact-map-wrap reveal-right">
+          <div class="map-container">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3912.012543598555!2d78.169123!3d11.688123!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3babf0c5a2b3c457%3A0x7d192be432e185c!2sChinna+Muniyappan+Kovil%2C+Salem%2C+Tamil+Nadu!5e0!3m2!1sen!2sin!4v1782984926900!5m2!1sen!2sin"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Stackly office location map">
+            </iframe>
+          </div>
+          <div class="contact-map-meta">
+            <h4>Visit Our Salem Office</h4>
+            <ul class="contact-map-meta-list">
+              <li><i class="fas fa-map-marker-alt"></i> MMR Complex, Chinna Thirupathi, near Chinna Muniyappan Kovil, Salem, Tamil Nadu 636008</li>
+              <li><i class="fas fa-clock"></i> Mon – Sat: 9:00 AM – 6:00 PM · Sunday: Closed</li>
+              <li><i class="fas fa-phone"></i> +91 98765 43210 · hello@stackly.ai</li>
+              <li><i class="fas fa-car"></i> Free client parking available at MMR Complex entrance.</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
   </section>
-
-  <!-- ═══ Mini FAQ ═══ -->
   <section class="section">
     <div class="container">
       <div class="section-header reveal">
@@ -236,7 +230,6 @@
         <h2 class="section-title">Common Inquiry <span class="gradient-text">Assistance</span></h2>
         <p class="section-desc">Answers to common pre-sales and support questions.</p>
       </div>
-
       <div class="accordion stagger-children" style="max-width: 800px; margin: 0 auto;">
         <div class="accordion-item">
           <div class="accordion-header">
@@ -249,7 +242,6 @@
             </div>
           </div>
         </div>
-
         <div class="accordion-item">
           <div class="accordion-header">
             <span>Do you sign Non-Disclosure Agreements (NDAs)?</span>
@@ -261,7 +253,6 @@
             </div>
           </div>
         </div>
-
         <div class="accordion-item">
           <div class="accordion-header">
             <span>What support SLA is standard for deployed models?</span>
@@ -276,8 +267,6 @@
       </div>
     </div>
   </section>
-
-  <!-- ═══ CTA Banner ═══ -->
   <section class="cta-banner">
     <div class="container">
       <h2 class="reveal">Have a Vision? Let's Build It.</h2>
@@ -288,11 +277,8 @@
       </div>
     </div>
   </section>
-
-  <!-- ═══ Footer ═══ -->
   <footer class="footer">
     <div class="container">
-        <!-- Newsletter Row -->
         <div class="footer-newsletter-row">
           <div class="newsletter-info">
             <h4>Subscribe to our newsletter</h4>
@@ -305,7 +291,9 @@
         </div>
       <div class="footer-grid">
         <div class="footer-brand">
-          <img src="assets/logo.webp" alt="Stackly">
+          <a href="index.html" class="footer-logo" aria-label="Stackly Home">
+            <img src="assets/logo.webp" alt="Stackly">
+          </a>
           <p>Empowering businesses with cutting-edge AI solutions. We transform ideas into intelligent realities that drive growth and innovation.</p>
           <div class="footer-socials">
             <a href="404.html" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
@@ -315,29 +303,26 @@
             <a href="404.html" aria-label="GitHub"><i class="fab fa-github"></i></a>
           </div>
         </div>
-
         <div class="footer-col">
-          <h4>Company</h4>
+          <h4>Quick Links</h4>
           <ul class="footer-links">
-            <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+            <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+            <li><a href="about.html"><i class="fas fa-chevron-right"></i> About</a></li>
             <li><a href="services.html"><i class="fas fa-chevron-right"></i> Services</a></li>
             <li><a href="blog.html"><i class="fas fa-chevron-right"></i> Blog</a></li>
             <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
-            <li><a href="404.html"><i class="fas fa-chevron-right"></i> Careers</a></li>
           </ul>
         </div>
-
         <div class="footer-col">
-          <h4>Services</h4>
+          <h4>Resources</h4>
           <ul class="footer-links">
-            <li><a href="services.html"><i class="fas fa-chevron-right"></i> AI Development</a></li>
-            <li><a href="services.html"><i class="fas fa-chevron-right"></i> Machine Learning</a></li>
-            <li><a href="services.html"><i class="fas fa-chevron-right"></i> Data Analytics</a></li>
-            <li><a href="services.html"><i class="fas fa-chevron-right"></i> Cloud Solutions</a></li>
-            <li><a href="services.html"><i class="fas fa-chevron-right"></i> Automation</a></li>
+            <li><a href="404.html"><i class="fas fa-chevron-right"></i> Careers</a></li>
+            <li><a href="404.html"><i class="fas fa-chevron-right"></i> FAQ</a></li>
+            <li><a href="404.html"><i class="fas fa-chevron-right"></i> Portfolio</a></li>
+            <li><a href="404.html"><i class="fas fa-chevron-right"></i> Case Studies</a></li>
+            <li><a href="404.html"><i class="fas fa-chevron-right"></i> Documentation</a></li>
           </ul>
         </div>
-
         <div class="footer-col">
           <h4>Get in Touch</h4>
           <ul class="footer-contact">
@@ -347,7 +332,6 @@
           </ul>
         </div>
       </div>
-
       <div class="footer-bottom">
         <p>&copy; 2026 Stackly. All rights reserved.</p>
         <div class="footer-bottom-links">
@@ -358,12 +342,9 @@
       </div>
     </div>
   </footer>
-
-  <!-- Scroll to Top -->
   <button class="scroll-top" aria-label="Scroll to top">
     <i class="fas fa-arrow-up"></i>
   </button>
-
   <script src="script.js"></script>
 </body>
 </html>

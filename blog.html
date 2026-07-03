@@ -6,7 +6,6 @@
   <meta name="description" content="Our Blog — Stackly. Articles and research updates on AI trends, machine learning algorithms, and tech scaling models.">
   <meta name="theme-color" content="#e24c4a">
   <title>Blog — Stackly</title>
-
   <link rel="icon" type="image/webp" href="assets/top-logo.webp">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,8 +14,6 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-  <!-- Preloader -->
   <div class="preloader">
     <div class="preloader-content">
       <div class="preloader-circle">
@@ -26,11 +23,7 @@
       <div class="preloader-text">Loading Stackly...</div>
     </div>
   </div>
-
-  <!-- Menu Overlay -->
   <div class="menu-overlay"></div>
-
-  <!-- ═══ Navbar ═══ -->
   <nav class="navbar">
     <div class="container">
       <a href="index.html" class="navbar-logo">
@@ -66,11 +59,9 @@
       </button>
     </div>
   </nav>
-
-  <!-- ═══ Page Hero Banner ═══ -->
   <section class="page-hero">
     <div class="page-hero-bg" aria-hidden="true">
-      <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=80" alt="">
+      <img src="assets/page-hero-blog.webp" alt="">
     </div>
     <div class="page-hero-overlay"></div>
     <div class="container page-hero-inner">
@@ -89,12 +80,10 @@
       </div>
     </div>
   </section>
-
-  <!-- ═══ Featured Post ═══ -->
-  <section class="section" style="padding-bottom: 2rem;">
+  <section class="section blog-featured-section">
     <div class="container">
       <div class="blog-featured reveal">
-        <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1600&q=80" alt="Featured Post AI">
+        <img src="assets/hero-ai.webp" alt="Featured Post AI">
         <div class="blog-featured-overlay">
           <span class="blog-card-category" style="position:static; margin-bottom:1rem; display:inline-block; width:fit-content;">Featured</span>
           <h2>The Future of AI in Enterprise Solutions</h2>
@@ -104,54 +93,141 @@
       </div>
     </div>
   </section>
-
-  <!-- ═══ Category Pills ═══ -->
-  <section class="section" style="padding-top:0; padding-bottom:1rem;">
+  <section class="section blog-grid-section">
     <div class="container">
-      <div class="category-pills reveal">
-        <div class="category-pill active">All</div>
-        <div class="category-pill">AI</div>
-        <div class="category-pill">Machine Learning</div>
-        <div class="category-pill">Data Science</div>
-        <div class="category-pill">Automation</div>
-        <div class="category-pill">Cloud</div>
+      <div class="category-pills reveal" id="blogCategoryFilters">
+        <button type="button" class="category-pill active" data-filter="all">All</button>
+        <button type="button" class="category-pill" data-redirect="404.html">AI</button>
+        <button type="button" class="category-pill" data-redirect="404.html">Machine Learning</button>
+        <button type="button" class="category-pill" data-redirect="404.html">Data Science</button>
+        <button type="button" class="category-pill" data-redirect="404.html">Automation</button>
+        <button type="button" class="category-pill" data-redirect="404.html">Cloud</button>
+      </div>
+      <div class="grid-3 stagger-children">
+        <div class="blog-card">
+          <div class="blog-card-image">
+            <img src="assets/blog-1.webp" alt="AI healthcare">
+            <span class="blog-card-category">AI</span>
+          </div>
+          <div class="blog-card-body">
+            <div class="blog-card-meta">
+              <span><i class="fas fa-calendar"></i> Jan 15, 2026</span>
+              <span><i class="fas fa-clock"></i> 5 min read</span>
+            </div>
+            <h4 class="blog-card-title">How AI is Revolutionizing Healthcare Diagnostics</h4>
+            <p class="blog-card-excerpt">Discover how automated visual check layers analyze clinical reports with speed and precision.</p>
+            <a href="404.html" class="blog-card-link">Read More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        <div class="blog-card">
+          <div class="blog-card-image">
+            <img src="assets/blog-2.webp" alt="Smart cities">
+            <span class="blog-card-category">Machine Learning</span>
+          </div>
+          <div class="blog-card-body">
+            <div class="blog-card-meta">
+              <span><i class="fas fa-calendar"></i> Feb 8, 2026</span>
+              <span><i class="fas fa-clock"></i> 7 min read</span>
+            </div>
+            <h4 class="blog-card-title">Smart Cities: The Role of Machine Learning</h4>
+            <p class="blog-card-excerpt">Leveraging routing models to improve urban metrics and traffic patterns.</p>
+            <a href="404.html" class="blog-card-link">Read More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        <div class="blog-card">
+          <div class="blog-card-image">
+            <img src="assets/blog-3.webp" alt="NLP">
+            <span class="blog-card-category">AI</span>
+          </div>
+          <div class="blog-card-body">
+            <div class="blog-card-meta">
+              <span><i class="fas fa-calendar"></i> Mar 12, 2026</span>
+              <span><i class="fas fa-clock"></i> 6 min read</span>
+            </div>
+            <h4 class="blog-card-title">NLP Breakthroughs in 2026</h4>
+            <p class="blog-card-excerpt">Exploring semantic retrieval engines and how vector databases are reshaping chatbot efficiency.</p>
+            <a href="404.html" class="blog-card-link">Read More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        <div class="blog-card">
+          <div class="blog-card-image">
+            <img src="assets/blog-4.webp" alt="Cloud">
+            <span class="blog-card-category">Cloud</span>
+          </div>
+          <div class="blog-card-body">
+            <div class="blog-card-meta">
+              <span><i class="fas fa-calendar"></i> Apr 5, 2026</span>
+              <span><i class="fas fa-clock"></i> 8 min read</span>
+            </div>
+            <h4 class="blog-card-title">Cloud Computing Meets AI Scaling</h4>
+            <p class="blog-card-excerpt">How serverless computing structures allow massive scaling of predictive AI workloads dynamically.</p>
+            <a href="404.html" class="blog-card-link">Read More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        <div class="blog-card">
+          <div class="blog-card-image">
+            <img src="assets/service-ml.webp" alt="Ethics">
+            <span class="blog-card-category">AI</span>
+          </div>
+          <div class="blog-card-body">
+            <div class="blog-card-meta">
+              <span><i class="fas fa-calendar"></i> May 20, 2026</span>
+              <span><i class="fas fa-clock"></i> 5 min read</span>
+            </div>
+            <h4 class="blog-card-title">The Ethics of Artificial Intelligence Models</h4>
+            <p class="blog-card-excerpt">Evaluating bias tracking methods, explainable AI workflows, and model deployment compliance.</p>
+            <a href="404.html" class="blog-card-link">Read More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        <div class="blog-card">
+          <div class="blog-card-image">
+            <img src="assets/service-automation.webp" alt="Automation">
+            <span class="blog-card-category">Automation</span>
+          </div>
+          <div class="blog-card-body">
+            <div class="blog-card-meta">
+              <span><i class="fas fa-calendar"></i> Jun 15, 2026</span>
+              <span><i class="fas fa-clock"></i> 6 min read</span>
+            </div>
+            <h4 class="blog-card-title">Automation in Modern Manufacturing</h4>
+            <p class="blog-card-excerpt">Using smart optical sensors and predictive maintenance algorithms to increase yield production.</p>
+            <a href="404.html" class="blog-card-link">Read More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
-
-  <!-- ═══ Trending Topics ═══ -->
-  <section class="section" style="padding-top: 0; padding-bottom: 1rem;">
+  <section class="section blog-trending-section">
     <div class="container">
       <div class="section-header reveal">
         <span class="section-badge"><i class="fas fa-fire"></i> Trending Now</span>
         <h2 class="section-title">Hot Topics in <span class="gradient-text">AI</span></h2>
         <p class="section-desc">Explore the most-read categories and research areas our team is actively publishing on.</p>
       </div>
-
       <div class="blog-topic-grid stagger-children">
         <a href="404.html" class="blog-topic-tile">
-          <img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=1600&q=80" alt="Enterprise AI">
+          <img src="assets/blog-enterprise.webp" alt="Enterprise AI">
           <div class="blog-topic-tile__label">
             <span>Enterprise AI</span>
             <strong>Scaling LLMs for Business Workflows</strong>
           </div>
         </a>
         <a href="404.html" class="blog-topic-tile">
-          <img src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?auto=format&fit=crop&w=1600&q=80" alt="Machine Learning">
+          <img src="assets/blog-2.webp" alt="Machine Learning">
           <div class="blog-topic-tile__label">
             <span>Machine Learning</span>
             <strong>Smart Infrastructure & Urban Data</strong>
           </div>
         </a>
         <a href="404.html" class="blog-topic-tile">
-          <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=1600&q=80" alt="NLP">
+          <img src="assets/blog-3.webp" alt="NLP">
           <div class="blog-topic-tile__label">
             <span>NLP</span>
             <strong>Semantic Search & Vector Databases</strong>
           </div>
         </a>
         <a href="404.html" class="blog-topic-tile">
-          <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80" alt="Cloud AI">
+          <img src="assets/blog-4.webp" alt="Cloud AI">
           <div class="blog-topic-tile__label">
             <span>Cloud</span>
             <strong>Serverless AI Scaling Strategies</strong>
@@ -160,13 +236,11 @@
       </div>
     </div>
   </section>
-
-  <!-- ═══ Research Spotlight ═══ -->
-  <section class="section" style="background: var(--bg-secondary); padding-top: 2rem;">
+  <section class="section blog-research-section">
     <div class="container">
-      <div class="split-section">
+      <div class="split-section split-section--equal">
         <div class="split-image reveal-left">
-          <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1600&q=80" alt="Stackly AI research">
+          <img src="assets/blog-research.webp" alt="Stackly AI research">
         </div>
         <div class="split-content reveal-right">
           <span class="section-badge"><i class="fas fa-microscope"></i> Research Spotlight</span>
@@ -186,140 +260,69 @@
               <span>Monthly digest delivered to 3,000+ subscribers.</span>
             </div>
           </div>
-          <a href="#newsletter" class="btn btn-primary">Subscribe to Insights <i class="fas fa-arrow-right"></i></a>
+          <a href="contact.html" class="btn btn-primary">Contact Our Team <i class="fas fa-arrow-right"></i></a>
         </div>
       </div>
     </div>
   </section>
-
-  <!-- ═══ Blog Grid ═══ -->
-  <section class="section" style="padding-top:0;">
+  <section class="section" style="background: var(--bg-secondary); border-top: 1px solid var(--border-light);">
     <div class="container">
+      <div class="section-header reveal">
+        <span class="section-badge"><i class="fas fa-star"></i> Editor's Picks</span>
+        <h2 class="section-title">Must-Read <span class="gradient-text">Articles</span></h2>
+        <p class="section-desc">Hand-picked by our editorial team — the most impactful AI insights published this quarter.</p>
+      </div>
       <div class="grid-3 stagger-children">
-        <!-- Post 1 -->
-        <div class="blog-card">
+        <article class="blog-card">
           <div class="blog-card-image">
-            <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1600&q=80" alt="AI healthcare">
-            <span class="blog-card-category">AI</span>
+            <img src="assets/hero-ai.webp" alt="Enterprise LLM guide">
+            <span class="blog-card-category">Editor's Pick</span>
           </div>
           <div class="blog-card-body">
             <div class="blog-card-meta">
-              <span><i class="fas fa-calendar"></i> Jan 15, 2026</span>
-              <span><i class="fas fa-clock"></i> 5 min read</span>
+              <span><i class="fas fa-calendar"></i> Jun 28, 2026</span>
+              <span><i class="fas fa-clock"></i> 9 min read</span>
             </div>
-            <h4 class="blog-card-title">How AI is Revolutionizing Healthcare Diagnostics</h4>
-            <p class="blog-card-excerpt">Discover how automated visual check layers analyze clinical reports with speed and precision.</p>
-            <a href="404.html" class="blog-card-link">Read More <i class="fas fa-arrow-right"></i></a>
+            <h4 class="blog-card-title">Enterprise LLM Deployment: A Complete Playbook</h4>
+            <p class="blog-card-excerpt">From model selection and fine-tuning to production monitoring — a step-by-step guide for CTOs.</p>
+            <a href="404.html" class="blog-card-link">Read Article <i class="fas fa-arrow-right"></i></a>
           </div>
-        </div>
-
-        <!-- Post 2 -->
-        <div class="blog-card">
+        </article>
+        <article class="blog-card">
           <div class="blog-card-image">
-            <img src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?auto=format&fit=crop&w=1600&q=80" alt="Smart cities">
-            <span class="blog-card-category">Machine Learning</span>
+            <img src="assets/service-analytics.webp" alt="Data pipeline article">
+            <span class="blog-card-category">Trending</span>
           </div>
           <div class="blog-card-body">
             <div class="blog-card-meta">
-              <span><i class="fas fa-calendar"></i> Feb 8, 2026</span>
+              <span><i class="fas fa-calendar"></i> Jun 20, 2026</span>
               <span><i class="fas fa-clock"></i> 7 min read</span>
             </div>
-            <h4 class="blog-card-title">Smart Cities: The Role of Machine Learning</h4>
-            <p class="blog-card-excerpt">Leveraging routing models to improve urban metrics and traffic patterns.</p>
-            <a href="404.html" class="blog-card-link">Read More <i class="fas fa-arrow-right"></i></a>
+            <h4 class="blog-card-title">Building Real-Time AI Data Pipelines</h4>
+            <p class="blog-card-excerpt">How to architect streaming ingestion, feature stores, and model serving for sub-second inference.</p>
+            <a href="404.html" class="blog-card-link">Read Article <i class="fas fa-arrow-right"></i></a>
           </div>
-        </div>
-
-        <!-- Post 3 -->
-        <div class="blog-card">
+        </article>
+        <article class="blog-card">
           <div class="blog-card-image">
-            <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=1600&q=80" alt="NLP">
-            <span class="blog-card-category">AI</span>
+            <img src="assets/service-vision.webp" alt="Computer vision article">
+            <span class="blog-card-category">Research</span>
           </div>
           <div class="blog-card-body">
             <div class="blog-card-meta">
-              <span><i class="fas fa-calendar"></i> Mar 12, 2026</span>
-              <span><i class="fas fa-clock"></i> 6 min read</span>
-            </div>
-            <h4 class="blog-card-title">NLP Breakthroughs in 2026</h4>
-            <p class="blog-card-excerpt">Exploring semantic retrieval engines and how vector databases are reshaping chatbot efficiency.</p>
-            <a href="404.html" class="blog-card-link">Read More <i class="fas fa-arrow-right"></i></a>
-          </div>
-        </div>
-
-        <!-- Post 4 -->
-        <div class="blog-card">
-          <div class="blog-card-image">
-            <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80" alt="Cloud">
-            <span class="blog-card-category">Cloud</span>
-          </div>
-          <div class="blog-card-body">
-            <div class="blog-card-meta">
-              <span><i class="fas fa-calendar"></i> Apr 5, 2026</span>
+              <span><i class="fas fa-calendar"></i> Jun 12, 2026</span>
               <span><i class="fas fa-clock"></i> 8 min read</span>
             </div>
-            <h4 class="blog-card-title">Cloud Computing Meets AI Scaling</h4>
-            <p class="blog-card-excerpt">How serverless computing structures allow massive scaling of predictive AI workloads dynamically.</p>
-            <a href="404.html" class="blog-card-link">Read More <i class="fas fa-arrow-right"></i></a>
+            <h4 class="blog-card-title">Edge Vision Models for Quality Inspection</h4>
+            <p class="blog-card-excerpt">Deploying lightweight YOLO variants on factory floors with 99.2% defect detection accuracy.</p>
+            <a href="404.html" class="blog-card-link">Read Article <i class="fas fa-arrow-right"></i></a>
           </div>
-        </div>
-
-        <!-- Post 5 -->
-        <div class="blog-card">
-          <div class="blog-card-image">
-            <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1600&q=80" alt="Ethics">
-            <span class="blog-card-category">AI</span>
-          </div>
-          <div class="blog-card-body">
-            <div class="blog-card-meta">
-              <span><i class="fas fa-calendar"></i> May 20, 2026</span>
-              <span><i class="fas fa-clock"></i> 5 min read</span>
-            </div>
-            <h4 class="blog-card-title">The Ethics of Artificial Intelligence Models</h4>
-            <p class="blog-card-excerpt">Evaluating bias tracking methods, explainable AI workflows, and model deployment compliance.</p>
-            <a href="404.html" class="blog-card-link">Read More <i class="fas fa-arrow-right"></i></a>
-          </div>
-        </div>
-
-        <!-- Post 6 -->
-        <div class="blog-card">
-          <div class="blog-card-image">
-            <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1600&q=80" alt="Automation">
-            <span class="blog-card-category">Automation</span>
-          </div>
-          <div class="blog-card-body">
-            <div class="blog-card-meta">
-              <span><i class="fas fa-calendar"></i> Jun 15, 2026</span>
-              <span><i class="fas fa-clock"></i> 6 min read</span>
-            </div>
-            <h4 class="blog-card-title">Automation in Modern Manufacturing</h4>
-            <p class="blog-card-excerpt">Using smart optical sensors and predictive maintenance algorithms to increase yield production.</p>
-            <a href="404.html" class="blog-card-link">Read More <i class="fas fa-arrow-right"></i></a>
-          </div>
-        </div>
+        </article>
       </div>
     </div>
   </section>
-
-  <!-- ═══ Newsletter Section ═══ -->
-  <section class="section" id="newsletter" style="background: var(--bg-secondary); border-top: 1px solid var(--border-light);">
-    <div class="container" style="max-width: 600px; text-align:center;">
-      <div class="reveal">
-        <i class="fas fa-envelope-open-text" style="font-size: 3rem; color: var(--primary); margin-bottom: 1.5rem;"></i>
-        <h3>Subscribe to Stackly Insights</h3>
-        <p class="mb-3" style="color: var(--text-secondary);">Receive monthly technical digests, predictive research, and news directly to your inbox.</p>
-        <form class="newsletter-form blog-newsletter-form" data-validate>
-          <input type="email" placeholder="Enter your business email" required style="padding: 0.85rem 1.25rem; border:2px solid var(--border-color); border-radius: var(--radius-full); outline:none;">
-          <button type="submit" class="btn btn-primary">Subscribe</button>
-        </form>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══ Footer ═══ -->
   <footer class="footer">
     <div class="container">
-        <!-- Newsletter Row -->
         <div class="footer-newsletter-row">
           <div class="newsletter-info">
             <h4>Subscribe to our newsletter</h4>
@@ -332,7 +335,9 @@
         </div>
       <div class="footer-grid">
         <div class="footer-brand">
-          <img src="assets/logo.webp" alt="Stackly">
+          <a href="index.html" class="footer-logo" aria-label="Stackly Home">
+            <img src="assets/logo.webp" alt="Stackly">
+          </a>
           <p>Empowering businesses with cutting-edge AI solutions. We transform ideas into intelligent realities that drive growth and innovation.</p>
           <div class="footer-socials">
             <a href="404.html" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
@@ -342,29 +347,26 @@
             <a href="404.html" aria-label="GitHub"><i class="fab fa-github"></i></a>
           </div>
         </div>
-
         <div class="footer-col">
-          <h4>Company</h4>
+          <h4>Quick Links</h4>
           <ul class="footer-links">
-            <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+            <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+            <li><a href="about.html"><i class="fas fa-chevron-right"></i> About</a></li>
             <li><a href="services.html"><i class="fas fa-chevron-right"></i> Services</a></li>
             <li><a href="blog.html"><i class="fas fa-chevron-right"></i> Blog</a></li>
             <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
-            <li><a href="404.html"><i class="fas fa-chevron-right"></i> Careers</a></li>
           </ul>
         </div>
-
         <div class="footer-col">
-          <h4>Services</h4>
+          <h4>Resources</h4>
           <ul class="footer-links">
-            <li><a href="services.html"><i class="fas fa-chevron-right"></i> AI Development</a></li>
-            <li><a href="services.html"><i class="fas fa-chevron-right"></i> Machine Learning</a></li>
-            <li><a href="services.html"><i class="fas fa-chevron-right"></i> Data Analytics</a></li>
-            <li><a href="services.html"><i class="fas fa-chevron-right"></i> Cloud Solutions</a></li>
-            <li><a href="services.html"><i class="fas fa-chevron-right"></i> Automation</a></li>
+            <li><a href="404.html"><i class="fas fa-chevron-right"></i> Careers</a></li>
+            <li><a href="404.html"><i class="fas fa-chevron-right"></i> FAQ</a></li>
+            <li><a href="404.html"><i class="fas fa-chevron-right"></i> Portfolio</a></li>
+            <li><a href="404.html"><i class="fas fa-chevron-right"></i> Case Studies</a></li>
+            <li><a href="404.html"><i class="fas fa-chevron-right"></i> Documentation</a></li>
           </ul>
         </div>
-
         <div class="footer-col">
           <h4>Get in Touch</h4>
           <ul class="footer-contact">
@@ -374,7 +376,6 @@
           </ul>
         </div>
       </div>
-
       <div class="footer-bottom">
         <p>&copy; 2026 Stackly. All rights reserved.</p>
         <div class="footer-bottom-links">
@@ -385,12 +386,9 @@
       </div>
     </div>
   </footer>
-
-  <!-- Scroll to Top -->
   <button class="scroll-top" aria-label="Scroll to top">
     <i class="fas fa-arrow-up"></i>
   </button>
-
   <script src="script.js"></script>
 </body>
 </html>

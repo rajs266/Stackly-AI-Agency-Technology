@@ -6,7 +6,6 @@
   <meta name="description" content="Page Not Found — Stackly.">
   <meta name="theme-color" content="#e24c4a">
   <title>404 Page Not Found — Stackly</title>
-
   <link rel="icon" type="image/webp" href="assets/top-logo.webp">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,8 +14,6 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-  <!-- Preloader -->
   <div class="preloader">
     <div class="preloader-content">
       <div class="preloader-circle">
@@ -26,28 +23,42 @@
       <div class="preloader-text">Loading Stackly...</div>
     </div>
   </div>
-
-  <!-- Menu Overlay -->
   <div class="menu-overlay"></div>
-
-  <!-- ═══ 404 Area ═══ -->
   <section class="error-page">
     <div class="floating-shape shape-1"></div>
     <div class="floating-shape shape-2"></div>
     <div class="floating-shape shape-3"></div>
     <div class="floating-shape shape-4"></div>
     <div class="floating-shape shape-5"></div>
-
     <div class="container">
       <div class="error-content reveal-zoom">
         <h1>404</h1>
         <h2>Oops! Page Not Found</h2>
         <p>The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.</p>
-        <a href="index.html" class="btn btn-primary btn-lg"><i class="fas fa-home"></i> Back to Safety</a>
+        <div class="error-actions">
+          <a href="index.html" class="btn btn-primary btn-lg"><i class="fas fa-home"></i> Back to Home</a>
+          <button type="button" class="btn btn-outline btn-lg" onclick="stacklyGoBack()"><i class="fas fa-arrow-left"></i> Go Back</button>
+        </div>
       </div>
     </div>
   </section>
-
+  <script>
+    function stacklyGoBack() {
+      if (sessionStorage.getItem('stackly_admin_return')) {
+        window.location.href = 'admin-dashboard.html';
+        return;
+      }
+      if (sessionStorage.getItem('stackly_dash_return')) {
+        window.location.href = 'customer-dashboard.html';
+        return;
+      }
+      if (document.referrer && !/404\.html/i.test(document.referrer) && window.history.length > 1) {
+        history.back();
+        return;
+      }
+      window.location.href = 'index.html';
+    }
+  </script>
   <script src="script.js"></script>
 </body>
 </html>

@@ -37,21 +37,28 @@
       --sidebar-w: 260px; --topbar-h: 68px;
     }
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    html{overflow-x:hidden;-webkit-text-size-adjust:100%;scrollbar-width:thin;scrollbar-color:var(--primary) var(--bg)}
-    html::-webkit-scrollbar{width:8px;height:8px}
-    html::-webkit-scrollbar-track{background:var(--bg)}
-    html::-webkit-scrollbar-thumb{background:var(--primary);border-radius:99px}
-    html::-webkit-scrollbar-thumb:hover{background:var(--accent)}
-    body{font-family:var(--font-body);background:var(--bg);color:var(--text-body);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased;padding-bottom:env(safe-area-inset-bottom)}
+    html{scrollbar-gutter:stable;overflow-x:hidden;overflow-y:scroll;-webkit-text-size-adjust:100%;scrollbar-width:thin;scrollbar-color:#f97316 var(--bg);width:100%;max-width:100%}
+    html::-webkit-scrollbar{width:10px;height:10px}
+    html::-webkit-scrollbar-track{background:var(--bg);border-radius:99px}
+    html::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#fb923c,#f97316);border-radius:99px;border:2px solid var(--bg)}
+    html::-webkit-scrollbar-thumb:hover{background:linear-gradient(180deg,#fdba74,#ea580c)}
+    body::-webkit-scrollbar{width:10px;height:10px}
+    body::-webkit-scrollbar-track{background:var(--bg)}
+    body::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#fb923c,#f97316);border-radius:99px;border:2px solid var(--bg)}
+    body::-webkit-scrollbar-thumb:hover{background:linear-gradient(180deg,#fdba74,#ea580c)}
+    html.no-scroll,body.no-scroll{overflow:hidden!important;touch-action:none}
+    body{font-family:var(--font-body);background:var(--bg);color:var(--text-body);line-height:1.6;overflow-x:hidden;overflow-y:auto;-webkit-font-smoothing:antialiased;padding-bottom:env(safe-area-inset-bottom);width:100%;max-width:100%;scrollbar-width:thin;scrollbar-color:#f97316 var(--bg)}
     a{color:inherit;text-decoration:none}
     button{cursor:pointer;font-family:inherit;border:none;background:none}
     img{display:block;max-width:100%}
-    .dash-layout{display:flex;min-height:100vh}
+    .dash-layout{display:flex;min-height:100vh;overflow-x:clip;max-width:100%;width:100%}
     .sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(3,8,20,0.65);z-index:299;backdrop-filter:blur(2px)}
     .sidebar-overlay.active{display:block}
     .sidebar{width:var(--sidebar-w);background:var(--sidebar-bg);height:calc(100vh - var(--topbar-h));display:flex;flex-direction:column;position:fixed;top:var(--topbar-h);left:0;z-index:300;transition:transform .32s var(--ease);overflow-y:auto;overflow-x:hidden;border-right:1px solid rgba(255,255,255,0.06)}
-    .sidebar::-webkit-scrollbar{width:4px}
-    .sidebar::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.12);border-radius:99px}
+    .sidebar::-webkit-scrollbar{width:6px}
+    .sidebar::-webkit-scrollbar-track{background:rgba(255,255,255,0.04);border-radius:99px}
+    .sidebar::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#fb923c,#f97316);border-radius:99px}
+    .sidebar{scrollbar-width:thin;scrollbar-color:#f97316 rgba(255,255,255,0.04)}
     .sidebar__user{padding:1rem 1.25rem;border-bottom:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02)}
     .sidebar__user-inner{display:flex;align-items:center;gap:.75rem}
     .sidebar__avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--accent));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.95rem;color:#fff;flex-shrink:0}
@@ -74,7 +81,7 @@
     .sidebar__logout{display:flex;align-items:center;gap:.75rem;padding:.75rem;border-radius:var(--r-md);font-size:.875rem;font-weight:600;color:rgba(252,165,165,0.75);width:100%;transition:all .18s var(--ease)}
     .sidebar__logout:hover{background:rgba(239,68,68,0.12);color:#fca5a5}
     .sidebar__logout i{width:20px;text-align:center}
-    .dash-main{margin-left:var(--sidebar-w);flex:1;min-width:0;display:flex;flex-direction:column;min-height:100vh}
+    .dash-main{margin-left:var(--sidebar-w);flex:1;min-width:0;max-width:100%;overflow-x:clip;display:flex;flex-direction:column;min-height:100vh}
     .topbar{position:fixed;top:0;left:0;right:0;width:100%;min-height:var(--topbar-h);padding:env(safe-area-inset-top,0px) 1.5rem 0;background:var(--topbar-bg);border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;gap:1rem;z-index:400;box-shadow:0 4px 20px rgba(0,0,0,0.25)}
     .topbar__hamburger{display:none;align-items:center;justify-content:center;width:40px;height:40px;border-radius:var(--r-sm);background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);color:#fff;font-size:1.05rem;flex-shrink:0;transition:all .18s var(--ease)}
     .topbar__hamburger:hover{background:rgba(255,255,255,0.14)}
@@ -89,9 +96,9 @@
     .topbar__icon-btn{width:38px;height:38px;border-radius:var(--r-sm);background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.1);color:#fff;display:flex;align-items:center;justify-content:center;position:relative;font-size:.95rem;transition:all .18s var(--ease)}
     .topbar__icon-btn:hover{background:rgba(226,76,74,0.15);border-color:rgba(226,76,74,0.35)}
     .topbar__notif-dot{position:absolute;top:5px;right:5px;width:7px;height:7px;background:#ef4444;border-radius:50%;border:1.5px solid var(--topbar-bg)}
-    .dash-content-wrap{padding-top:var(--topbar-h);background:var(--bg);min-height:100vh}
-    .dash-content{padding:1.75rem 1.5rem 2.5rem;max-width:1400px;width:100%}
-    .section-panel{display:none}.section-panel.active{display:block}
+    .dash-content-wrap{padding-top:var(--topbar-h);background:var(--bg);min-height:100vh;overflow-x:clip;max-width:100%;width:100%}
+    .dash-content{padding:1.75rem 1.5rem 2.5rem;max-width:1400px;width:100%;box-sizing:border-box;overflow-x:clip}
+    .section-panel{display:none;overflow-x:clip;max-width:100%}.section-panel.active{display:block}
     @keyframes panelReveal{from{opacity:0;transform:translateY(14px) scale(0.985)}to{opacity:1;transform:translateY(0) scale(1)}}
     .animate-up{animation:panelReveal .45s cubic-bezier(0.22,1,0.36,1)}
     .welcome-banner{background:linear-gradient(135deg,#030814 0%,#386bb7 48%,#e24c4a 120%);border-radius:var(--r-xl);padding:1.75rem 2rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.75rem;overflow:hidden;position:relative}
@@ -135,7 +142,9 @@
     .highlight-card__overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(3,8,20,0.85) 0%,rgba(3,8,20,0.1) 60%);display:flex;flex-direction:column;justify-content:flex-end;padding:1rem}
     .highlight-card__title{font-family:var(--font-display);font-size:.95rem;font-weight:700;color:#fff;margin-bottom:.2rem}
     .highlight-card__meta{font-size:.75rem;color:rgba(255,255,255,0.75)}
-    .dash-table-wrap{overflow-x:auto;scrollbar-width:thin}
+    .dash-table-wrap{overflow-x:auto;scrollbar-width:thin;scrollbar-color:#f97316 var(--bg)}
+    .dash-table-wrap::-webkit-scrollbar{height:8px}
+    .dash-table-wrap::-webkit-scrollbar-thumb{background:linear-gradient(90deg,#fb923c,#f97316);border-radius:99px}
     .dash-table{width:100%;border-collapse:collapse;font-size:.85rem}
     .dash-table th{text-align:left;padding:.85rem 1rem;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--primary);background:var(--primary-pale);border-bottom:2px solid var(--border);white-space:nowrap}
     .dash-table td{padding:.85rem 1rem;border-bottom:1px solid var(--border);vertical-align:middle;white-space:nowrap}
@@ -194,6 +203,211 @@
     .team-card__name{font-family:var(--font-display);font-weight:700;color:var(--text-dark);margin-bottom:.15rem}
     .team-card__role{font-size:.78rem;color:var(--text-muted);margin-bottom:.75rem}
     .team-card__tags{display:flex;flex-wrap:wrap;gap:.35rem}
+    .admin-section-summary {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.85rem;
+      margin-bottom: 1.25rem;
+    }
+    .admin-summary-chip {
+      background: linear-gradient(180deg, rgba(51, 65, 85, 0.55) 0%, var(--surface) 100%);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 0.95rem 1rem;
+      min-width: 0;
+    }
+    .admin-summary-chip strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      color: var(--text-dark);
+      line-height: 1.1;
+    }
+    .admin-summary-chip span {
+      display: block;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }
+    .admin-summary-chip i {
+      color: var(--primary-light);
+      margin-bottom: 0.45rem;
+      font-size: 0.95rem;
+    }
+    .admin-roster-grid,
+    .admin-client-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+      overflow-x: clip;
+      max-width: 100%;
+    }
+    .admin-roster-card,
+    .admin-client-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 1rem;
+      transition: all 0.22s var(--ease);
+      min-width: 0;
+    }
+    .admin-roster-card:hover,
+    .admin-client-card:hover {
+      border-color: rgba(56, 189, 248, 0.35);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+    .admin-roster-card__top,
+    .admin-client-card__top {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.85rem;
+      margin-bottom: 0.85rem;
+    }
+    .admin-person-avatar {
+      position: relative;
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      overflow: hidden;
+      border: 2px solid rgba(56, 189, 248, 0.35);
+      background: linear-gradient(135deg, #1e293b, #334155);
+    }
+    .admin-person-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 18%;
+    }
+    .admin-person-avatar--initial {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #fff;
+    }
+    .admin-person-status {
+      position: absolute;
+      right: 1px;
+      bottom: 1px;
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      border: 2px solid var(--surface);
+      background: #22c55e;
+    }
+    .admin-person-status.offline { background: #94a3b8; }
+    .admin-person-status.busy { background: #f59e0b; }
+    .admin-roster-card__info,
+    .admin-client-card__info { min-width: 0; flex: 1; }
+    .admin-person-name {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 0.15rem;
+      word-break: break-word;
+    }
+    .admin-person-role {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      margin-bottom: 0.45rem;
+    }
+    .admin-person-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+    }
+    .admin-person-tag {
+      font-size: 0.62rem;
+      font-weight: 700;
+      padding: 0.18rem 0.55rem;
+      border-radius: var(--r-full);
+      background: rgba(56, 189, 248, 0.12);
+      color: #7dd3fc;
+      border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .admin-person-tag--admin {
+      background: rgba(226, 76, 74, 0.12);
+      color: #fca5a5;
+      border-color: rgba(226, 76, 74, 0.22);
+    }
+    .admin-roster-card__meta,
+    .admin-client-card__meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.55rem;
+      margin-bottom: 0.85rem;
+    }
+    .admin-meta-pill {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--r-sm);
+      padding: 0.45rem 0.55rem;
+      min-width: 0;
+    }
+    .admin-meta-pill strong {
+      display: block;
+      font-size: 0.78rem;
+      color: var(--text-dark);
+      line-height: 1.2;
+    }
+    .admin-meta-pill span {
+      display: block;
+      font-size: 0.64rem;
+      color: var(--text-muted);
+      margin-top: 0.12rem;
+    }
+    .admin-roster-card__actions,
+    .admin-client-card__actions {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .admin-mini-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.38rem 0.75rem;
+      border-radius: var(--r-full);
+      font-size: 0.72rem;
+      font-weight: 700;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text-body);
+      transition: all 0.18s var(--ease);
+    }
+    .admin-mini-btn:hover {
+      border-color: var(--primary);
+      color: #fff;
+      background: var(--primary);
+    }
+    .admin-mini-btn--ghost:hover {
+      background: rgba(56, 189, 248, 0.12);
+      color: #7dd3fc;
+      border-color: rgba(56, 189, 248, 0.35);
+    }
+    .admin-client-card__desc {
+      font-size: 0.78rem;
+      color: var(--text-body);
+      line-height: 1.5;
+      margin-bottom: 0.75rem;
+    }
+    .admin-client-card__email {
+      font-size: 0.72rem;
+      color: var(--primary-light);
+      word-break: break-all;
+      margin-bottom: 0.35rem;
+    }
+    .admin-client-card__location {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+    .admin-client-card__location i { margin-right: 0.25rem; color: #7dd3fc; }
     .tag{font-size:.65rem;font-weight:700;padding:.15rem .5rem;border-radius:var(--r-full);background:var(--primary-pale);color:var(--primary)}
     .activity-list{display:flex;flex-direction:column}
     .activity-item{display:flex;gap:.85rem;padding:.85rem 0;border-bottom:1px solid var(--border);align-items:flex-start}
@@ -231,12 +445,13 @@
     .modal__text{font-size:.85rem;color:var(--text-muted);margin-bottom:1.25rem;line-height:1.6}
     .modal__btn{padding:.6rem 1.5rem;border-radius:var(--r-full);font-weight:600;font-size:.85rem}
     .modal__btn--cancel{background:var(--bg);color:var(--text-body);border:1px solid var(--border)}
-    @media(max-width:1200px){.stats-grid,.kpi-grid{grid-template-columns:repeat(2,1fr)}.dash-row--3col,.highlight-grid,.content-grid,.team-grid{grid-template-columns:1fr 1fr}.settings-grid{grid-template-columns:1fr}}
+    @media(max-width:1200px){.stats-grid,.kpi-grid{grid-template-columns:repeat(2,1fr)}.dash-row--3col,.highlight-grid,.content-grid,.team-grid,.admin-section-summary{grid-template-columns:1fr 1fr}.admin-roster-grid,.admin-client-grid{grid-template-columns:1fr 1fr}.settings-grid{grid-template-columns:1fr}}
     @media(max-width:1024px){.sidebar{transform:translateX(-100%)}.sidebar.open{transform:translateX(0)}.dash-main{margin-left:0}.topbar__hamburger{display:flex}}
-    @media(max-width:768px){:root{--topbar-h:60px}.dash-row--2col,.dash-row--3col,.highlight-grid,.content-grid,.team-grid{grid-template-columns:1fr}.welcome-banner{flex-direction:column;align-items:flex-start}.welcome-banner__actions{width:100%}.welcome-banner__btn{flex:1;justify-content:center}.dash-content{padding:1.25rem 1rem 2rem}.topbar__logo-zone{width:auto;flex:1;min-width:0}.topbar__meta,.topbar__divider{display:none}.form-grid{grid-template-columns:1fr}.form-group--full{grid-column:span 1}.quick-actions{grid-template-columns:repeat(3,1fr)}}
+    @media(max-width:768px){:root{--topbar-h:60px}.dash-row--2col,.dash-row--3col,.highlight-grid,.content-grid,.team-grid,.admin-roster-grid,.admin-client-grid,.admin-section-summary{grid-template-columns:1fr}.welcome-banner{flex-direction:column;align-items:flex-start}.welcome-banner__actions{width:100%}.welcome-banner__btn{flex:1;justify-content:center}.dash-content{padding:1.25rem 1rem 2rem}.topbar__logo-zone{width:auto;flex:1;min-width:0}.topbar__meta,.topbar__divider{display:none}.form-grid{grid-template-columns:1fr}.form-group--full{grid-column:span 1}.quick-actions{grid-template-columns:repeat(3,1fr)}}
     @media(max-width:480px){.stats-grid,.kpi-grid{grid-template-columns:1fr}.quick-actions{grid-template-columns:repeat(2,1fr)}.topbar{padding:0 .875rem}}
-
-    .chart-wrap{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+    .chart-wrap{width:100%;max-width:100%;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;scrollbar-width:thin;scrollbar-color:#f97316 var(--bg)}
+    .chart-wrap::-webkit-scrollbar{height:8px}
+    .chart-wrap::-webkit-scrollbar-thumb{background:linear-gradient(90deg,#fb923c,#f97316);border-radius:99px}
     .svg-chart{width:100%;min-width:280px;height:auto;display:block}
     .chart-legend{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1rem}
     .chart-legend-item{display:flex;align-items:center;gap:.35rem;font-size:.72rem;color:var(--text-muted)}
@@ -245,7 +460,6 @@
 </head>
 <body>
 <script src="script.js"></script>
-
 <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
 <div class="modal-backdrop" id="modal404">
   <div class="modal">
@@ -256,7 +470,6 @@
   </div>
 </div>
 <div class="toast" id="toast"></div>
-
 <div class="dash-layout">
   <header class="topbar" id="topbar">
     <button class="topbar__hamburger" id="hamburgerBtn" onclick="toggleSidebar()" aria-label="Toggle menu" aria-expanded="false">
@@ -276,7 +489,6 @@
       <button class="topbar__icon-btn" onclick="showSection('notifications')" title="Notifications"><i class="fa-solid fa-bell"></i><span class="topbar__notif-dot"></span></button>
     </div>
   </header>
-
   <aside class="sidebar" id="sidebar">
     <div class="sidebar__user">
       <div class="sidebar__user-inner">
@@ -315,12 +527,10 @@
       <button class="sidebar__logout" onclick="handleLogout()"><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></button>
     </div>
   </aside>
-
   <div class="dash-main">
     <div class="dash-content-wrap">
       <div class="dash-content">
 
-        
         <div class="section-panel active animate-up" id="section-overview">
           <div class="welcome-banner">
             <div class="welcome-banner__text">
@@ -393,7 +603,6 @@
           </div>
         </div>
 
-        
         <div class="section-panel" id="section-analytics">
           <div class="section-header"><div><div class="section-header__title">Analytics</div><div class="section-header__sub">AI service performance, trends and forecasts</div></div><button class="section-header__btn" onclick="showToast('Exporting analytics report...')"><i class="fa-solid fa-download"></i> Export Report</button></div>
           <div class="kpi-grid">
@@ -444,7 +653,6 @@
           </div>
         </div>
 
-        
         <div class="section-panel" id="section-transactions">
           <div class="section-header"><div><div class="section-header__title">AI Projects</div><div class="section-header__sub">AI service engagements and technology projects</div></div><button class="section-header__btn" onclick="showToast('Creating new project...')"><i class="fa-solid fa-plus"></i> New Project</button></div>
           <div class="dash-card"><div class="dash-card__body" style="padding:0"><div class="dash-table-wrap"><table class="dash-table"><thead><tr><th>Project ID</th><th>Customer</th><th>Package</th><th>Amount</th><th>Date</th><th>Status</th><th>Action</th></tr></thead><tbody>
@@ -456,7 +664,6 @@
           </tbody></table></div></div></div>
         </div>
 
-        
         <div class="section-panel" id="section-invoices">
           <div class="section-header"><div><div class="section-header__title">Service Catalog &amp; Deployments</div><div class="section-header__sub">Service catalog entries and deployment logs</div></div><button class="section-header__btn" onclick="showToast('Creating deployment record...')"><i class="fa-solid fa-plus"></i> New Deployment</button></div>
           <div class="content-grid">
@@ -466,33 +673,282 @@
           </div>
         </div>
 
-        
         <div class="section-panel" id="section-users">
-          <div class="section-header"><div><div class="section-header__title">Team Users</div><div class="section-header__sub">Manage system access and roles</div></div><button class="section-header__btn" onclick="showToast('Inviting team member...')"><i class="fa-solid fa-user-plus"></i> Invite User</button></div>
-          <div class="team-grid">
-            <div class="team-card"><div class="team-card__media"><img class="team-card__img" src="assets/team-1.webp" alt="Arjun Mehta" loading="lazy" /></div><div class="team-card__body"><div class="team-card__name">Arjun Mehta</div><div class="team-card__role">AI Solutions Director</div><div class="team-card__tags"><span class="tag">Admin</span><span class="tag">Engineer</span></div></div></div>
-            <div class="team-card"><div class="team-card__media"><img class="team-card__img" src="assets/team-2.webp" alt="Priya Rajan" loading="lazy" /></div><div class="team-card__body"><div class="team-card__name">Priya Rajan</div><div class="team-card__role">MLOps &amp; Quality Lead</div><div class="team-card__tags"><span class="tag">Compliance</span></div></div></div>
-            <div class="team-card"><div class="team-card__media"><img class="team-card__img" src="assets/team-3.webp" alt="Karthik Sundaram" loading="lazy" /></div><div class="team-card__body"><div class="team-card__name">Karthik Sundaram</div><div class="team-card__role">Sales Analytics Lead</div><div class="team-card__tags"><span class="tag">Analyst</span></div></div></div>
-            <div class="team-card"><div class="team-card__media"><img class="team-card__img" src="./assets/team-4.webp" alt="Kavitha Nair" loading="lazy"></div><div class="team-card__body"><div class="team-card__name">Kavitha Nair</div><div class="team-card__role">AI Product Strategist</div><div class="team-card__tags"><span class="tag">Design</span></div></div></div>
-            <div class="team-card"><div class="team-card__media"><img class="team-card__img" src="assets/team-1.webp" alt="Ravi Patel" loading="lazy"></div><div class="team-card__body"><div class="team-card__name">Ravi Patel</div><div class="team-card__role">Cloud Infrastructure Lead</div><div class="team-card__tags"><span class="tag">DevOps</span></div></div></div>
-            <div class="team-card"><div class="team-card__media"><img class="team-card__img" src="assets/team-4.webp" alt="Meera Joshi" loading="lazy"></div><div class="team-card__body"><div class="team-card__name">Meera Joshi</div><div class="team-card__role">Customer Support Lead</div><div class="team-card__tags"><span class="tag">Support</span></div></div></div>
+          <div class="section-header"><div><div class="section-header__title">Team Users</div><div class="section-header__sub">Manage system access, roles, and activity</div></div><button class="section-header__btn" onclick="showToast('Inviting team member...')"><i class="fa-solid fa-user-plus"></i> Invite User</button></div>
+          <div class="admin-section-summary">
+            <div class="admin-summary-chip"><i class="fa-solid fa-users"></i><strong>6</strong><span>Total team members</span></div>
+            <div class="admin-summary-chip"><i class="fa-solid fa-circle-check"></i><strong>4</strong><span>Online right now</span></div>
+            <div class="admin-summary-chip"><i class="fa-solid fa-shield-halved"></i><strong>1</strong><span>Admin access</span></div>
+            <div class="admin-summary-chip"><i class="fa-solid fa-clock"></i><strong>2</strong><span>Away / offline</span></div>
+          </div>
+          <div class="admin-roster-grid">
+            <div class="admin-roster-card">
+              <div class="admin-roster-card__top">
+                <div class="admin-person-avatar"><img src="assets/team-1.webp" alt="Arjun Mehta" loading="lazy" /><span class="admin-person-status"></span></div>
+                <div class="admin-roster-card__info">
+                  <div class="admin-person-name">Arjun Mehta</div>
+                  <div class="admin-person-role">AI Solutions Director</div>
+                  <div class="admin-person-tags"><span class="admin-person-tag admin-person-tag--admin">Admin</span><span class="admin-person-tag">Engineer</span></div>
+                </div>
+              </div>
+              <div class="admin-roster-card__meta">
+                <div class="admin-meta-pill"><strong>2 hrs ago</strong><span>Last login</span></div>
+                <div class="admin-meta-pill"><strong>Full access</strong><span>Permissions</span></div>
+                <div class="admin-meta-pill"><strong>18</strong><span>Projects owned</span></div>
+                <div class="admin-meta-pill"><strong>Active</strong><span>Account status</span></div>
+              </div>
+              <div class="admin-roster-card__actions">
+                <button class="admin-mini-btn" onclick="showToast('Editing Arjun Mehta...')"><i class="fa-solid fa-pen"></i> Edit</button>
+                <button class="admin-mini-btn admin-mini-btn--ghost" onclick="showToast('Viewing activity log...')"><i class="fa-solid fa-chart-line"></i> Activity</button>
+              </div>
+            </div>
+            <div class="admin-roster-card">
+              <div class="admin-roster-card__top">
+                <div class="admin-person-avatar"><img src="assets/team-2.webp" alt="Priya Rajan" loading="lazy" /><span class="admin-person-status"></span></div>
+                <div class="admin-roster-card__info">
+                  <div class="admin-person-name">Priya Rajan</div>
+                  <div class="admin-person-role">MLOps &amp; Quality Lead</div>
+                  <div class="admin-person-tags"><span class="admin-person-tag">Compliance</span><span class="admin-person-tag">QA</span></div>
+                </div>
+              </div>
+              <div class="admin-roster-card__meta">
+                <div class="admin-meta-pill"><strong>Today</strong><span>Last login</span></div>
+                <div class="admin-meta-pill"><strong>Editor</strong><span>Permissions</span></div>
+                <div class="admin-meta-pill"><strong>12</strong><span>Audits run</span></div>
+                <div class="admin-meta-pill"><strong>Active</strong><span>Account status</span></div>
+              </div>
+              <div class="admin-roster-card__actions">
+                <button class="admin-mini-btn" onclick="showToast('Editing Priya Rajan...')"><i class="fa-solid fa-pen"></i> Edit</button>
+                <button class="admin-mini-btn admin-mini-btn--ghost" onclick="showToast('Viewing activity log...')"><i class="fa-solid fa-chart-line"></i> Activity</button>
+              </div>
+            </div>
+            <div class="admin-roster-card">
+              <div class="admin-roster-card__top">
+                <div class="admin-person-avatar"><img src="assets/team-3.webp" alt="Karthik Sundaram" loading="lazy" /><span class="admin-person-status busy"></span></div>
+                <div class="admin-roster-card__info">
+                  <div class="admin-person-name">Karthik Sundaram</div>
+                  <div class="admin-person-role">Sales Analytics Lead</div>
+                  <div class="admin-person-tags"><span class="admin-person-tag">Analyst</span><span class="admin-person-tag">Reports</span></div>
+                </div>
+              </div>
+              <div class="admin-roster-card__meta">
+                <div class="admin-meta-pill"><strong>45 min ago</strong><span>Last login</span></div>
+                <div class="admin-meta-pill"><strong>Viewer</strong><span>Permissions</span></div>
+                <div class="admin-meta-pill"><strong>9</strong><span>Reports sent</span></div>
+                <div class="admin-meta-pill"><strong>Busy</strong><span>Account status</span></div>
+              </div>
+              <div class="admin-roster-card__actions">
+                <button class="admin-mini-btn" onclick="showToast('Editing Karthik Sundaram...')"><i class="fa-solid fa-pen"></i> Edit</button>
+                <button class="admin-mini-btn admin-mini-btn--ghost" onclick="showToast('Viewing activity log...')"><i class="fa-solid fa-chart-line"></i> Activity</button>
+              </div>
+            </div>
+            <div class="admin-roster-card">
+              <div class="admin-roster-card__top">
+                <div class="admin-person-avatar"><img src="./assets/team-4.webp" alt="Kavitha Nair" loading="lazy" /><span class="admin-person-status"></span></div>
+                <div class="admin-roster-card__info">
+                  <div class="admin-person-name">Kavitha Nair</div>
+                  <div class="admin-person-role">AI Product Strategist</div>
+                  <div class="admin-person-tags"><span class="admin-person-tag">Design</span><span class="admin-person-tag">Strategy</span></div>
+                </div>
+              </div>
+              <div class="admin-roster-card__meta">
+                <div class="admin-meta-pill"><strong>Yesterday</strong><span>Last login</span></div>
+                <div class="admin-meta-pill"><strong>Editor</strong><span>Permissions</span></div>
+                <div class="admin-meta-pill"><strong>7</strong><span>Roadmaps</span></div>
+                <div class="admin-meta-pill"><strong>Active</strong><span>Account status</span></div>
+              </div>
+              <div class="admin-roster-card__actions">
+                <button class="admin-mini-btn" onclick="showToast('Editing Kavitha Nair...')"><i class="fa-solid fa-pen"></i> Edit</button>
+                <button class="admin-mini-btn admin-mini-btn--ghost" onclick="showToast('Viewing activity log...')"><i class="fa-solid fa-chart-line"></i> Activity</button>
+              </div>
+            </div>
+            <div class="admin-roster-card">
+              <div class="admin-roster-card__top">
+                <div class="admin-person-avatar"><img src="assets/team-1.webp" alt="Ravi Patel" loading="lazy" /><span class="admin-person-status offline"></span></div>
+                <div class="admin-roster-card__info">
+                  <div class="admin-person-name">Ravi Patel</div>
+                  <div class="admin-person-role">Cloud Infrastructure Lead</div>
+                  <div class="admin-person-tags"><span class="admin-person-tag">DevOps</span><span class="admin-person-tag">Cloud</span></div>
+                </div>
+              </div>
+              <div class="admin-roster-card__meta">
+                <div class="admin-meta-pill"><strong>3 days ago</strong><span>Last login</span></div>
+                <div class="admin-meta-pill"><strong>Editor</strong><span>Permissions</span></div>
+                <div class="admin-meta-pill"><strong>14</strong><span>Deployments</span></div>
+                <div class="admin-meta-pill"><strong>Offline</strong><span>Account status</span></div>
+              </div>
+              <div class="admin-roster-card__actions">
+                <button class="admin-mini-btn" onclick="showToast('Editing Ravi Patel...')"><i class="fa-solid fa-pen"></i> Edit</button>
+                <button class="admin-mini-btn admin-mini-btn--ghost" onclick="showToast('Viewing activity log...')"><i class="fa-solid fa-chart-line"></i> Activity</button>
+              </div>
+            </div>
+            <div class="admin-roster-card">
+              <div class="admin-roster-card__top">
+                <div class="admin-person-avatar"><img src="assets/team-4.webp" alt="Meera Joshi" loading="lazy" /><span class="admin-person-status"></span></div>
+                <div class="admin-roster-card__info">
+                  <div class="admin-person-name">Meera Joshi</div>
+                  <div class="admin-person-role">Customer Support Lead</div>
+                  <div class="admin-person-tags"><span class="admin-person-tag">Support</span><span class="admin-person-tag">CSAT</span></div>
+                </div>
+              </div>
+              <div class="admin-roster-card__meta">
+                <div class="admin-meta-pill"><strong>1 hr ago</strong><span>Last login</span></div>
+                <div class="admin-meta-pill"><strong>Support</strong><span>Permissions</span></div>
+                <div class="admin-meta-pill"><strong>96%</strong><span>CSAT score</span></div>
+                <div class="admin-meta-pill"><strong>Active</strong><span>Account status</span></div>
+              </div>
+              <div class="admin-roster-card__actions">
+                <button class="admin-mini-btn" onclick="showToast('Editing Meera Joshi...')"><i class="fa-solid fa-pen"></i> Edit</button>
+                <button class="admin-mini-btn admin-mini-btn--ghost" onclick="showToast('Viewing activity log...')"><i class="fa-solid fa-chart-line"></i> Activity</button>
+              </div>
+            </div>
           </div>
         </div>
 
-        
         <div class="section-panel" id="section-clients">
-          <div class="section-header"><div><div class="section-header__title">Customers</div><div class="section-header__sub">Registered customers and order history</div></div><button class="section-header__btn" onclick="showToast('Adding customer...')"><i class="fa-solid fa-user-plus"></i> Add Customer</button></div>
-          <div class="content-grid">
-            <div class="content-card"><img class="content-card__img" src="./assets/team-1.webp" alt="Rahul Krishnan home" loading="lazy" /><div class="content-card__body"><div class="content-card__title">Rahul Krishnan</div><div class="content-card__meta">rahul@email.com · Bangalore · 24 projects</div><div class="content-card__text">Enterprise client — NLP chatbots, automation, and custom ML models.</div><div class="content-card__footer"><span class="badge badge--green">Active</span><button class="table-action-btn table-action-btn--view" onclick="showToast('Viewing profile...')">Profile</button></div></div></div>
-            <div class="content-card"><img class="content-card__img" src="assets/team-2.webp" alt="Priya Nair home" loading="lazy" /><div class="content-card__body"><div class="content-card__title">Priya Nair</div><div class="content-card__meta">priya@email.com · Mumbai · 8 projects</div><div class="content-card__text">Data pipeline project — awaiting UAT sign-off.</div><div class="content-card__footer"><span class="badge badge--gold">Pending Setup</span><button class="table-action-btn table-action-btn--view" onclick="showToast('Viewing profile...')">Profile</button></div></div></div>
-            <div class="content-card"><img class="content-card__img" src="assets/team-3.webp" alt="Vijay Sharma home" loading="lazy" /><div class="content-card__body"><div class="content-card__title">Vijay Sharma</div><div class="content-card__meta">vijay@email.com · Delhi · 14 projects</div><div class="content-card__text">Active CV API and LLM fine-tuning — staging environment setup.</div><div class="content-card__footer"><span class="badge badge--blue">Processing</span><button class="table-action-btn table-action-btn--view" onclick="showToast('Viewing profile...')">Profile</button></div></div></div>
-            <div class="content-card"><img class="content-card__img" src="assets/team-2.webp" alt="Ananya Mehta home" loading="lazy" /><div class="content-card__body"><div class="content-card__title">Ananya Mehta</div><div class="content-card__meta">ananya@email.com · Hyderabad · 5 projects</div><div class="content-card__text">Voice AI deployment scheduled for production rollout.</div><div class="content-card__footer"><span class="badge badge--purple">Scheduled</span><button class="table-action-btn table-action-btn--view" onclick="showToast('Viewing profile...')">Profile</button></div></div></div>
-            <div class="content-card"><img class="content-card__img" src="assets/team-3.webp" alt="Karthik Sundaram home" loading="lazy" /><div class="content-card__body"><div class="content-card__title">Karthik Sundaram</div><div class="content-card__meta">karthik@email.com · Chennai · 19 projects</div><div class="content-card__text">Full-stack AI platform with monitoring dashboards and voice agents.</div><div class="content-card__footer"><span class="badge badge--green">Active</span><button class="table-action-btn table-action-btn--view" onclick="showToast('Viewing profile...')">Profile</button></div></div></div>
-            <div class="content-card"><img class="content-card__img" src="assets/team-4.webp" alt="Lakshmi Reddy home" loading="lazy" /><div class="content-card__body"><div class="content-card__title">Lakshmi Reddy</div><div class="content-card__meta">lakshmi@email.com · Pune · 2 projects</div><div class="content-card__text">New lead — starter AI assessment package in pipeline.</div><div class="content-card__footer"><span class="badge badge--gray">New Lead</span><button class="table-action-btn table-action-btn--view" onclick="showToast('Viewing profile...')">Profile</button></div></div></div>
+          <div class="section-header"><div><div class="section-header__title">Customers</div><div class="section-header__sub">Client roster, engagement, and project pipeline</div></div><button class="section-header__btn" onclick="showToast('Adding customer...')"><i class="fa-solid fa-user-plus"></i> Add Customer</button></div>
+          <div class="admin-section-summary">
+            <div class="admin-summary-chip"><i class="fa-solid fa-building-user"></i><strong>6</strong><span>Total customers</span></div>
+            <div class="admin-summary-chip"><i class="fa-solid fa-bolt"></i><strong>2</strong><span>Active accounts</span></div>
+            <div class="admin-summary-chip"><i class="fa-solid fa-layer-group"></i><strong>72</strong><span>Combined projects</span></div>
+            <div class="admin-summary-chip"><i class="fa-solid fa-indian-rupee-sign"></i><strong>₹16.8L</strong><span>Monthly revenue</span></div>
+          </div>
+          <div class="admin-client-grid">
+            <div class="admin-client-card">
+              <div class="admin-client-card__top">
+                <div class="admin-person-avatar admin-person-avatar--initial" style="background:linear-gradient(135deg,#0ea5e9,#6366f1)">RK</div>
+                <div class="admin-client-card__info">
+                  <div class="admin-person-name">Rahul Krishnan</div>
+                  <div class="admin-client-card__email">rahul@email.com</div>
+                  <div class="admin-client-card__location"><i class="fa-solid fa-location-dot"></i>Bangalore · Enterprise</div>
+                  <div class="admin-person-tags"><span class="badge badge--green">Active</span></div>
+                </div>
+              </div>
+              <div class="admin-client-card__desc">NLP chatbots, automation workflows, and custom ML models for enterprise scale.</div>
+              <div class="admin-client-card__meta">
+                <div class="admin-meta-pill"><strong>24</strong><span>Projects</span></div>
+                <div class="admin-meta-pill"><strong>₹4.2L</strong><span>LTV</span></div>
+                <div class="admin-meta-pill"><strong>2023</strong><span>Member since</span></div>
+                <div class="admin-meta-pill"><strong>98%</strong><span>Health score</span></div>
+              </div>
+              <div class="admin-client-card__actions">
+                <button class="admin-mini-btn" onclick="showToast('Viewing profile...')"><i class="fa-solid fa-user"></i> Profile</button>
+                <button class="admin-mini-btn admin-mini-btn--ghost" onclick="showToast('Opening projects...')"><i class="fa-solid fa-folder-open"></i> Projects</button>
+              </div>
+            </div>
+            <div class="admin-client-card">
+              <div class="admin-client-card__top">
+                <div class="admin-person-avatar admin-person-avatar--initial" style="background:linear-gradient(135deg,#f59e0b,#ef4444)">PN</div>
+                <div class="admin-client-card__info">
+                  <div class="admin-person-name">Priya Nair</div>
+                  <div class="admin-client-card__email">priya@email.com</div>
+                  <div class="admin-client-card__location"><i class="fa-solid fa-location-dot"></i>Mumbai · Mid-market</div>
+                  <div class="admin-person-tags"><span class="badge badge--gold">Pending Setup</span></div>
+                </div>
+              </div>
+              <div class="admin-client-card__desc">Data pipeline project awaiting UAT sign-off — onboarding checklist 80% complete.</div>
+              <div class="admin-client-card__meta">
+                <div class="admin-meta-pill"><strong>8</strong><span>Projects</span></div>
+                <div class="admin-meta-pill"><strong>₹1.1L</strong><span>LTV</span></div>
+                <div class="admin-meta-pill"><strong>2024</strong><span>Member since</span></div>
+                <div class="admin-meta-pill"><strong>72%</strong><span>Health score</span></div>
+              </div>
+              <div class="admin-client-card__actions">
+                <button class="admin-mini-btn" onclick="showToast('Viewing profile...')"><i class="fa-solid fa-user"></i> Profile</button>
+                <button class="admin-mini-btn admin-mini-btn--ghost" onclick="showToast('Opening projects...')"><i class="fa-solid fa-folder-open"></i> Projects</button>
+              </div>
+            </div>
+            <div class="admin-client-card">
+              <div class="admin-client-card__top">
+                <div class="admin-person-avatar admin-person-avatar--initial" style="background:linear-gradient(135deg,#10b981,#059669)">VS</div>
+                <div class="admin-client-card__info">
+                  <div class="admin-person-name">Vijay Sharma</div>
+                  <div class="admin-client-card__email">vijay@email.com</div>
+                  <div class="admin-client-card__location"><i class="fa-solid fa-location-dot"></i>Delhi · Growth</div>
+                  <div class="admin-person-tags"><span class="badge badge--blue">Processing</span></div>
+                </div>
+              </div>
+              <div class="admin-client-card__desc">CV API and LLM fine-tuning in staging — production rollout scheduled next week.</div>
+              <div class="admin-client-card__meta">
+                <div class="admin-meta-pill"><strong>14</strong><span>Projects</span></div>
+                <div class="admin-meta-pill"><strong>₹2.8L</strong><span>LTV</span></div>
+                <div class="admin-meta-pill"><strong>2023</strong><span>Member since</span></div>
+                <div class="admin-meta-pill"><strong>85%</strong><span>Health score</span></div>
+              </div>
+              <div class="admin-client-card__actions">
+                <button class="admin-mini-btn" onclick="showToast('Viewing profile...')"><i class="fa-solid fa-user"></i> Profile</button>
+                <button class="admin-mini-btn admin-mini-btn--ghost" onclick="showToast('Opening projects...')"><i class="fa-solid fa-folder-open"></i> Projects</button>
+              </div>
+            </div>
+            <div class="admin-client-card">
+              <div class="admin-client-card__top">
+                <div class="admin-person-avatar admin-person-avatar--initial" style="background:linear-gradient(135deg,#a855f7,#ec4899)">AM</div>
+                <div class="admin-client-card__info">
+                  <div class="admin-person-name">Ananya Mehta</div>
+                  <div class="admin-client-card__email">ananya@email.com</div>
+                  <div class="admin-client-card__location"><i class="fa-solid fa-location-dot"></i>Hyderabad · Startup</div>
+                  <div class="admin-person-tags"><span class="badge badge--purple">Scheduled</span></div>
+                </div>
+              </div>
+              <div class="admin-client-card__desc">Voice AI deployment queued for production — demo approved, infra provisioning in progress.</div>
+              <div class="admin-client-card__meta">
+                <div class="admin-meta-pill"><strong>5</strong><span>Projects</span></div>
+                <div class="admin-meta-pill"><strong>₹0.6L</strong><span>LTV</span></div>
+                <div class="admin-meta-pill"><strong>2025</strong><span>Member since</span></div>
+                <div class="admin-meta-pill"><strong>91%</strong><span>Health score</span></div>
+              </div>
+              <div class="admin-client-card__actions">
+                <button class="admin-mini-btn" onclick="showToast('Viewing profile...')"><i class="fa-solid fa-user"></i> Profile</button>
+                <button class="admin-mini-btn admin-mini-btn--ghost" onclick="showToast('Opening projects...')"><i class="fa-solid fa-folder-open"></i> Projects</button>
+              </div>
+            </div>
+            <div class="admin-client-card">
+              <div class="admin-client-card__top">
+                <div class="admin-person-avatar admin-person-avatar--initial" style="background:linear-gradient(135deg,#38bdf8,#0284c7)">KS</div>
+                <div class="admin-client-card__info">
+                  <div class="admin-person-name">Karthik Sundaram</div>
+                  <div class="admin-client-card__email">karthik@email.com</div>
+                  <div class="admin-client-card__location"><i class="fa-solid fa-location-dot"></i>Chennai · Enterprise</div>
+                  <div class="admin-person-tags"><span class="badge badge--green">Active</span></div>
+                </div>
+              </div>
+              <div class="admin-client-card__desc">Full-stack AI platform with monitoring dashboards, voice agents, and analytics layer.</div>
+              <div class="admin-client-card__meta">
+                <div class="admin-meta-pill"><strong>19</strong><span>Projects</span></div>
+                <div class="admin-meta-pill"><strong>₹5.1L</strong><span>LTV</span></div>
+                <div class="admin-meta-pill"><strong>2022</strong><span>Member since</span></div>
+                <div class="admin-meta-pill"><strong>97%</strong><span>Health score</span></div>
+              </div>
+              <div class="admin-client-card__actions">
+                <button class="admin-mini-btn" onclick="showToast('Viewing profile...')"><i class="fa-solid fa-user"></i> Profile</button>
+                <button class="admin-mini-btn admin-mini-btn--ghost" onclick="showToast('Opening projects...')"><i class="fa-solid fa-folder-open"></i> Projects</button>
+              </div>
+            </div>
+            <div class="admin-client-card">
+              <div class="admin-client-card__top">
+                <div class="admin-person-avatar admin-person-avatar--initial" style="background:linear-gradient(135deg,#64748b,#475569)">LR</div>
+                <div class="admin-client-card__info">
+                  <div class="admin-person-name">Lakshmi Reddy</div>
+                  <div class="admin-client-card__email">lakshmi@email.com</div>
+                  <div class="admin-client-card__location"><i class="fa-solid fa-location-dot"></i>Pune · New lead</div>
+                  <div class="admin-person-tags"><span class="badge badge--gray">New Lead</span></div>
+                </div>
+              </div>
+              <div class="admin-client-card__desc">Starter AI assessment package in pipeline — discovery call completed, proposal sent.</div>
+              <div class="admin-client-card__meta">
+                <div class="admin-meta-pill"><strong>2</strong><span>Projects</span></div>
+                <div class="admin-meta-pill"><strong>₹0.2L</strong><span>LTV</span></div>
+                <div class="admin-meta-pill"><strong>2025</strong><span>Member since</span></div>
+                <div class="admin-meta-pill"><strong>64%</strong><span>Health score</span></div>
+              </div>
+              <div class="admin-client-card__actions">
+                <button class="admin-mini-btn" onclick="showToast('Viewing profile...')"><i class="fa-solid fa-user"></i> Profile</button>
+                <button class="admin-mini-btn admin-mini-btn--ghost" onclick="showToast('Opening projects...')"><i class="fa-solid fa-folder-open"></i> Projects</button>
+              </div>
+            </div>
           </div>
         </div>
 
-        
         <div class="section-panel" id="section-reports">
           <div class="section-header"><div><div class="section-header__title">Performance Reports</div><div class="section-header__sub">Monthly AI service and deployment activity reports</div></div><button class="section-header__btn" onclick="showToast('Generating report...')"><i class="fa-solid fa-file-export"></i> Generate</button></div>
           <div class="dash-row dash-row--2col">
@@ -510,7 +966,6 @@
           </div>
         </div>
 
-        
         <div class="section-panel" id="section-compliance">
           <div class="section-header"><div><div class="section-header__title">Model Compliance</div><div class="section-header__sub">Model governance, data privacy and quality audits</div></div><button class="section-header__btn" onclick="showToast('Running compliance scan...')"><i class="fa-solid fa-shield-check"></i> Run Scan</button></div>
           <div class="alert-list" style="margin-bottom:1.25rem">
@@ -523,7 +978,6 @@
           </div>
         </div>
 
-        
         <div class="section-panel" id="section-settings">
           <div class="section-header"><div><div class="section-header__title">Settings</div><div class="section-header__sub">Configure your Stackly AI agency admin portal</div></div></div>
           <div class="settings-grid">
@@ -576,7 +1030,6 @@
           </div>
         </div>
 
-        
         <div class="section-panel" id="section-notifications">
           <div class="section-header"><div><div class="section-header__title">Notifications</div><div class="section-header__sub">System alerts and admin notifications</div></div><button class="section-header__btn" onclick="showToast('All notifications marked read')"><i class="fa-solid fa-check-double"></i> Mark All Read</button></div>
           <div class="dash-card"><div class="dash-card__body"><div class="activity-list">
@@ -588,7 +1041,6 @@
           </div></div></div>
         </div>
 
-        
         <div class="section-panel" id="section-support">
           <div class="section-header"><div><div class="section-header__title">Help &amp; Support</div><div class="section-header__sub">Admin support resources and ticket management</div></div></div>
           <div class="dash-row dash-row--2col">
@@ -612,7 +1064,6 @@
     </div>
   </div>
 </div>
-
 <script>
 (function(){
   const session = localStorage.getItem('stackly_user') || sessionStorage.getItem('stackly_user');
@@ -621,7 +1072,6 @@
   if (user.role !== 'admin') { window.location.href = 'customer-dashboard.html'; return; }
   populateUser(user);
 })();
-
 function populateUser(user) {
   const name = user.name || 'Admin';
   const email = user.email || 'admin@stackly.com';
@@ -634,13 +1084,18 @@ function populateUser(user) {
   if (el('welcomeEmail')) el('welcomeEmail').textContent = email + ' · Last login: Today, 9:42 AM';
   document.title = 'Admin Dashboard | Stackly AI Agency';
 }
-
 let sidebarOpen = false;
-
 function toggleSidebar() {
   sidebarOpen ? closeSidebar() : openSidebar();
 }
-
+function lockPageScroll() {
+  document.documentElement.classList.add('no-scroll');
+  document.body.classList.add('no-scroll');
+}
+function unlockPageScroll() {
+  document.documentElement.classList.remove('no-scroll');
+  document.body.classList.remove('no-scroll');
+}
 function openSidebar() {
   sidebarOpen = true;
   document.getElementById('sidebar').classList.add('open');
@@ -649,9 +1104,8 @@ function openSidebar() {
   if (icon) icon.className = 'fa-solid fa-xmark';
   const btn = document.getElementById('hamburgerBtn');
   if (btn) btn.setAttribute('aria-expanded', 'true');
-  document.body.style.overflow = 'hidden';
+  lockPageScroll();
 }
-
 function closeSidebar() {
   sidebarOpen = false;
   document.getElementById('sidebar').classList.remove('open');
@@ -660,9 +1114,19 @@ function closeSidebar() {
   if (icon) icon.className = 'fa-solid fa-bars';
   const btn = document.getElementById('hamburgerBtn');
   if (btn) btn.setAttribute('aria-expanded', 'false');
-  document.body.style.overflow = '';
+  unlockPageScroll();
 }
-
+function setActiveAdminNav(sectionId, navEl) {
+  document.querySelectorAll('.sidebar__nav-item').forEach(function(i) { i.classList.remove('active'); });
+  if (navEl) {
+    navEl.classList.add('active');
+    return;
+  }
+  document.querySelectorAll('.sidebar__nav-item').forEach(function(item) {
+    var onclick = item.getAttribute('onclick') || '';
+    if (onclick.indexOf("showSection('" + sectionId + "'") !== -1) item.classList.add('active');
+  });
+}
 function showSection(sectionId, titleText, navEl) {
   document.querySelectorAll('.section-panel').forEach(p => p.classList.remove('active'));
   const target = document.getElementById('section-' + sectionId);
@@ -672,8 +1136,8 @@ function showSection(sectionId, titleText, navEl) {
     target.offsetHeight;
     target.style.animation = '';
   }
-  document.querySelectorAll('.sidebar__nav-item').forEach(i => i.classList.remove('active'));
-  if (navEl) navEl.classList.add('active');
+  setActiveAdminNav(sectionId, navEl);
+  sessionStorage.setItem('stackly_admin_section', sectionId);
   const titleMap = {
     overview: 'Dashboard', analytics: 'Analytics', transactions: 'AI Projects',
     invoices: 'Service Catalog', users: 'Team Users', clients: 'Customers',
@@ -688,34 +1152,31 @@ function showSection(sectionId, titleText, navEl) {
   if (window.innerWidth <= 1024) closeSidebar();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-
-function redirect404() { window.location.href = '404.html'; }
-
+function redirect404() {
+  var current = sessionStorage.getItem('stackly_admin_section') || 'overview';
+  sessionStorage.setItem('stackly_admin_section', current);
+  sessionStorage.setItem('stackly_admin_return', current);
+  window.location.href = '404.html';
+}
 function showToast() { redirect404(); }
-
 function validateAdminName(name) {
   return /^[a-zA-Z0-9\s&.,'-]+$/.test(name) && name.trim().length >= 2;
 }
-
 function validateAdminEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
-
 function validateAdminPhone(phone) {
   return phone.replace(/\D/g, '').length === 10;
 }
-
 function validateAdminAddress(address) {
   return address.trim().length >= 10;
 }
-
 function validateAdminField(value, emptyMsg, invalidMsg, validator) {
   const trimmed = (value || '').trim();
   if (!trimmed) return emptyMsg;
   if (validator && !validator(trimmed)) return invalidMsg;
   return '';
 }
-
 function setAdminFieldError(group, message) {
   if (!group) return;
   const errEl = group.querySelector('.form-error');
@@ -726,17 +1187,14 @@ function setAdminFieldError(group, message) {
     group.classList.remove('has-error');
   }
 }
-
 function handleAdminSettingsSave(e) {
   e.preventDefault();
-
   const companyEl = document.getElementById('adminCompanyName');
   const emailEl = document.getElementById('adminSupportEmail');
   const phoneEl = document.getElementById('adminPhone');
   const regionEl = document.getElementById('adminHubRegion');
   const addressEl = document.getElementById('adminBusinessAddress');
   const alertEl = document.getElementById('adminSettingsAlert');
-
   const errors = [
     { group: document.getElementById('adminCompanyNameGroup'), message: validateAdminField(companyEl.value, 'Company name is required', 'Enter a valid company name (min 2 characters)', validateAdminName) },
     { group: document.getElementById('adminSupportEmailGroup'), message: validateAdminField(emailEl.value, 'Support email is required', 'Please enter a valid email address', validateAdminEmail) },
@@ -744,13 +1202,11 @@ function handleAdminSettingsSave(e) {
     { group: document.getElementById('adminHubRegionGroup'), message: regionEl.value ? '' : 'Please select a data region' },
     { group: document.getElementById('adminAddressGroup'), message: validateAdminField(addressEl.value, 'Business address is required', 'Please enter a complete address (min 10 characters)', validateAdminAddress) }
   ];
-
   let firstInvalid = null;
   errors.forEach(function(item) {
     setAdminFieldError(item.group, item.message);
     if (item.message && !firstInvalid) firstInvalid = item.group;
   });
-
   if (errors.some(function(item) { return item.message; })) {
     if (alertEl) {
       alertEl.textContent = 'Please fill all required fields correctly before saving.';
@@ -759,11 +1215,9 @@ function handleAdminSettingsSave(e) {
     if (firstInvalid) firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
     return;
   }
-
   if (alertEl) alertEl.classList.remove('show');
   redirect404();
 }
-
 ['adminCompanyName', 'adminSupportEmail', 'adminPhone', 'adminBusinessAddress'].forEach(function(id) {
   const input = document.getElementById(id);
   if (!input) return;
@@ -774,7 +1228,6 @@ function handleAdminSettingsSave(e) {
     if (alertEl) alertEl.classList.remove('show');
   });
 });
-
 const regionSelect = document.getElementById('adminHubRegion');
 if (regionSelect) {
   regionSelect.addEventListener('change', function() {
@@ -784,19 +1237,15 @@ if (regionSelect) {
     if (alertEl) alertEl.classList.remove('show');
   });
 }
-
 function handleLogout() {
   localStorage.removeItem('stackly_user');
   sessionStorage.removeItem('stackly_user');
   window.location.href = 'signin.html';
 }
-
 function show404Modal() { redirect404(); }
-
 document.getElementById('modal404').addEventListener('click', function(e) {
   if (e.target === this) redirect404();
 });
-
 history.pushState(null, '', location.href);
 window.addEventListener('popstate', function() {
   const user = JSON.parse(localStorage.getItem('stackly_user') || sessionStorage.getItem('stackly_user') || 'null');
@@ -806,11 +1255,33 @@ window.addEventListener('popstate', function() {
     history.pushState(null, '', location.href);
   }
 });
-
 window.addEventListener('resize', function() {
   if (window.innerWidth > 1024) closeSidebar();
 });
-
+function initAdminNavigation() {
+  var returnSection = sessionStorage.getItem('stackly_admin_return');
+  if (returnSection && document.getElementById('section-' + returnSection)) {
+    sessionStorage.removeItem('stackly_admin_return');
+    showSection(returnSection, null, null);
+    return;
+  }
+  var saved = sessionStorage.getItem('stackly_admin_section');
+  if (saved && saved !== 'overview' && document.getElementById('section-' + saved)) {
+    showSection(saved, null, null);
+  }
+}
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initAdminNavigation);
+} else {
+  initAdminNavigation();
+}
+window.addEventListener('pageshow', function() {
+  if (!document.querySelector('.dash-layout')) return;
+  var returnSection = sessionStorage.getItem('stackly_admin_return');
+  if (!returnSection || !document.getElementById('section-' + returnSection)) return;
+  sessionStorage.removeItem('stackly_admin_return');
+  showSection(returnSection, null, null);
+});
 document.querySelectorAll('.sidebar__nav-item').forEach(function(item) {
   item.addEventListener('keydown', function(e) {
     if (e.key === 'Enter' || e.key === ' ') {
@@ -820,9 +1291,5 @@ document.querySelectorAll('.sidebar__nav-item').forEach(function(item) {
   });
 });
 </script>
-
 </body>
 </html>
-
-
-
