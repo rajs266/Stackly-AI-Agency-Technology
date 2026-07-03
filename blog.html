@@ -55,12 +55,23 @@
 
   <!-- ═══ Page Hero Banner ═══ -->
   <section class="page-hero">
-    <div class="container">
+    <div class="page-hero-bg" aria-hidden="true">
+      <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=80" alt="">
+    </div>
+    <div class="page-hero-overlay"></div>
+    <div class="container page-hero-inner">
+      <span class="page-hero-badge"><i class="fas fa-newspaper"></i> Insights & Research</span>
       <h1>Our <span class="text-gradient">Blog</span></h1>
+      <p class="page-hero-desc">Deep dives into AI trends, machine learning breakthroughs, and practical guides for scaling intelligent systems in modern enterprises.</p>
       <div class="breadcrumb">
         <a href="index.html">Home</a>
         <span>/</span>
         <span>Blog</span>
+      </div>
+      <div class="page-hero-stats">
+        <div class="page-hero-stat"><strong>50+</strong><span>Articles Published</span></div>
+        <div class="page-hero-stat"><strong>12K+</strong><span>Monthly Readers</span></div>
+        <div class="page-hero-stat"><strong>6</strong><span>Topic Categories</span></div>
       </div>
     </div>
   </section>
@@ -69,7 +80,7 @@
   <section class="section" style="padding-bottom: 2rem;">
     <div class="container">
       <div class="blog-featured reveal">
-        <img src="assets/blog-1.webp" alt="Featured Post AI">
+        <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1600&q=80" alt="Featured Post AI">
         <div class="blog-featured-overlay">
           <span class="blog-card-category" style="position:static; margin-bottom:1rem; display:inline-block; width:fit-content;">Featured</span>
           <h2>The Future of AI in Enterprise Solutions</h2>
@@ -94,6 +105,79 @@
     </div>
   </section>
 
+  <!-- ═══ Trending Topics ═══ -->
+  <section class="section" style="padding-top: 0; padding-bottom: 1rem;">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-badge"><i class="fas fa-fire"></i> Trending Now</span>
+        <h2 class="section-title">Hot Topics in <span class="gradient-text">AI</span></h2>
+        <p class="section-desc">Explore the most-read categories and research areas our team is actively publishing on.</p>
+      </div>
+
+      <div class="blog-topic-grid stagger-children">
+        <a href="404.html" class="blog-topic-tile">
+          <img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=1600&q=80" alt="Enterprise AI">
+          <div class="blog-topic-tile__label">
+            <span>Enterprise AI</span>
+            <strong>Scaling LLMs for Business Workflows</strong>
+          </div>
+        </a>
+        <a href="404.html" class="blog-topic-tile">
+          <img src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?auto=format&fit=crop&w=1600&q=80" alt="Machine Learning">
+          <div class="blog-topic-tile__label">
+            <span>Machine Learning</span>
+            <strong>Smart Infrastructure & Urban Data</strong>
+          </div>
+        </a>
+        <a href="404.html" class="blog-topic-tile">
+          <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=1600&q=80" alt="NLP">
+          <div class="blog-topic-tile__label">
+            <span>NLP</span>
+            <strong>Semantic Search & Vector Databases</strong>
+          </div>
+        </a>
+        <a href="404.html" class="blog-topic-tile">
+          <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80" alt="Cloud AI">
+          <div class="blog-topic-tile__label">
+            <span>Cloud</span>
+            <strong>Serverless AI Scaling Strategies</strong>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Research Spotlight ═══ -->
+  <section class="section" style="background: var(--bg-secondary); padding-top: 2rem;">
+    <div class="container">
+      <div class="split-section">
+        <div class="split-image reveal-left">
+          <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1600&q=80" alt="Stackly AI research">
+        </div>
+        <div class="split-content reveal-right">
+          <span class="section-badge"><i class="fas fa-microscope"></i> Research Spotlight</span>
+          <h2>From Lab Notes to <span class="gradient-text">Published Insights</span></h2>
+          <p>Our blog is written by the same engineers who build production AI systems. Every article reflects hands-on experience — not recycled hype — with code samples, architecture diagrams, and real deployment lessons.</p>
+          <div class="feature-list">
+            <div class="feature-item">
+              <i class="fas fa-pen-nib"></i>
+              <span>Weekly technical deep-dives from our ML research team.</span>
+            </div>
+            <div class="feature-item">
+              <i class="fas fa-chart-bar"></i>
+              <span>Benchmark comparisons and performance analysis reports.</span>
+            </div>
+            <div class="feature-item">
+              <i class="fas fa-envelope-open-text"></i>
+              <span>Monthly digest delivered to 3,000+ subscribers.</span>
+            </div>
+          </div>
+          <a href="#newsletter" class="btn btn-primary">Subscribe to Insights <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ═══ Blog Grid ═══ -->
   <section class="section" style="padding-top:0;">
     <div class="container">
@@ -101,7 +185,7 @@
         <!-- Post 1 -->
         <div class="blog-card">
           <div class="blog-card-image">
-            <img src="assets/blog-1.webp" alt="AI healthcare">
+            <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1600&q=80" alt="AI healthcare">
             <span class="blog-card-category">AI</span>
           </div>
           <div class="blog-card-body">
@@ -118,7 +202,7 @@
         <!-- Post 2 -->
         <div class="blog-card">
           <div class="blog-card-image">
-            <img src="assets/blog-2.webp" alt="Smart cities">
+            <img src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?auto=format&fit=crop&w=1600&q=80" alt="Smart cities">
             <span class="blog-card-category">Machine Learning</span>
           </div>
           <div class="blog-card-body">
@@ -135,7 +219,7 @@
         <!-- Post 3 -->
         <div class="blog-card">
           <div class="blog-card-image">
-            <img src="assets/blog-3.webp" alt="NLP">
+            <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=1600&q=80" alt="NLP">
             <span class="blog-card-category">AI</span>
           </div>
           <div class="blog-card-body">
@@ -152,7 +236,7 @@
         <!-- Post 4 -->
         <div class="blog-card">
           <div class="blog-card-image">
-            <img src="assets/blog-4.webp" alt="Cloud">
+            <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80" alt="Cloud">
             <span class="blog-card-category">Cloud</span>
           </div>
           <div class="blog-card-body">
@@ -169,7 +253,7 @@
         <!-- Post 5 -->
         <div class="blog-card">
           <div class="blog-card-image">
-            <img src="assets/blog-1.webp" alt="Ethics">
+            <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1600&q=80" alt="Ethics">
             <span class="blog-card-category">AI</span>
           </div>
           <div class="blog-card-body">
@@ -186,7 +270,7 @@
         <!-- Post 6 -->
         <div class="blog-card">
           <div class="blog-card-image">
-            <img src="assets/blog-2.webp" alt="Automation">
+            <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1600&q=80" alt="Automation">
             <span class="blog-card-category">Automation</span>
           </div>
           <div class="blog-card-body">
@@ -204,7 +288,7 @@
   </section>
 
   <!-- ═══ Newsletter Section ═══ -->
-  <section class="section" style="background: var(--bg-secondary); border-top: 1px solid var(--border-light);">
+  <section class="section" id="newsletter" style="background: var(--bg-secondary); border-top: 1px solid var(--border-light);">
     <div class="container" style="max-width: 600px; text-align:center;">
       <div class="reveal">
         <i class="fas fa-envelope-open-text" style="font-size: 3rem; color: var(--primary); margin-bottom: 1.5rem;"></i>

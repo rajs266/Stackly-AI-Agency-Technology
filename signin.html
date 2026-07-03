@@ -149,6 +149,13 @@
       align-items: center;
       gap: 0.55rem;
     }
+    .signin-visual .logo-brand img,
+    .signin-form-side .logo-brand img,
+    .auth-form-logo img {
+      height: 52px;
+      width: auto;
+      display: block;
+    }
     .signin-visual .logo-brand .logo-accent,
     .signin-form-side .logo-brand .logo-accent { color: #38bdf8; }
     .signin-visual .logo-brand i,
@@ -237,7 +244,8 @@
       gap: 0.4rem;
       transition: all var(--dur-base) var(--ease);
       width: fit-content;
-      margin-top: 4.5rem;
+      margin-top: 0;
+      flex-shrink: 0;
     }
     .form-back-btn:hover {
       background: rgba(255, 255, 255, 0.15);
@@ -250,6 +258,22 @@
     }
     .form-back-btn:hover i {
       transform: translateX(-3px);
+    }
+
+    .auth-form-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      margin-bottom: 1.5rem;
+      gap: 1rem;
+    }
+
+    .auth-form-logo {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+      flex-shrink: 0;
     }
 
     .signin-form-side {
@@ -805,23 +829,6 @@
   </style>
 </head>
 <body>
-<div id="stackly-preloader" class="stackly-preloader" role="status" aria-live="polite" aria-label="Loading Stackly">
-  <div class="stackly-preloader__aurora" aria-hidden="true"></div>
-  <div class="stackly-preloader__particles" aria-hidden="true">
-    <span></span><span></span><span></span><span></span><span></span><span></span>
-  </div>
-  <div class="stackly-preloader__core">
-    <div class="stackly-preloader__ring stackly-preloader__ring--1"></div>
-    <div class="stackly-preloader__ring stackly-preloader__ring--2"></div>
-    <div class="stackly-preloader__ring stackly-preloader__ring--3"></div>
-    <div class="stackly-preloader__logo-glow" aria-hidden="true"></div>
-    <img src="assets/logo.webp" alt="Stackly" class="stackly-preloader__logo" width="140" height="48" decoding="sync">
-  </div>
-  <div class="stackly-preloader__progress" aria-hidden="true"><span></span></div>
-</div>
-<script src="script.js"></script>
-
-
 
 <div class="signin-toast" id="signinToast" role="alert" aria-live="polite"></div>
 
@@ -836,7 +843,7 @@
 
     <div class="signin-visual__content">
       <div class="signin-logo-wrap" style="width: 100%; display: flex; flex-direction: column; align-items: flex-start; margin-bottom: 2.5rem; gap: 0.75rem;">
-        <a href="index.html" class="logo-brand"><img src="assets/logo.webp" alt="Stackly Logo" style="height: 36px; width: auto;" /></a>
+        <a href="index.html" class="logo-brand"><img src="assets/logo.webp" alt="Stackly Logo" /></a>
       </div>
 
       <h2 class="signin-visual__tagline">
@@ -869,8 +876,11 @@
     <div class="signin-form-side__inner">
 
       <div class="signin-form-box__header">
-        <div style="display: flex; align-items: center; justify-content: flex-end; width: 100%; margin-bottom: 1.5rem;">
-          <a href="index.html" class="form-back-btn" style="margin-top: 0;">
+        <div class="auth-form-top">
+          <a href="index.html" class="auth-form-logo">
+            <img src="assets/logo.webp" alt="Stackly">
+          </a>
+          <a href="index.html" class="form-back-btn">
             <i class="fa-solid fa-arrow-left"></i> Back to Home
           </a>
         </div>
@@ -993,15 +1003,7 @@
 
 </div>
 
-<script>
-
-document.addEventListener('DOMContentLoaded', () => {
-
-  if (typeof AOS !== 'undefined') {
-    AOS.init({ duration: 700, once: true, offset: 60, easing: 'ease-out-cubic' });
-  }
-});
-</script>
+<script src="script.js"></script>
 <script>
 
 function showSigninToast(msg, type = 'success') {

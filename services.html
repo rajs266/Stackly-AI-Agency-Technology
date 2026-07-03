@@ -55,12 +55,23 @@
 
   <!-- ═══ Page Hero Banner ═══ -->
   <section class="page-hero">
-    <div class="container">
+    <div class="page-hero-bg" aria-hidden="true">
+      <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1600&q=80" alt="">
+    </div>
+    <div class="page-hero-overlay"></div>
+    <div class="container page-hero-inner">
+      <span class="page-hero-badge"><i class="fas fa-cogs"></i> AI Solutions</span>
       <h1>Our <span class="text-gradient">Services</span></h1>
+      <p class="page-hero-desc">End-to-end AI development — from custom neural architectures and ML pipelines to computer vision, NLP, and intelligent automation built for your industry.</p>
       <div class="breadcrumb">
         <a href="index.html">Home</a>
         <span>/</span>
         <span>Services</span>
+      </div>
+      <div class="page-hero-stats">
+        <div class="page-hero-stat"><strong>6+</strong><span>Core Offerings</span></div>
+        <div class="page-hero-stat"><strong>4–8 wks</strong><span>Avg. Delivery</span></div>
+        <div class="page-hero-stat"><strong>99.9%</strong><span>Enterprise SLA</span></div>
       </div>
     </div>
   </section>
@@ -122,6 +133,118 @@
           <p class="card-text">Zero-touch robotic workflow automation, API bridge synchronization, and document ingestion architectures.</p>
           <a href="404.html" class="card-link">Explore Service <i class="fas fa-arrow-right"></i></a>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Service Showcase ═══ -->
+  <section class="section" style="background: var(--bg-secondary); padding-top: 0;">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-badge"><i class="fas fa-images"></i> Visual Showcase</span>
+        <h2 class="section-title">Services in <span class="gradient-text">Action</span></h2>
+        <p class="section-desc">Real-world applications of our AI expertise — each solution tailored to industry-specific challenges and datasets.</p>
+      </div>
+
+      <div class="service-showcase-grid stagger-children">
+        <div class="service-showcase">
+          <div class="service-showcase__thumb">
+            <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1600&q=80" alt="AI Development">
+          </div>
+          <div class="service-showcase__content">
+            <h4>AI Development</h4>
+            <p>Custom agent architectures and generative models trained on proprietary enterprise data with secure deployment pipelines.</p>
+          </div>
+        </div>
+        <div class="service-showcase">
+          <div class="service-showcase__thumb">
+            <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1600&q=80" alt="Machine Learning">
+          </div>
+          <div class="service-showcase__content">
+            <h4>Machine Learning</h4>
+            <p>Predictive scoring engines for healthcare diagnostics, fraud detection, and demand forecasting at scale.</p>
+          </div>
+        </div>
+        <div class="service-showcase">
+          <div class="service-showcase__thumb">
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&q=80" alt="Data Analytics">
+          </div>
+          <div class="service-showcase__content">
+            <h4>Data Analytics</h4>
+            <p>Interactive BI dashboards and automated reporting that turn raw telemetry into executive-ready insights.</p>
+          </div>
+        </div>
+        <div class="service-showcase">
+          <div class="service-showcase__thumb">
+            <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=1600&q=80" alt="Natural Language Processing">
+          </div>
+          <div class="service-showcase__content">
+            <h4>Natural Language Processing</h4>
+            <p>LLM fine-tuning, semantic search, and contextual chatbots integrated into CRM and support workflows.</p>
+          </div>
+        </div>
+        <div class="service-showcase">
+          <div class="service-showcase__thumb">
+            <img src="https://images.unsplash.com/photo-1504639725590-34d0984388bd?auto=format&fit=crop&w=1600&q=80" alt="Computer Vision">
+          </div>
+          <div class="service-showcase__content">
+            <h4>Computer Vision</h4>
+            <p>Object detection, quality inspection, and smart city surveillance systems deployed on edge devices.</p>
+          </div>
+        </div>
+        <div class="service-showcase">
+          <div class="service-showcase__thumb">
+            <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1600&q=80" alt="Process Automation">
+          </div>
+          <div class="service-showcase__content">
+            <h4>Process Automation</h4>
+            <p>RPA bots, document ingestion, and API bridge synchronization for zero-touch operational workflows.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Case Studies ═══ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-badge"><i class="fas fa-briefcase"></i> Case Studies</span>
+        <h2 class="section-title">Proven <span class="gradient-text">Results</span></h2>
+        <p class="section-desc">Selected deployments showcasing measurable impact across healthcare, urban tech, and enterprise automation.</p>
+      </div>
+
+      <div class="image-card-grid stagger-children">
+        <article class="image-card">
+          <div class="image-card__media">
+            <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1600&q=80" alt="Healthcare AI case study">
+            <span class="image-card__tag">Healthcare</span>
+          </div>
+          <div class="image-card__body">
+            <h4>Clinical Diagnostic Assistant</h4>
+            <p>Reduced report analysis time by 68% using vision models trained on anonymized radiology datasets.</p>
+          </div>
+        </article>
+        <article class="image-card">
+          <div class="image-card__media">
+            <img src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?auto=format&fit=crop&w=1600&q=80" alt="Smart city case study">
+            <span class="image-card__tag">Smart Cities</span>
+          </div>
+          <div class="image-card__body">
+            <h4>Urban Traffic Intelligence</h4>
+            <p>ML routing models cut peak-hour congestion by 22% across a 40-intersection pilot network.</p>
+          </div>
+        </article>
+        <article class="image-card">
+          <div class="image-card__media">
+            <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1600&q=80" alt="Enterprise automation case study">
+            <span class="image-card__tag">Automation</span>
+          </div>
+          <div class="image-card__body">
+            <h4>Enterprise Workflow Engine</h4>
+            <p>Automated 14 legacy manual processes, saving 2,400 staff hours per quarter for a logistics client.</p>
+          </div>
+        </article>
       </div>
     </div>
   </section>

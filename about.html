@@ -55,12 +55,23 @@
 
   <!-- ═══ Page Hero Banner ═══ -->
   <section class="page-hero">
-    <div class="container">
+    <div class="page-hero-bg" aria-hidden="true">
+      <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1600&q=80" alt="">
+    </div>
+    <div class="page-hero-overlay"></div>
+    <div class="container page-hero-inner">
+      <span class="page-hero-badge"><i class="fas fa-users"></i> Who We Are</span>
       <h1>About <span class="text-gradient">Stackly</span></h1>
+      <p class="page-hero-desc">We are a Salem-born AI agency building intelligent products for global enterprises — from research labs to production deployments that scale with your business.</p>
       <div class="breadcrumb">
         <a href="index.html">Home</a>
         <span>/</span>
         <span>About Us</span>
+      </div>
+      <div class="page-hero-stats">
+        <div class="page-hero-stat"><strong>2020</strong><span>Founded in Salem</span></div>
+        <div class="page-hero-stat"><strong>50+</strong><span>Expert Team</span></div>
+        <div class="page-hero-stat"><strong>150+</strong><span>Global Clients</span></div>
       </div>
     </div>
   </section>
@@ -70,7 +81,7 @@
     <div class="container">
       <div class="split-section">
         <div class="split-image reveal-left">
-          <img src="assets/about-mission.webp" alt="Stackly Mission & Vision">
+          <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1600&q=80" alt="Stackly Mission & Vision">
         </div>
         <div class="split-content reveal-right">
           <span class="section-badge"><i class="fas fa-bullseye"></i> Our Mission & Vision</span>
@@ -89,6 +100,85 @@
               <i class="fas fa-shield-alt"></i>
               <span><strong>Trust & Security:</strong> Building ethical, safe, and secure AI systems.</span>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Innovation Lab ═══ -->
+  <section class="section" style="background: var(--bg-secondary);">
+    <div class="container">
+      <div class="split-section">
+        <div class="split-content reveal-left">
+          <span class="section-badge"><i class="fas fa-flask"></i> Innovation Lab</span>
+          <h2>Where Ideas Become <span class="gradient-text">Production AI</span></h2>
+          <p>Our Salem headquarters hosts a full-stack AI lab — data engineers, ML researchers, and product designers working side by side. We prototype fast, validate with real datasets, and ship models that survive enterprise load.</p>
+          <div class="feature-list">
+            <div class="feature-item">
+              <i class="fas fa-server"></i>
+              <span><strong>GPU Clusters:</strong> On-prem training rigs for secure, high-speed model iteration.</span>
+            </div>
+            <div class="feature-item">
+              <i class="fas fa-code-branch"></i>
+              <span><strong>MLOps Pipelines:</strong> Automated testing, versioning, and staged rollouts.</span>
+            </div>
+            <div class="feature-item">
+              <i class="fas fa-globe-asia"></i>
+              <span><strong>Global Delivery:</strong> Remote teams across India, Europe, and North America.</span>
+            </div>
+          </div>
+        </div>
+        <div class="split-image reveal-right">
+          <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1600&q=80" alt="Stackly AI Innovation Lab">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Life at Stackly Gallery ═══ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-badge"><i class="fas fa-camera"></i> Inside Stackly</span>
+        <h2 class="section-title">Life at Our <span class="gradient-text">Studio</span></h2>
+        <p class="section-desc">Collaborative workshops, client demos, and breakthrough moments captured across our AI development journey.</p>
+      </div>
+
+      <div class="media-gallery reveal">
+        <div class="media-gallery__item media-gallery__item--wide">
+          <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1600&q=80" alt="Stackly team collaboration">
+          <div class="media-gallery__caption">
+            <h4>Team Collaboration</h4>
+            <p>Cross-functional sprints blending design, data science, and engineering.</p>
+          </div>
+        </div>
+        <div class="media-gallery__item media-gallery__item--tall">
+          <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1600&q=80" alt="Stackly mission workspace">
+          <div class="media-gallery__caption">
+            <h4>Mission-Driven Culture</h4>
+            <p>Every project anchored in measurable business outcomes.</p>
+          </div>
+        </div>
+        <div class="media-gallery__item media-gallery__item--third">
+          <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1600&q=80" alt="AI healthcare research">
+          <div class="media-gallery__caption">
+            <h4>Healthcare AI</h4>
+            <p>Diagnostic models in active research.</p>
+          </div>
+        </div>
+        <div class="media-gallery__item media-gallery__item--third">
+          <img src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?auto=format&fit=crop&w=1600&q=80" alt="Smart city analytics">
+          <div class="media-gallery__caption">
+            <h4>Smart Cities</h4>
+            <p>Urban data intelligence deployments.</p>
+          </div>
+        </div>
+        <div class="media-gallery__item media-gallery__item--third">
+          <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1600&q=80" alt="NLP development">
+          <div class="media-gallery__caption">
+            <h4>NLP Research</h4>
+            <p>Language models tuned for enterprise.</p>
           </div>
         </div>
       </div>
@@ -162,7 +252,7 @@
         <div class="flip-card">
           <div class="flip-card-inner">
             <div class="flip-card-front">
-              <img src="assets/team-1.webp" alt="Rajesh Kumar" class="team-card-img">
+              <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80" alt="Rajesh Kumar" class="team-card-img">
               <h4>Rajesh Kumar</h4>
               <p style="color:var(--primary); font-weight:600; font-size:0.9rem;">CEO & Founder</p>
             </div>
@@ -181,7 +271,7 @@
         <div class="flip-card">
           <div class="flip-card-inner">
             <div class="flip-card-front">
-              <img src="assets/team-2.webp" alt="Priya Sharma" class="team-card-img">
+              <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80" alt="Priya Sharma" class="team-card-img">
               <h4>Priya Sharma</h4>
               <p style="color:var(--primary); font-weight:600; font-size:0.9rem;">Lead Data Scientist</p>
             </div>
@@ -200,7 +290,7 @@
         <div class="flip-card">
           <div class="flip-card-inner">
             <div class="flip-card-front">
-              <img src="assets/team-3.webp" alt="Arun Patel" class="team-card-img">
+              <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=800&q=80" alt="Arun Patel" class="team-card-img">
               <h4>Arun Patel</h4>
               <p style="color:var(--primary); font-weight:600; font-size:0.9rem;">Senior Developer</p>
             </div>
@@ -219,7 +309,7 @@
         <div class="flip-card">
           <div class="flip-card-inner">
             <div class="flip-card-front">
-              <img src="assets/team-4.webp" alt="Meera Nair" class="team-card-img">
+              <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=800&q=80" alt="Meera Nair" class="team-card-img">
               <h4>Meera Nair</h4>
               <p style="color:var(--primary); font-weight:600; font-size:0.9rem;">UX Director</p>
             </div>

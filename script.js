@@ -24,7 +24,7 @@ class RealAquariumInteraction {
 
     // Mouse coordinates tracking
     this.mouse = { x: 0, y: 0, lastX: 0, lastY: 0, active: false, speed: 0 };
-    
+
     this.isWebGLFallback = false;
 
     if (this.bgImage.complete && this.bgImage.naturalWidth > 0) {
@@ -100,9 +100,9 @@ class RealAquariumInteraction {
       const dy = this.mouse.y - this.mouse.lastY;
       this.mouse.speed = Math.sqrt(dx * dx + dy * dy);
 
-      // Trigger WebGL ripple waves if moving fast
-      if (this.mouse.speed > 2) {
-        this.addRipple(this.mouse.x, this.mouse.y, 6, this.mouse.speed * 0.015);
+      // Light WebGL ripples on mouse move
+      if (this.mouse.speed > 1.8) {
+        this.addRipple(this.mouse.x, this.mouse.y, 6, this.mouse.speed * 0.018);
       }
 
       this.mouse.lastX = this.mouse.x;
@@ -118,7 +118,7 @@ class RealAquariumInteraction {
       const rect = this.hero.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
-      this.addRipple(x, y, 15, 0.8);
+      this.addRipple(x, y, 16, 0.88);
       this.spawnSplashParticles(x, y);
     });
   }
@@ -144,7 +144,7 @@ class RealAquariumInteraction {
     this.buffer1 = new Float32Array(this.bufferSize);
     this.buffer2 = new Float32Array(this.bufferSize);
     this.heightmapData = new Uint8Array(this.bufferSize);
-    this.damping = 0.98; // wave decay rate
+    this.damping = 0.98;
 
     // Shader sources
     const vsSource = `
@@ -160,23 +160,20 @@ class RealAquariumInteraction {
     const fsSource = `
       precision mediump float;
       varying vec2 v_texCoord;
-      uniform sampler2D u_image;      // Video texture frame
-      uniform sampler2D u_heightmap;  // Heightmap wave displacement map
-      
+      uniform sampler2D u_image;
+      uniform sampler2D u_heightmap;
+
       void main() {
         float texelX = 1.0 / 256.0;
         float texelY = 1.0 / 256.0;
-        
-        // Sample surrounding height values to get wave slope normal
+
         float h_left  = texture2D(u_heightmap, v_texCoord + vec2(-texelX, 0.0)).r;
         float h_right = texture2D(u_heightmap, v_texCoord + vec2( texelX, 0.0)).r;
         float h_up    = texture2D(u_heightmap, v_texCoord + vec2(0.0, -texelY)).r;
         float h_down  = texture2D(u_heightmap, v_texCoord + vec2(0.0,  texelY)).r;
-        
-        // Calculate coordinate displacement offset based on slopes
-        vec2 offset = vec2(h_left - h_right, h_up - h_down) * 0.035;
-        
-        // Sample moving video frame with refractive coordinate distortion
+
+        vec2 offset = vec2(h_left - h_right, h_up - h_down) * 0.038;
+
         vec4 color = texture2D(u_image, v_texCoord + offset);
         gl_FragColor = color;
       }
@@ -259,6 +256,7 @@ class RealAquariumInteraction {
   }
 
   addRipple(x, y, radius, strength) {
+    if (!this.buffer1) return;
     const gx = Math.floor((x / this.width) * this.gridWidth);
     const gy = Math.floor((y / this.height) * this.gridHeight);
 
@@ -353,7 +351,7 @@ class RealAquariumInteraction {
     this.fish = [];
 
     // Spawn initial bubbles
-    this.spawnBubbles(20);
+    this.spawnBubbles(14);
     
     // Set spawned fish count to 0 to remove all fish from the hero section
     this.spawnFish(0);
@@ -368,8 +366,8 @@ class RealAquariumInteraction {
         speedY: -(Math.random() * 1.6 + 0.5), // float up
         swaySpeed: Math.random() * 0.02 + 0.01,
         swayOffset: Math.random() * Math.PI * 2,
-        opacity: Math.random() * 0.4 + 0.15,
-        targetOpacity: Math.random() * 0.4 + 0.15
+        opacity: Math.random() * 0.28 + 0.1,
+        targetOpacity: Math.random() * 0.28 + 0.1
       });
     }
   }
@@ -394,17 +392,17 @@ class RealAquariumInteraction {
   }
 
   spawnSplashParticles(x, y) {
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 24; i++) {
       const angle = Math.random() * Math.PI * 2;
-      const speed = Math.random() * 5 + 2;
+      const speed = Math.random() * 4.5 + 2;
       this.splashes.push({
-        x: x,
-        y: y,
+        x,
+        y,
         vx: Math.cos(angle) * speed,
         vy: Math.sin(angle) * speed - 1.5,
-        radius: Math.random() * 4 + 1.5,
-        opacity: 1,
-        color: i % 2 === 0 ? 'rgba(255, 255, 255, 0.75)' : 'rgba(56, 107, 183, 0.5)'
+        radius: Math.random() * 3.5 + 1.2,
+        opacity: 0.85,
+        color: i % 2 === 0 ? 'rgba(255, 255, 255, 0.6)' : 'rgba(56, 107, 183, 0.35)'
       });
     }
   }
@@ -574,8 +572,8 @@ class RealAquariumInteraction {
       const s = this.splashes[i];
       s.x += s.vx;
       s.y += s.vy;
-      s.vy -= 0.08; // float upwards (anti-gravity)
-      s.opacity -= 0.025; // fade out
+      s.vy -= 0.08;
+      s.opacity -= 0.028;
       s.radius *= 0.97;
 
       if (s.opacity <= 0 || s.radius < 0.2) {
@@ -585,11 +583,10 @@ class RealAquariumInteraction {
 
       ctx.beginPath();
       ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+      ctx.globalAlpha = s.opacity;
       ctx.fillStyle = s.color;
-      ctx.shadowBlur = 8;
-      ctx.shadowColor = s.color;
       ctx.fill();
-      ctx.shadowBlur = 0; // reset glow
+      ctx.globalAlpha = 1;
     }
   }
 
