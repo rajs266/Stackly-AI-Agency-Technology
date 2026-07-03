@@ -46,7 +46,11 @@
       --ease-bounce: cubic-bezier(0.34,1.56,0.64,1);
     }
     *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-    html { overflow-x:hidden; -webkit-text-size-adjust:100%; }
+    html { overflow-x:hidden; -webkit-text-size-adjust:100%; scrollbar-width:thin; scrollbar-color:var(--primary) var(--bg); }
+    html::-webkit-scrollbar { width:8px; height:8px; }
+    html::-webkit-scrollbar-track { background:var(--bg); }
+    html::-webkit-scrollbar-thumb { background:var(--primary); border-radius:99px; }
+    html::-webkit-scrollbar-thumb:hover { background:var(--accent); }
     html.preloader-active,
     html.preloader-active body {
       overflow: hidden !important;
@@ -244,10 +248,10 @@
     body.no-scroll { overflow:hidden; }
  
      .welcome-banner {
-      background:linear-gradient(135deg, #1e3a5f 0%, #2563eb 55%, #38bdf8 130%);
+      background:linear-gradient(135deg, #0f172a 0%, #386bb7 52%, #e24c4a 130%);
       border-radius:var(--radius-lg); padding:32px; color:white;
       margin-bottom:28px; position:relative; overflow:hidden;
-      animation:slideIn 0.5s ease forwards;
+      animation:dashReveal 0.55s cubic-bezier(0.22,1,0.36,1) forwards;
     }
     .welcome-banner::before {
       content:''; position:absolute; top:-50px; right:-50px;
@@ -300,11 +304,11 @@
       border-top: 4px solid var(--primary);
       text-align: center; margin-bottom: 28px;
       box-shadow: var(--shadow);
-      transition: var(--transition); animation: slideIn 0.5s 0.1s ease both;
+      transition: var(--transition); animation: dashReveal 0.55s 0.08s cubic-bezier(0.22,1,0.36,1) both;
     }
     .profile-card:hover {
       box-shadow: var(--shadow-lg);
-      border-color: rgba(14,165,233,0.25);
+      border-color: rgba(56,107,183,0.35);
     }
     .profile-avatar {
       width:88px; height:88px;
@@ -312,9 +316,9 @@
       border-radius:50%; display:flex; align-items:center; justify-content:center;
       font-size:2.4rem; margin:0 auto 14px;
       border:4px solid white; box-shadow:0 8px 28px rgba(14,165,233,0.3);
-      animation:floatAvatar 3s ease-in-out infinite;
+      animation:profileGlow 4s ease-in-out infinite;
     }
-    @keyframes floatAvatar { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-7px);} }
+    @keyframes profileGlow { 0%,100%{transform:translateY(0) scale(1); box-shadow:0 8px 28px rgba(56,107,183,0.35);} 50%{transform:translateY(-6px) scale(1.03); box-shadow:0 12px 32px rgba(226,76,74,0.28);} }
     .profile-name { font-family:var(--font-display); font-size:1.45rem; color:var(--dark); letter-spacing:1px; margin-bottom:5px; word-break:break-word; overflow-wrap:break-word; }
     .profile-email { color:var(--text-light); font-size:0.88rem; margin-bottom:14px; word-break:break-all; overflow-wrap:break-word; }
     .profile-meta { display:flex; justify-content:center; gap:24px; flex-wrap:wrap; }
@@ -337,13 +341,13 @@
       border: 1px solid var(--border);
       border-left: 4px solid var(--primary);
       transition: var(--transition);
-      text-align: center; animation: slideIn 0.5s ease both;
+      text-align: center; animation: dashReveal 0.5s cubic-bezier(0.22,1,0.36,1) both;
       box-shadow: var(--shadow);
     }
     .stat-card:hover {
-      transform: translateY(-5px);
+      transform: translateY(-5px) scale(1.02);
       box-shadow: var(--shadow-lg);
-      border-color: rgba(14,165,233,0.25);
+      border-color: rgba(56,107,183,0.35);
     }
     .stat-card:nth-child(1) { border-left-color: #2D9B5E; }
     .stat-card:nth-child(2) { border-left-color: #FFB300; }
@@ -746,8 +750,8 @@
     .spend-bar.faded { opacity:0.35; }
     .spend-bar-label { font-size:0.62rem; color:var(--text-light); }
 
-    @keyframes slideIn { from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);} }
-    .animate-in { animation:slideIn 0.45s ease both; }
+    @keyframes dashReveal { from{opacity:0;transform:translateY(18px) scale(0.98);}to{opacity:1;transform:translateY(0) scale(1);} }
+    .animate-in { animation:dashReveal 0.5s cubic-bezier(0.22,1,0.36,1) both; }
     .delay-1 { animation-delay:0.08s; }
     .delay-2 { animation-delay:0.16s; }
     .delay-3 { animation-delay:0.24s; }
@@ -1193,7 +1197,7 @@
     <img src="assets/logo.webp" alt="Stackly" class="stackly-preloader__logo" width="140" height="48" decoding="sync">
   </div>
   <div class="stackly-preloader__progress" aria-hidden="true"><span></span></div>
-  <p class="stackly-preloader__tagline">Premium Tech Experience</p>
+  <p class="stackly-preloader__tagline">Intelligent Solutions, Delivered</p>
 </div>
 <script src="script.js"></script>
 
@@ -1250,7 +1254,7 @@
         </a>
         <a href="#energy" class="sidebar-link" onclick="showCustomerSection('energySection', event)">
           <span class="sidebar-link-icon"><i class="fa-solid fa-chart-line"></i></span>
-          <span class="sidebar-link-text">Purchase Insights</span>
+          <span class="sidebar-link-text">Project Insights</span>
         </a>
       </div>
 
@@ -1315,7 +1319,7 @@
         <div id="dashboardOverview" class="dash-home-only">
         <div class="welcome-banner animate-in">
           <h2 id="welcomeText">Welcome Back!</h2>
-          <p>Your Stackly account at a glance. Track orders, wishlist items, reward points, and PC build support — all from one dashboard.</p>
+          <p>Your Stackly account at a glance. Track AI projects, consulting sessions, saved services, and Stackly Rewards — all from one dashboard.</p>
           <div class="welcome-banner-btns">
             <a href="404.html" class="btn btn-dark"><i class="fa-solid fa-brain"></i> Browse AI Services</a>
             <a href="404.html" class="btn btn-outline"><i class="fa-solid fa-headset"></i> Contact Support</a>
@@ -1388,23 +1392,23 @@
               <div class="dash-mini-stats">
                 <div class="dash-mini-stat"><strong>12</strong><span>Total projects</span></div>
                 <div class="dash-mini-stat"><strong>9</strong><span>Delivered</span></div>
-                <div class="dash-mini-stat"><strong>2</strong><span>In transit</span></div>
+                <div class="dash-mini-stat"><strong>2</strong><span>In UAT</span></div>
                 <div class="dash-mini-stat"><strong>₹1,24,580</strong><span>Lifetime spend</span></div>
               </div>
               <div class="order-filter-tabs">
                 <button type="button" class="order-filter-tab active">All (12)</button>
-                <button type="button" class="order-filter-tab">Delivered (9)</button>
-                <button type="button" class="order-filter-tab">Shipped (2)</button>
-                <button type="button" class="order-filter-tab">Cancelled (1)</button>
+                <button type="button" class="order-filter-tab">Deployed (9)</button>
+                <button type="button" class="order-filter-tab">In Dev (2)</button>
+                <button type="button" class="order-filter-tab">Archived (1)</button>
               </div>
             </div>
 
             <div class="order-card">
-              <img src="assets/blog-1.webp" class="order-img" alt="Custom NLP Chatbot" loading="lazy" onerror="this.onerror=null;this.src='assets/keyboard.webp';" />
+              <img src="assets/blog-1.webp" class="order-img" alt="Custom NLP Chatbot" loading="lazy" onerror="this.onerror=null;this.src='assets/blog-1.webp';" />
               <div class="order-details">
                 <div class="order-name">Custom NLP Chatbot — Deployed</div>
-                <div class="order-meta">Order #ORD-2841 · 28 May 2026 · 6:30 PM</div>
-                <span class="order-status status-confirmed"><span class="status-dot"></span>Delivered</span>
+                <div class="order-meta">Project #PRJ-2841 · 28 May 2026 · 6:30 PM</div>
+                <span class="order-status status-confirmed"><span class="status-dot"></span>Deployed</span>
               </div>
               <div class="order-card-actions">
                 <div class="order-price">₹8,499</div>
@@ -1413,11 +1417,11 @@
             </div>
 
             <div class="order-card">
-              <img src="assets/service-automation.webp" class="order-img" alt="Data Pipeline Integration" loading="lazy" onerror="this.onerror=null;this.src='assets/monitor.webp';" />
+              <img src="assets/service-automation.webp" class="order-img" alt="Data Pipeline Integration" loading="lazy" onerror="this.onerror=null;this.src='assets/service-automation.webp';" />
               <div class="order-details">
                 <div class="order-name">Data Pipeline Integration — Running</div>
-                <div class="order-meta">Order #ORD-2840 · 27 May 2026 · ETA Jun 2</div>
-                <span class="order-status status-confirmed"><span class="status-dot"></span>Shipped</span>
+                <div class="order-meta">Project #PRJ-2840 · 27 May 2026 · ETA Jun 2</div>
+                <span class="order-status status-confirmed"><span class="status-dot"></span>In Development</span>
               </div>
               <div class="order-card-actions">
                 <div class="order-price">₹32,999</div>
@@ -1426,11 +1430,11 @@
             </div>
 
             <div class="order-card">
-              <img src="assets/blog-2.webp" class="order-img" alt="Object Detection API" loading="lazy" onerror="this.onerror=null;this.src='assets/webcam.webp';" />
+              <img src="assets/blog-2.webp" class="order-img" alt="Object Detection API" loading="lazy" onerror="this.onerror=null;this.src='assets/blog-2.webp';" />
               <div class="order-details">
                 <div class="order-name">Object Detection API — Testing</div>
-                <div class="order-meta">Order #ORD-2839 · 27 May 2026 · 8:14 PM</div>
-                <span class="order-status status-pending"><span class="status-dot"></span>In Transit</span>
+                <div class="order-meta">Project #PRJ-2839 · 27 May 2026 · 8:14 PM</div>
+                <span class="order-status status-pending"><span class="status-dot"></span>Testing</span>
               </div>
               <div class="order-card-actions">
                 <div class="order-price">₹6,999</div>
@@ -1439,11 +1443,11 @@
             </div>
 
             <div class="order-card dash-full-only" style="display:none;">
-              <img src="assets/hero-ai.webp" class="order-img" alt="Fine-Tuned LLM" loading="lazy" onerror="this.onerror=null;this.src='assets/mouse.webp';" />
+              <img src="assets/hero-ai.webp" class="order-img" alt="Fine-Tuned LLM" loading="lazy" onerror="this.onerror=null;this.src='assets/hero-ai.webp';" />
               <div class="order-details">
                 <div class="order-name">Fine-Tuned LLM (Llama 3) — Completed</div>
-                <div class="order-meta">Order #ORD-2838 · 12 May 2026</div>
-                <span class="order-status status-confirmed"><span class="status-dot"></span>Delivered</span>
+                <div class="order-meta">Project #PRJ-2838 · 12 May 2026</div>
+                <span class="order-status status-confirmed"><span class="status-dot"></span>Deployed</span>
               </div>
               <div class="order-card-actions">
                 <div class="order-price">₹4,999</div>
@@ -1452,15 +1456,15 @@
             </div>
 
             <div class="order-card dash-full-only" style="display:none;">
-              <img src="assets/blog-3.webp" class="order-img" alt="Voice Synthesis Engine" loading="lazy" onerror="this.onerror=null;this.src='assets/audio.webp';" />
+              <img src="assets/blog-3.webp" class="order-img" alt="Voice Synthesis Engine" loading="lazy" onerror="this.onerror=null;this.src='assets/blog-3.webp';" />
               <div class="order-details">
                 <div class="order-name">Voice Synthesis Engine — Suspended</div>
-                <div class="order-meta">Order #ORD-2837 · 05 May 2026</div>
+                <div class="order-meta">Project #PRJ-2837 · 05 May 2026</div>
                 <span class="order-status status-cancelled"><span class="status-dot"></span>Cancelled</span>
               </div>
               <div class="order-card-actions">
                 <div class="order-price">₹6,499</div>
-                <button class="order-action-btn" onclick="show404()">Reorder</button>
+                <button class="order-action-btn" onclick="show404()">Restart</button>
               </div>
             </div>
 
@@ -1475,7 +1479,7 @@
                   <div class="insight-stat"><strong>3</strong><span>Active projects</span></div>
                   <div class="insight-stat"><strong>₹48,497</strong><span>Order value</span></div>
                   <div class="insight-stat"><strong>98%</strong><span>On-time rate</span></div>
-                  <div class="insight-stat"><strong>2</strong><span>Items in cart</span></div>
+                  <div class="insight-stat"><strong>2</strong><span>Pending quotes</span></div>
                 </div>
               </div>
             </div>
@@ -1484,9 +1488,9 @@
               <div class="section-card" style="padding:16px;">
                 <div class="section-card-title" style="margin-bottom:12px;"><i class="fa-solid fa-lightbulb"></i> Order Tips</div>
                 <div class="mini-list">
-                  <div class="mini-list-item"><b>Track shipments</b><span>Real-time updates via SMS &amp; email</span></div>
+                  <div class="mini-list-item"><b>Track milestones</b><span>Real-time updates via email &amp; dashboard</span></div>
                   <div class="mini-list-item"><b>Easy returns</b><span>Milestone-based service deliverables</span></div>
-                  <div class="mini-list-item"><b>Earn rewards</b><span>Leave a review after delivery for +50 pts</span></div>
+                  <div class="mini-list-item"><b>Earn rewards</b><span>Review deliverables after deployment for +50 pts</span></div>
                 </div>
               </div>
             </div>
@@ -1557,15 +1561,15 @@
             <div class="dash-full-only" style="display:none;">
               <div class="service-type-grid">
                 <div class="service-type-card"><i class="fa-solid fa-microchip"></i><b>Custom AI Consulting</b><span>From ₹2,999 · 2–3 hrs</span></div>
-                <div class="service-type-card"><i class="fa-solid fa-screwdriver-wrench"></i><b>Peripheral Setup</b><span>From ₹799 · 45 min</span></div>
-                <div class="service-type-card"><i class="fa-solid fa-stethoscope"></i><b>PC Tune-Up</b><span>From ₹1,499 · 60 min</span></div>
-                <div class="service-type-card"><i class="fa-solid fa-hard-drive"></i><b>Storage Upgrade</b><span>From ₹599 · 30 min</span></div>
-                <div class="service-type-card"><i class="fa-solid fa-wifi"></i><b>Network Setup</b><span>From ₹999 · 45 min</span></div>
+                <div class="service-type-card"><i class="fa-solid fa-diagram-project"></i><b>MLOps Setup</b><span>From ₹4,999 · 2 hrs</span></div>
+                <div class="service-type-card"><i class="fa-solid fa-microchip"></i><b>Model Audit</b><span>From ₹3,499 · 90 min</span></div>
+                <div class="service-type-card"><i class="fa-solid fa-database"></i><b>Data Pipeline Review</b><span>From ₹2,499 · 2 hrs</span></div>
+                <div class="service-type-card"><i class="fa-solid fa-plug"></i><b>API Integration</b><span>From ₹3,999 · 2 hrs</span></div>
                 <div class="service-type-card"><i class="fa-solid fa-headset"></i><b>Remote Support</b><span>From ₹499 · 30 min</span></div>
               </div>
               <div class="section-card" style="padding:16px; margin-top:8px;">
                 <div class="section-card-title" style="margin-bottom:12px;"><i class="fa-solid fa-circle-question"></i> Support FAQ</div>
-                <div class="faq-item"><b>What should I bring for a PC build appointment?</b><p>Bring all components, PSU cables, and your OS license key. Our engineer will verify compatibility before assembly.</p></div>
+                <div class="faq-item"><b>What should I prepare for an AI consulting session?</b><p>Bring sample datasets, API credentials, use-case documentation, and deployment preferences. Our specialist will review scope before the session.</p></div>
                 <div class="faq-item"><b>Can I reschedule a service visit?</b><p>Yes — reschedule up to 24 hours before your slot via Contact Support or call our helpline.</p></div>
                 <div class="faq-item"><b>Is on-site service available in my city?</b><p>On-site visits are available in Chennai, Bangalore, Hyderabad, and Mumbai. Remote support is available nationwide.</p></div>
               </div>
@@ -1577,7 +1581,7 @@
         <div class="section-card animate-in dash-section-panel" id="favoritesSection">
           <div class="section-page-intro">
             <h3>My Saved Services</h3>
-            <p>Saved accessories you want to buy — keyboards, monitors, headsets and more.</p>
+            <p>AI services and solutions you've bookmarked — chatbots, automation, vision AI, and more.</p>
           </div>
           <div class="section-card-header">
             <div class="section-card-title"><i class="fa-solid fa-heart"></i> My Saved Services</div>
@@ -1586,11 +1590,11 @@
           <div class="fav-grid">
             <div class="fav-item" onclick="show404()">
               <div style="overflow:hidden; height:120px;">
-                 <img src="assets/prod_logitech_mx_keys_wireless.webp" class="fav-item-img" alt="Gaming Keyboard" loading="lazy" onerror="this.onerror=null;this.src='assets/keyboard.webp';" />
+                 <img src="assets/blog-1.webp" class="fav-item-img" alt="Custom Chatbot" loading="lazy" onerror="this.onerror=null;this.src='assets/blog-1.webp';" />
               </div>
               <div class="fav-item-body">
-                <div class="fav-item-name">Gaming Keyboard</div>
-                <div class="fav-item-desc">Mechanical RGB · Cherry MX switches · USB-C</div>
+                <div class="fav-item-name">Custom Chatbot</div>
+                <div class="fav-item-desc">NLP · Multi-language · API-ready deployment</div>
                 <div class="fav-item-footer">
                   <div class="fav-item-price">₹8,499</div>
                   <span class="fav-heart"><i class="fa-solid fa-heart" style="color: #e74c3c;"></i></span>
@@ -1599,11 +1603,11 @@
             </div>
             <div class="fav-item" onclick="show404()">
               <div style="overflow:hidden; height:120px;">
-                 <img src="assets/service-automation.webp" class="fav-item-img" alt="4K Monitor" loading="lazy" onerror="this.onerror=null;this.src='assets/monitor.webp';" />
+                 <img src="assets/service-automation.webp" class="fav-item-img" alt="Automation Pipeline" loading="lazy" onerror="this.onerror=null;this.src='assets/service-automation.webp';" />
               </div>
               <div class="fav-item-body">
-                <div class="fav-item-name">4K Monitor</div>
-                <div class="fav-item-desc">Price drop · 27" curved · 240Hz · FreeSync</div>
+                <div class="fav-item-name">Automation Pipeline</div>
+                <div class="fav-item-desc">Workflow automation · RPA · Cloud integration</div>
                 <div class="fav-item-footer">
                   <div class="fav-item-price">₹32,999</div>
                   <span class="fav-heart"><i class="fa-solid fa-heart" style="color: #e74c3c;"></i></span>
@@ -1612,11 +1616,11 @@
             </div>
             <div class="fav-item" onclick="show404()">
               <div style="overflow:hidden; height:120px;">
-                 <img src="assets/blog-3.webp" class="fav-item-img" alt="Wireless Headset" loading="lazy" onerror="this.onerror=null;this.src='assets/audio.webp';" />
+                 <img src="assets/blog-3.webp" class="fav-item-img" alt="Voice AI Module" loading="lazy" onerror="this.onerror=null;this.src='assets/blog-3.webp';" />
               </div>
               <div class="fav-item-body">
-                <div class="fav-item-name">Wireless Headset</div>
-                <div class="fav-item-desc">Back in stock · ANC · 40hr battery · Wireless</div>
+                <div class="fav-item-name">Voice AI Module</div>
+                <div class="fav-item-desc">Speech-to-text · TTS · Real-time voice agents</div>
                 <div class="fav-item-footer">
                   <div class="fav-item-price">₹6,999</div>
                   <span class="fav-heart"><i class="fa-solid fa-heart" style="color: #e74c3c;"></i></span>
@@ -1625,11 +1629,11 @@
             </div>
             <div class="fav-item" onclick="show404()">
               <div style="overflow:hidden; height:120px;">
-                 <img src="assets/prod_razer_deathadder.webp" class="fav-item-img" alt="Gaming mouse" loading="lazy" onerror="this.onerror=null;this.src='assets/mouse.webp';" />
+                 <img src="assets/hero-ai.webp" class="fav-item-img" alt="Computer Vision API" loading="lazy" onerror="this.onerror=null;this.src='assets/hero-ai.webp';" />
               </div>
               <div class="fav-item-body">
-                <div class="fav-item-name">Gaming Mouse</div>
-                <div class="fav-item-desc">RGB · 25K DPI · Wireless · Ergonomic grip</div>
+                <div class="fav-item-name">Computer Vision API</div>
+                <div class="fav-item-desc">Object detection · Edge deployment · REST API</div>
                 <div class="fav-item-footer">
                   <div class="fav-item-price">₹3,499</div>
                   <span class="fav-heart"><i class="fa-solid fa-heart" style="color: #e74c3c;"></i></span>
@@ -1638,11 +1642,11 @@
             </div>
             <div class="fav-item" onclick="show404()">
               <div style="overflow:hidden; height:120px;">
-                 <img src="assets/blog-2.webp" class="fav-item-img" alt="USB Webcam" loading="lazy" onerror="this.onerror=null;this.src='assets/webcam.webp';" />
+                 <img src="assets/blog-2.webp" class="fav-item-img" alt="LLM Fine-Tuning" loading="lazy" onerror="this.onerror=null;this.src='assets/blog-2.webp';" />
               </div>
               <div class="fav-item-body">
-                <div class="fav-item-name">USB Webcam</div>
-                <div class="fav-item-desc">1080p, auto-focus, ring light</div>
+                <div class="fav-item-name">LLM Fine-Tuning</div>
+                <div class="fav-item-desc">Custom models · Domain training · Guardrails</div>
                 <div class="fav-item-footer">
                   <div class="fav-item-price">₹2,799</div>
                   <span class="fav-heart"><i class="fa-solid fa-heart" style="color: #e74c3c;"></i></span>
@@ -1651,11 +1655,11 @@
             </div>
             <div class="fav-item" onclick="show404()">
               <div style="overflow:hidden; height:120px;">
-                 <img src="assets/prod_redragon_k552.webp" class="fav-item-img" alt="Mechanical Switches" loading="lazy" onerror="this.onerror=null;this.src='assets/keyboard.webp';" />
+                 <img src="assets/blog-2.webp" class="fav-item-img" alt="Predictive Analytics" loading="lazy" onerror="this.onerror=null;this.src='assets/blog-1.webp';" />
               </div>
               <div class="fav-item-body">
-                <div class="fav-item-name">Mechanical Switches</div>
-                <div class="fav-item-desc">Cherry MX switches, hot-swappable</div>
+                <div class="fav-item-name">Predictive Analytics</div>
+                <div class="fav-item-desc">Forecasting · Dashboards · ML insights</div>
                 <div class="fav-item-footer">
                   <div class="fav-item-price">Online</div>
                   <span class="fav-heart"><i class="fa-solid fa-heart" style="color: #e74c3c;"></i></span>
@@ -1666,19 +1670,19 @@
           <div class="dash-mini-stats" style="margin-top:16px;">
             <div class="dash-mini-stat"><strong>8</strong><span>Saved items</span></div>
             <div class="dash-mini-stat"><strong>₹68,294</strong><span>Total value</span></div>
-            <div class="dash-mini-stat"><strong>3</strong><span>Price drops</span></div>
-            <div class="dash-mini-stat"><strong>2</strong><span>Back in stock</span></div>
+            <div class="dash-mini-stat"><strong>3</strong><span>Promo alerts</span></div>
+            <div class="dash-mini-stat"><strong>2</strong><span>Available now</span></div>
           </div>
           <div class="insight-panel dark" style="margin-top:16px;">
             <div>
               <div class="insight-kicker">Saved Services tip</div>
               <div class="insight-title">3 items dropped in price this week</div>
-              <p class="insight-text">Your Samsung Odyssey monitor and Logitech MX Keys are now on sale. Move to cart before stock runs out.</p>
+              <p class="insight-text">Your Automation Pipeline and Custom Chatbot services have limited-time pricing. Request a quote before slots fill up.</p>
             </div>
             <div class="insight-stat-row">
               <div class="insight-stat"><strong>₹4,200</strong><span>Potential savings</span></div>
               <div class="insight-stat"><strong>Silver</strong><span>Member discount</span></div>
-              <div class="insight-stat"><strong>Free</strong><span>Shipping ₹999+</span></div>
+              <div class="insight-stat"><strong>Priority</strong><span>SLA support</span></div>
             </div>
           </div>
         </div>
@@ -1690,10 +1694,10 @@
           </div>
           
           <div class="reward-card animate-in">
-            <img src="assets/gaming_setup_bg.webp" class="reward-card__banner" alt="Stackly rewards" loading="lazy" onerror="this.onerror=null;this.src='assets/hero-setup.webp';" />
+            <img src="assets/hero-aquarium.webp" class="reward-card__banner" alt="Stackly rewards" loading="lazy" onerror="this.onerror=null;this.src='assets/hero-aquarium.webp';" />
             <div class="reward-card__inner">
             <div class="reward-card-title"><i class="fa-solid fa-bullseye"></i> Stackly AI Rewards Progress</div>
-            <div class="reward-card-text">You're 37% of the way to Gold Member status! Keep shopping, leaving reviews, and referring friends to unlock priority support and exclusive accessory discounts.</div>
+            <div class="reward-card-text">You're 37% of the way to Gold Member status! Keep shopping, leaving reviews, and referring friends to unlock priority support and exclusive AI service credits.</div>
             <div class="reward-progress">
               <div class="reward-progress-bar" id="rewardProgressBar"></div>
             </div>
@@ -1728,7 +1732,7 @@
               <div class="loyalty-hist-item">
                 <div class="loyalty-hist-icon earn"><i class="fa-solid fa-arrow-up"></i></div>
                 <div class="loyalty-hist-body">
-                  <div class="loyalty-hist-title">Earned · Keyboard purchase review</div>
+                  <div class="loyalty-hist-title">Earned · Chatbot deployment review</div>
                   <div class="loyalty-hist-date">28 May 2026</div>
                 </div>
                 <div class="loyalty-hist-pts positive">+50 pts</div>
@@ -1744,7 +1748,7 @@
               <div class="loyalty-hist-item">
                 <div class="loyalty-hist-icon redeem"><i class="fa-solid fa-arrow-down"></i></div>
                 <div class="loyalty-hist-body">
-                  <div class="loyalty-hist-title">Redeemed · Mouse pad bundle</div>
+                  <div class="loyalty-hist-title">Redeemed · API credits bundle</div>
                   <div class="loyalty-hist-date">10 May 2026</div>
                 </div>
                 <div class="loyalty-hist-pts negative">-100 pts</div>
@@ -1766,8 +1770,8 @@
             </div>
             <div class="redeem-grid">
               <div class="redeem-card"><strong>100 pts</strong><span>₹100 off · Min order ₹999</span></div>
-              <div class="redeem-card"><strong>250 pts</strong><span>Free shipping · Any order</span></div>
-              <div class="redeem-card"><strong>500 pts</strong><span>₹750 off · Pro accessories</span></div>
+              <div class="redeem-card"><strong>250 pts</strong><span>Free consultation · Any project</span></div>
+              <div class="redeem-card"><strong>500 pts</strong><span>₹750 off · Pro AI services</span></div>
             </div>
           </div>
 
@@ -1794,7 +1798,7 @@
         <div class="section-card animate-in dash-section-panel" id="offersSection">
           <div class="section-page-intro">
             <h3>Membership Plans</h3>
-            <p>Choose a plan for free shipping, priority support, and member-only deals on PC accessories.</p>
+            <p>Choose a plan for priority SLA, dedicated support, and member-only deals on AI services.</p>
           </div>
           <div class="section-card-header">
             <div class="section-card-title"><i class="fa-solid fa-layer-group"></i> Membership Plans</div>
@@ -1802,26 +1806,26 @@
           </div>
           <div class="plans-grid">
             <div class="plan-card">
-              <img src="assets/prod_logitech_mx_keys_wireless.webp" class="plan-card-img" alt="Essential plan" loading="lazy" onerror="this.onerror=null;this.src='assets/keyboard.webp';" />
+              <img src="assets/blog-1.webp" class="plan-card-img" alt="Starter plan" loading="lazy" onerror="this.onerror=null;this.src='assets/blog-1.webp';" />
               <div class="plan-card-body">
-                <div class="plan-card-name">Essential</div>
+                <div class="plan-card-name">Starter</div>
                 <div class="plan-card-price">₹14,999<span>/yr</span></div>
                 <ul class="plan-card-features">
-                  <li><i class="fa-solid fa-check"></i> Free shipping on orders ₹999+</li>
-                  <li><i class="fa-solid fa-check"></i> Basic Orders</li>
+                  <li><i class="fa-solid fa-check"></i> Email support &amp; project tracking</li>
+                  <li><i class="fa-solid fa-check"></i> 2 active AI projects</li>
                   <li><i class="fa-solid fa-check"></i> Email support</li>
                 </ul>
                 <button class="btn btn-primary btn-sm plan-card-btn" onclick="show404()">Choose Plan</button>
               </div>
             </div>
             <div class="plan-card featured">
-              <img src="assets/service-automation.webp" class="plan-card-img" alt="Pro Gamer plan" loading="lazy" onerror="this.onerror=null;this.src='assets/monitor.webp';" />
+              <img src="assets/service-automation.webp" class="plan-card-img" alt="Professional plan" loading="lazy" onerror="this.onerror=null;this.src='assets/service-automation.webp';" />
               <div class="plan-card-body">
-                <div class="plan-card-name">Pro Gamer</div>
+                <div class="plan-card-name">Professional</div>
                 <div class="plan-card-price">₹29,999<span>/yr</span></div>
                 <ul class="plan-card-features">
-                  <li><i class="fa-solid fa-check"></i> 5% extra off flash deals</li>
-                  <li><i class="fa-solid fa-check"></i> Priority dispatch</li>
+                  <li><i class="fa-solid fa-check"></i> 5% off new AI modules</li>
+                  <li><i class="fa-solid fa-check"></i> Priority deployment queue</li>
                   <li><i class="fa-solid fa-check"></i> Priority support</li>
                   <li><i class="fa-solid fa-check"></i> Exclusive coupon codes</li>
                 </ul>
@@ -1829,28 +1833,28 @@
               </div>
             </div>
             <div class="plan-card">
-              <img src="assets/blog-3.webp" class="plan-card-img" alt="Premium Tech plan" loading="lazy" onerror="this.onerror=null;this.src='assets/audio.webp';" />
+              <img src="assets/blog-3.webp" class="plan-card-img" alt="Enterprise plan" loading="lazy" onerror="this.onerror=null;this.src='assets/blog-3.webp';" />
               <div class="plan-card-body">
-                <div class="plan-card-name">Premium Tech</div>
+                <div class="plan-card-name">Enterprise</div>
                 <div class="plan-card-price">₹49,999<span>/yr</span></div>
                 <ul class="plan-card-features">
-                  <li><i class="fa-solid fa-check"></i> Free extended warranty</li>
+                  <li><i class="fa-solid fa-check"></i> Dedicated solution architect</li>
                   <li><i class="fa-solid fa-check"></i> Dedicated support line</li>
-                  <li><i class="fa-solid fa-check"></i> Free PC build consultation</li>
+                  <li><i class="fa-solid fa-check"></i> Quarterly AI strategy review</li>
                   <li><i class="fa-solid fa-check"></i> VIP launch previews</li>
                 </ul>
                 <button class="btn btn-primary btn-sm plan-card-btn" onclick="show404()">Choose Plan</button>
               </div>
             </div>
             <div class="plan-card">
-              <img src="assets/gaming_setup_bg.webp" class="plan-card-img" alt="Ultimate Setup plan" loading="lazy" onerror="this.onerror=null;this.src='assets/gaming.webp';" />
+              <img src="assets/hero-aquarium.webp" class="plan-card-img" alt="Enterprise Plus plan" loading="lazy" onerror="this.onerror=null;this.src='assets/hero-ai.webp';" />
               <div class="plan-card-body">
-                <div class="plan-card-name">Ultimate Setup</div>
+                <div class="plan-card-name">Enterprise Plus</div>
                 <div class="plan-card-price">₹79,999<span>/yr</span></div>
                 <ul class="plan-card-features">
-                  <li><i class="fa-solid fa-check"></i> Unlimited free shipping</li>
-                  <li><i class="fa-solid fa-check"></i> PC build + peripheral bundles</li>
-                  <li><i class="fa-solid fa-check"></i> Personal shopping assistant</li>
+                  <li><i class="fa-solid fa-check"></i> Unlimited API calls tier</li>
+                  <li><i class="fa-solid fa-check"></i> Full-stack AI + MLOps bundles</li>
+                  <li><i class="fa-solid fa-check"></i> Dedicated AI success manager</li>
                 </ul>
                 <button class="btn btn-primary btn-sm plan-card-btn" onclick="show404()">Choose Plan</button>
               </div>
@@ -1861,14 +1865,14 @@
             <div class="compare-table-wrap">
             <table class="compare-table">
               <thead>
-                <tr><th>Feature</th><th>Essential</th><th>Pro Gamer</th><th>Premium Tech</th><th>Ultimate</th></tr>
+                <tr><th>Feature</th><th>Starter</th><th>Professional</th><th>Enterprise</th><th>Enterprise Plus</th></tr>
               </thead>
               <tbody>
-                <tr><td>Free shipping threshold</td><td>₹999+</td><td>₹499+</td><td>All orders</td><td>Unlimited</td></tr>
-                <tr><td>Extra flash deal discount</td><td>—</td><td>5%</td><td>8%</td><td>12%</td></tr>
-                <tr><td>PC build consultation</td><td>—</td><td>1× / yr</td><td>4× / yr</td><td>Unlimited</td></tr>
-                <tr><td>Extended warranty</td><td>—</td><td>—</td><td><i class="fa-solid fa-check" style="color:var(--accent2);"></i></td><td><i class="fa-solid fa-check" style="color:var(--accent2);"></i></td></tr>
-                <tr><td>Personal shopper</td><td>—</td><td>—</td><td>—</td><td><i class="fa-solid fa-check" style="color:var(--accent2);"></i></td></tr>
+                <tr><td>Consultation hours / mo</td><td>₹999+</td><td>₹499+</td><td>All orders</td><td>Unlimited</td></tr>
+                <tr><td>New module discount</td><td>—</td><td>5%</td><td>8%</td><td>12%</td></tr>
+                <tr><td>Strategy sessions</td><td>—</td><td>1× / yr</td><td>4× / yr</td><td>Unlimited</td></tr>
+                <tr><td>Model governance</td><td>—</td><td>—</td><td><i class="fa-solid fa-check" style="color:var(--accent2);"></i></td><td><i class="fa-solid fa-check" style="color:var(--accent2);"></i></td></tr>
+                <tr><td>Dedicated manager</td><td>—</td><td>—</td><td>—</td><td><i class="fa-solid fa-check" style="color:var(--accent2);"></i></td></tr>
               </tbody>
             </table>
             </div>
@@ -1877,18 +1881,18 @@
             <div>
               <div class="insight-kicker">Your plan</div>
               <div class="insight-title">Silver Member — Essential benefits active</div>
-              <p class="insight-text">Upgrade to Pro Gamer for priority dispatch and 5% extra off flash deals. You could save ₹2,840 more per year based on your spending.</p>
+              <p class="insight-text">Upgrade to Professional for priority deployment and 5% off new AI modules. You could save ₹2,840 more per year based on your spending.</p>
             </div>
           </div>
         </div>
 
         <div class="section-card animate-in dash-section-panel" id="energySection">
           <div class="section-page-intro">
-            <h3>Purchase Insights</h3>
-            <p>Monthly spending trends, savings from membership, and your average order value.</p>
+            <h3>Project Insights</h3>
+            <p>Monthly project spend, membership savings, and average engagement value.</p>
           </div>
           <div class="section-card-header">
-            <div class="section-card-title"><i class="fa-solid fa-chart-line"></i> Purchase Insights</div>
+            <div class="section-card-title"><i class="fa-solid fa-chart-line"></i> Project Insights</div>
             <button class="btn btn-primary btn-sm" onclick="show404()">Full Report</button>
           </div>
           <div class="chart-wrap" style="margin-bottom:16px">
@@ -1921,10 +1925,10 @@
                   <circle cx="120" cy="100" r="70" fill="none" stroke="#34d399" stroke-width="28" stroke-dasharray="44 330" stroke-dashoffset="-264" transform="rotate(-90 120 100)"/>
                   <text x="120" y="96" text-anchor="middle" fill="#dce4ef" font-size="14" font-weight="700">₹18.4K</text>
                   <text x="120" y="112" text-anchor="middle" fill="#94a3b8" font-size="9">This year</text>
-                  <rect x="230" y="40" width="10" height="10" rx="2" fill="#2563eb"/><text x="246" y="49" fill="#b0bec9" font-size="10">Monitors 33%</text>
-                  <rect x="230" y="62" width="10" height="10" rx="2" fill="#38bdf8"/><text x="246" y="71" fill="#b0bec9" font-size="10">Keyboards 27%</text>
-                  <rect x="230" y="84" width="10" height="10" rx="2" fill="#818cf8"/><text x="246" y="93" fill="#b0bec9" font-size="10">Audio 20%</text>
-                  <rect x="230" y="106" width="10" height="10" rx="2" fill="#34d399"/><text x="246" y="115" fill="#b0bec9" font-size="10">Mice &amp; more 20%</text>
+                  <rect x="230" y="40" width="10" height="10" rx="2" fill="#2563eb"/><text x="246" y="49" fill="#b0bec9" font-size="10">NLP 33%</text>
+                  <rect x="230" y="62" width="10" height="10" rx="2" fill="#38bdf8"/><text x="246" y="71" fill="#b0bec9" font-size="10">Automation 27%</text>
+                  <rect x="230" y="84" width="10" height="10" rx="2" fill="#818cf8"/><text x="246" y="93" fill="#b0bec9" font-size="10">Voice AI 20%</text>
+                  <rect x="230" y="106" width="10" height="10" rx="2" fill="#34d399"/><text x="246" y="115" fill="#b0bec9" font-size="10">Computer Vision 20%</text>
                 </svg>
               </div>
             </div>
@@ -1949,25 +1953,25 @@
           </div>
 
           <div class="section-card" style="margin-top:16px; padding:16px;">
-            <div class="section-card-title" style="margin-bottom:8px;"><i class="fa-solid fa-ranking-star"></i> Top Purchased Products</div>
+            <div class="section-card-title" style="margin-bottom:8px;"><i class="fa-solid fa-ranking-star"></i> Top AI Services</div>
             <div class="top-product-row">
-              <img src="assets/service-automation.webp" alt="Samsung Odyssey" loading="lazy" onerror="this.onerror=null;this.src='assets/monitor.webp';">
-              <div><div class="tp-name">Samsung Odyssey G7</div><div class="tp-meta">Monitors · 1 purchase</div></div>
+              <img src="assets/service-automation.webp" alt="Automation Pipeline" loading="lazy" onerror="this.onerror=null;this.src='assets/service-automation.webp';">
+              <div><div class="tp-name">Automation Pipeline</div><div class="tp-meta">Automation · 1 project</div></div>
               <div class="tp-amt">₹32,999</div>
             </div>
             <div class="top-product-row">
-              <img src="assets/blog-1.webp" alt="Razer BlackWidow" loading="lazy" onerror="this.onerror=null;this.src='assets/keyboard.webp';">
-              <div><div class="tp-name">Razer BlackWidow V4</div><div class="tp-meta">Keyboards · 1 purchase</div></div>
+              <img src="assets/blog-1.webp" alt="Custom Chatbot" loading="lazy" onerror="this.onerror=null;this.src='assets/blog-1.webp';">
+              <div><div class="tp-name">Custom NLP Chatbot</div><div class="tp-meta">NLP · 1 project</div></div>
               <div class="tp-amt">₹8,499</div>
             </div>
             <div class="top-product-row">
-              <img src="assets/blog-2.webp" alt="Logitech C920" loading="lazy" onerror="this.onerror=null;this.src='assets/webcam.webp';">
-              <div><div class="tp-name">Logitech C920 Webcam</div><div class="tp-meta">Webcams · 1 purchase</div></div>
+              <img src="assets/blog-2.webp" alt="Object Detection API" loading="lazy" onerror="this.onerror=null;this.src='assets/blog-2.webp';">
+              <div><div class="tp-name">Object Detection API</div><div class="tp-meta">Computer Vision · 1 project</div></div>
               <div class="tp-amt">₹6,999</div>
             </div>
             <div class="top-product-row">
-              <img src="assets/hero-ai.webp" alt="Logitech G502" loading="lazy" onerror="this.onerror=null;this.src='assets/mouse.webp';">
-              <div><div class="tp-name">Logitech G502 Hero</div><div class="tp-meta">Mice · 2 purchases</div></div>
+              <img src="assets/hero-ai.webp" alt="LLM Fine-Tuning" loading="lazy" onerror="this.onerror=null;this.src='assets/hero-ai.webp';">
+              <div><div class="tp-name">LLM Fine-Tuning Pack</div><div class="tp-meta">Custom Models · 2 projects</div></div>
               <div class="tp-amt">₹9,998</div>
             </div>
           </div>
@@ -1976,14 +1980,14 @@
             <div class="dash-mini-stat"><strong>+18%</strong><span>vs last month</span></div>
             <div class="dash-mini-stat"><strong>₹3,240</strong><span>May spend</span></div>
             <div class="dash-mini-stat"><strong>₹3,820</strong><span>Jun spend</span></div>
-            <div class="dash-mini-stat"><strong>Keyboards</strong><span>Top category</span></div>
+            <div class="dash-mini-stat"><strong>NLP</strong><span>Top category</span></div>
           </div>
         </div>
 
         <div class="section-card animate-in dash-section-panel" id="notificationsSection">
           <div class="section-page-intro">
             <h3>Notifications</h3>
-            <p>Order updates, delivery alerts, reward points, and account messages.</p>
+            <p>Project updates, deployment alerts, reward points, and account messages.</p>
           </div>
           <div class="section-card-header">
             <div class="section-card-title"><i class="fa-solid fa-bell"></i> Notifications</div>
@@ -1993,7 +1997,7 @@
             <div class="notif-item">
               <span class="notif-icon"><i class="fa-solid fa-box"></i></span>
               <div class="notif-body">
-                <div class="notif-text">Your Razer keyboard order has been delivered! Leave a review to earn 50 points.</div>
+                <div class="notif-text">Your Custom Chatbot project has been deployed! Leave a review to earn 50 points.</div>
                 <div class="notif-time">2 minutes ago</div>
               </div>
               <div class="notif-unread"></div>
@@ -2009,7 +2013,7 @@
             <div class="notif-item teal">
               <span class="notif-icon"><i class="fa-solid fa-truck"></i></span>
               <div class="notif-body">
-                <div class="notif-text">Your Samsung monitor has shipped · Track delivery in AI Projects.</div>
+                <div class="notif-text">Your Automation Pipeline entered UAT · Track progress in AI Projects.</div>
                 <div class="notif-time">3 hours ago</div>
               </div>
               <div class="notif-unread" style="background:var(--accent2);"></div>
@@ -2017,7 +2021,7 @@
             <div class="notif-item">
               <span class="notif-icon"><i class="fa-solid fa-calendar-days"></i></span>
               <div class="notif-body">
-                <div class="notif-text">PC build appointment confirmed for June 15, 3:00 PM · at Stackly service center.</div>
+                <div class="notif-text">AI consulting session confirmed for June 15, 3:00 PM · Remote via Zoom.</div>
                 <div class="notif-time">Yesterday</div>
               </div>
             </div>
@@ -2032,7 +2036,7 @@
               <span class="notif-icon"><i class="fa-solid fa-tag"></i></span>
               <div class="notif-body">
                 <div class="notif-category-label">Deals</div>
-                <div class="notif-text">Flash sale: 15% off gaming keyboards — ends in 6 hours. Use code KEY15 at checkout.</div>
+                <div class="notif-text">Limited offer: 15% off NLP modules — ends in 6 hours. Use code AI15 at checkout.</div>
                 <div class="notif-time">3 days ago</div>
               </div>
             </div>
@@ -2040,7 +2044,7 @@
               <span class="notif-icon"><i class="fa-solid fa-heart"></i></span>
               <div class="notif-body">
                 <div class="notif-category-label">Saved Services</div>
-                <div class="notif-text">Logitech MX Keys dropped to ₹7,999 — ₹500 off your wishlist item.</div>
+                <div class="notif-text">Automation Pipeline now ₹29,999 — ₹3,000 off your saved service.</div>
                 <div class="notif-time">4 days ago</div>
               </div>
             </div>
@@ -2073,7 +2077,7 @@
         <div class="section-card animate-in dash-section-panel" id="settingsSection">
           <div class="section-page-intro">
             <h3>Account Settings</h3>
-            <p>Update your profile, notification preferences, and shopping defaults.</p>
+            <p>Update your profile, notification preferences, and AI service defaults.</p>
           </div>
           <div class="section-card-header">
             <div class="section-card-title"><i class="fa-solid fa-gear"></i> Account Settings</div>
@@ -2140,16 +2144,16 @@
                 <div class="settings-panel">
                   <div class="settings-panel-title"><i class="fa-solid fa-bell"></i> Preferences</div>
                   <div class="settings-option">
-                    <div><b>Order updates</b><span>Shipping and delivery alerts</span></div>
+                    <div><b>Project updates</b><span>Deployment and milestone alerts</span></div>
                     <button type="button" class="settings-toggle" aria-label="Order updates"></button>
                   </div>
                   <div class="settings-option">
-                    <div><b>Deal alerts</b><span>Flash sales and price drops</span></div>
+                    <div><b>Promo alerts</b><span>Service offers and pricing updates</span></div>
                     <button type="button" class="settings-toggle" aria-label="Deal alerts"></button>
                   </div>
                   <div class="settings-option">
-                    <div><b>PC build reminders</b><span>Service appointment alerts</span></div>
-                    <button type="button" class="settings-toggle off" aria-label="PC build reminders"></button>
+                    <div><b>Consulting reminders</b><span>Session appointment alerts</span></div>
+                    <button type="button" class="settings-toggle off" aria-label="Consulting reminders"></button>
                   </div>
                   <div class="settings-option">
                     <div><b>Reward updates</b><span>Points earned and tier changes</span></div>
@@ -2157,12 +2161,12 @@
                   </div>
                 </div>
                 <div class="settings-panel">
-                  <div class="settings-panel-title"><i class="fa-solid fa-desktop"></i> Shopping Preferences</div>
+                  <div class="settings-panel-title"><i class="fa-solid fa-microchip"></i> AI Preferences</div>
                   <div class="mini-list">
-                    <div class="mini-list-item"><b>Favourite Category</b><span>Gaming Keyboards</span></div>
-                    <div class="mini-list-item"><b>Preferred Brand</b><span>Razer / Logitech</span></div>
-                    <div class="mini-list-item"><b>Default Shipping</b><span>Express · 2–3 days</span></div>
-                    <div class="mini-list-item"><b>Newsletter</b><span>Weekly deals enabled</span></div>
+                    <div class="mini-list-item"><b>Primary Focus</b><span>NLP &amp; Chatbots</span></div>
+                    <div class="mini-list-item"><b>Tech Stack</b><span>Python / TensorFlow / OpenAI</span></div>
+                    <div class="mini-list-item"><b>Engagement Type</b><span>Remote · Cloud deployment</span></div>
+                    <div class="mini-list-item"><b>Newsletter</b><span>Weekly AI insights enabled</span></div>
                   </div>
                 </div>
                 <div class="settings-panel">
@@ -2327,7 +2331,7 @@ function handleNewsletter(e) {
     favoritesSection: 'Saved Services',
     rewardsSection: 'Stackly AI Rewards',
     offersSection: 'Membership Plans',
-    energySection: 'Purchase Insights',
+    energySection: 'Project Insights',
     notificationsSection: 'Notifications',
     settingsSection: 'Settings'
   };

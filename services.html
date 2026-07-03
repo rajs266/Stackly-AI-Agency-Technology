@@ -36,12 +36,26 @@
       <a href="index.html" class="navbar-logo">
         <img src="assets/logo.webp" alt="Stackly">
       </a>
-      <div class="navbar-menu">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="services.html" class="active">Services</a>
-        <a href="blog.html">Blog</a>
-        <a href="contact.html">Contact</a>
+      <div class="navbar-menu" id="navbarMenu">
+        <div class="mobile-menu-header">
+          <a href="index.html" class="mobile-menu-logo">
+            <img src="assets/logo.webp" alt="Stackly">
+          </a>
+          <button type="button" class="mobile-menu-close" aria-label="Close Menu">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="mobile-menu-links">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="services.html" class="active">Services</a>
+          <a href="blog.html">Blog</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div class="mobile-menu-actions">
+          <a href="signin.html" class="btn-signin btn-signin--mobile">Sign In</a>
+          <a href="signup.html" class="btn btn-primary btn-sm">Get Started <i class="fas fa-arrow-right"></i></a>
+        </div>
       </div>
       <div class="navbar-actions">
         <a href="signin.html" class="btn-signin">Sign In</a>

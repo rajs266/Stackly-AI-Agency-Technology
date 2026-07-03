@@ -12,7 +12,6 @@ class RealAquariumInteraction {
     this.bgImage = document.getElementById('hero-bg-image');
 
     if (!this.hero || !this.rippleCanvas || !this.aquariumCanvas || !this.bgImage) {
-      console.error('Aquarium DOM elements not found');
       return;
     }
 
@@ -49,26 +48,6 @@ class RealAquariumInteraction {
 
   initFishAssets() {
     this.fishImages = [];
-    const assets = [
-      'assets/fish_clownfish.webp',
-      'assets/fish_blue_tang.webp',
-      'assets/fish_yellow_tang.webp',
-      'assets/fish_discus_red.webp',
-      'assets/fish_green_tang.webp',
-      'assets/fish_purple_tang.webp',
-      'assets/fish_1.webp',
-      'assets/fish_2.webp',
-      'assets/fish_3.webp'
-    ];
-
-    assets.forEach((src, idx) => {
-      const img = new Image();
-      img.src = src;
-      img.onload = () => {
-        console.log(`Loaded fish texture: ${src}`);
-      };
-      this.fishImages.push(img);
-    });
   }
 
   resize() {
@@ -129,7 +108,6 @@ class RealAquariumInteraction {
   initWebGL() {
     const gl = this.rippleCanvas.getContext('webgl') || this.rippleCanvas.getContext('experimental-webgl');
     if (!gl) {
-      console.warn('WebGL not supported, running in direct DOM video fallback mode');
       this.isWebGLFallback = true;
       this.rippleCanvas.style.display = 'none';
       return;
@@ -182,13 +160,17 @@ class RealAquariumInteraction {
     // Compile shaders and program
     const vs = this.compileShader(gl.VERTEX_SHADER, vsSource);
     const fs = this.compileShader(gl.FRAGMENT_SHADER, fsSource);
+    if (!vs || !fs) {
+      this.isWebGLFallback = true;
+      this.rippleCanvas.style.display = 'none';
+      return;
+    }
     this.shaderProgram = gl.createProgram();
     gl.attachShader(this.shaderProgram, vs);
     gl.attachShader(this.shaderProgram, fs);
     gl.linkProgram(this.shaderProgram);
 
     if (!gl.getProgramParameter(this.shaderProgram, gl.LINK_STATUS)) {
-      console.error('Shader program linking failed');
       this.isWebGLFallback = true;
       this.rippleCanvas.style.display = 'none';
       return;
@@ -225,7 +207,6 @@ class RealAquariumInteraction {
     gl.shaderSource(shader, source);
     gl.compileShader(shader);
     if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-      console.error('WebGL compilation error:', gl.getShaderInfoLog(shader));
       gl.deleteShader(shader);
       return null;
     }
@@ -332,11 +313,11 @@ class RealAquariumInteraction {
     } catch (e) {
       // Catch CORS SecurityError (thrown when opening index.html directly via file:// protocol)
       if (e.name === 'SecurityError' || e.message.includes('CORS') || e.message.includes('cross-origin')) {
-        console.warn("WebGL Video Texture blocked by browser CORS security (file:// protocol). Falling back to direct DOM video background with overlay.", e);
         this.isWebGLFallback = true;
-        this.rippleCanvas.style.display = 'none'; // Hide WebGL ripple canvas to show video underneath
+        this.rippleCanvas.style.display = 'none';
       } else {
-        console.error("WebGL Draw Error:", e);
+        this.isWebGLFallback = true;
+        this.rippleCanvas.style.display = 'none';
       }
     }
   }
@@ -607,6 +588,20 @@ class RealAquariumInteraction {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  const isDashboardPage = !!document.querySelector('.dashboard-wrap, .dash-layout');
+
+  // ── Stackly dashboard preloader ──
+  const stacklyPreloader = document.getElementById('stackly-preloader');
+  if (stacklyPreloader) {
+    document.documentElement.classList.add('preloader-active');
+    const hideStacklyPreloader = () => {
+      stacklyPreloader.classList.add('is-hidden');
+      document.documentElement.classList.remove('preloader-active');
+    };
+    window.addEventListener('load', () => setTimeout(hideStacklyPreloader, 400));
+    setTimeout(hideStacklyPreloader, 2500);
+  }
+
   // ── Preloader ──
   const preloader = document.querySelector('.preloader');
   if (preloader) {
@@ -620,7 +615,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // ── Custom Cursor ──
   const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
-  if (!isTouchDevice) {
+  if (!isTouchDevice && !isDashboardPage) {
     const cursor = document.createElement('div');
     cursor.className = 'custom-cursor';
     document.body.appendChild(cursor);
@@ -750,32 +745,50 @@ document.addEventListener('DOMContentLoaded', () => {
   const hamburger = document.querySelector('.hamburger');
   const navMenu = document.querySelector('.navbar-menu');
   const menuOverlay = document.querySelector('.menu-overlay');
+  const menuClose = document.querySelector('.mobile-menu-close');
+
+  const closeMobileMenu = () => {
+    if (hamburger) hamburger.classList.remove('active');
+    if (navMenu) navMenu.classList.remove('active');
+    if (menuOverlay) menuOverlay.classList.remove('active');
+    document.body.classList.remove('menu-open');
+    document.body.style.overflow = '';
+    document.documentElement.style.overflow = '';
+  };
+
+  const openMobileMenu = () => {
+    if (hamburger) hamburger.classList.add('active');
+    if (navMenu) navMenu.classList.add('active');
+    document.body.classList.add('menu-open');
+    document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
+  };
 
   if (hamburger && navMenu) {
     hamburger.addEventListener('click', () => {
-      hamburger.classList.toggle('active');
-      navMenu.classList.toggle('active');
-      if (menuOverlay) menuOverlay.classList.toggle('active');
-      document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+      if (navMenu.classList.contains('active')) {
+        closeMobileMenu();
+      } else {
+        openMobileMenu();
+      }
     });
 
-    if (menuOverlay) {
-      menuOverlay.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        navMenu.classList.remove('active');
-        menuOverlay.classList.remove('active');
-        document.body.style.overflow = '';
-      });
+    if (menuClose) {
+      menuClose.addEventListener('click', closeMobileMenu);
     }
 
-    // Close menu on link click
+    if (menuOverlay) {
+      menuOverlay.addEventListener('click', closeMobileMenu);
+    }
+
     navMenu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        navMenu.classList.remove('active');
-        if (menuOverlay) menuOverlay.classList.remove('active');
-        document.body.style.overflow = '';
-      });
+      link.addEventListener('click', closeMobileMenu);
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+        closeMobileMenu();
+      }
     });
   }
 
@@ -1004,7 +1017,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ── Active Nav Link ──
   const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-  document.querySelectorAll('.navbar-menu a').forEach(link => {
+  document.querySelectorAll('.mobile-menu-links a').forEach(link => {
     const href = link.getAttribute('href');
     if (href === currentPage || (currentPage === '' && href === 'index.html')) {
       link.classList.add('active');
@@ -1146,9 +1159,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function toggleVideoPlayback() {
       if (videoFile.paused) {
         videoFile.muted = false;
-        videoFile.play().catch((err) => {
-          console.error('Video play failed:', err);
-        });
+        videoFile.play().catch(() => {});
       } else {
         videoFile.pause();
       }
@@ -1170,6 +1181,8 @@ document.addEventListener('DOMContentLoaded', () => {
       stopWordStream();
     });
   }
-  // ── Hero Aquarium Interaction ──
-  window.aquarium = new RealAquariumInteraction();
+  // ── Hero Aquarium Interaction (index page only) ──
+  if (document.getElementById('hero-aquarium-canvas')) {
+    window.aquarium = new RealAquariumInteraction();
+  }
 });

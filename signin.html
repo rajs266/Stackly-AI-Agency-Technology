@@ -41,6 +41,9 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       overflow: hidden;
+      overflow-x: hidden;
+      max-width: 100%;
+      width: 100%;
     }
 
     .signin-visual {
@@ -57,7 +60,7 @@
     .signin-visual__bg {
       position: absolute;
       inset: 0;
-      background: url('assets/hero_fluid_bg.webp') center/cover no-repeat !important;
+      background: url('assets/hero-aquarium.webp') center/cover no-repeat !important;
       opacity: 2.0;
       z-index: 0;
     }
@@ -267,6 +270,8 @@
       width: 100%;
       margin-bottom: 1.5rem;
       gap: 1rem;
+      flex-wrap: wrap;
+      min-width: 0;
     }
 
     .auth-form-logo {
@@ -284,7 +289,10 @@
       padding: 3rem 3.5rem;
       background: linear-gradient(160deg, rgba(15, 23, 42, 0.98) 0%, rgba(30, 41, 59, 0.99) 60%, rgba(15, 23, 42, 1) 100%);
       overflow-y: auto;
+      overflow-x: hidden;
       position: relative;
+      min-width: 0;
+      width: 100%;
     }
 
     .signin-form-side__inner {
@@ -817,6 +825,12 @@
       .signin-visual { display: none; }
       .signin-form-side { padding: 2.5rem 2rem; }
       .signin-mobile-back { display: inline-flex; color: var(--clr-accent); }
+    }
+
+    @media (max-width: 576px) {
+      .signin-form-side { padding: 1.75rem 1rem; }
+      .auth-form-top { gap: 0.75rem; }
+      .form-back-btn { font-size: 0.85rem; }
     }
 
     @media (max-width: 480px) {

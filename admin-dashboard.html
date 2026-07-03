@@ -37,7 +37,11 @@
       --sidebar-w: 260px; --topbar-h: 68px;
     }
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    html{overflow-x:hidden;-webkit-text-size-adjust:100%}
+    html{overflow-x:hidden;-webkit-text-size-adjust:100%;scrollbar-width:thin;scrollbar-color:var(--primary) var(--bg)}
+    html::-webkit-scrollbar{width:8px;height:8px}
+    html::-webkit-scrollbar-track{background:var(--bg)}
+    html::-webkit-scrollbar-thumb{background:var(--primary);border-radius:99px}
+    html::-webkit-scrollbar-thumb:hover{background:var(--accent)}
     body{font-family:var(--font-body);background:var(--bg);color:var(--text-body);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased;padding-bottom:env(safe-area-inset-bottom)}
     a{color:inherit;text-decoration:none}
     button{cursor:pointer;font-family:inherit;border:none;background:none}
@@ -88,9 +92,9 @@
     .dash-content-wrap{padding-top:var(--topbar-h);background:var(--bg);min-height:100vh}
     .dash-content{padding:1.75rem 1.5rem 2.5rem;max-width:1400px;width:100%}
     .section-panel{display:none}.section-panel.active{display:block}
-    @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-    .animate-up{animation:fadeUp .4s var(--ease)}
-    .welcome-banner{background:linear-gradient(135deg,var(--sidebar-bg) 0%,#b83230 50%,#e24c4a 120%);border-radius:var(--r-xl);padding:1.75rem 2rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.75rem;overflow:hidden;position:relative}
+    @keyframes panelReveal{from{opacity:0;transform:translateY(14px) scale(0.985)}to{opacity:1;transform:translateY(0) scale(1)}}
+    .animate-up{animation:panelReveal .45s cubic-bezier(0.22,1,0.36,1)}
+    .welcome-banner{background:linear-gradient(135deg,#030814 0%,#386bb7 48%,#e24c4a 120%);border-radius:var(--r-xl);padding:1.75rem 2rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.75rem;overflow:hidden;position:relative}
     .welcome-banner::before{content:'';position:absolute;top:-50px;right:-50px;width:200px;height:200px;background:radial-gradient(circle,rgba(226,76,74,0.18) 0%,transparent 70%);border-radius:50%}
     .welcome-banner__text{position:relative;z-index:1;min-width:0;flex:1}
     .welcome-banner__tag{display:inline-flex;align-items:center;gap:.4rem;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);color:#fff;font-size:.7rem;font-weight:600;padding:.25rem .7rem;border-radius:var(--r-full);margin-bottom:.6rem;letter-spacing:.05em;text-transform:uppercase}
@@ -106,7 +110,7 @@
     .welcome-banner__btn--outline:hover{background:rgba(255,255,255,0.14);transform:translateY(-2px)}
     .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.75rem}
     .stat-card{background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--primary);border-radius:var(--r-lg);padding:1.25rem;display:flex;flex-direction:column;gap:.65rem;box-shadow:var(--shadow-sm);transition:all .25s var(--ease)}
-    .stat-card:hover{box-shadow:var(--shadow-md);transform:translateY(-3px)}
+    .stat-card:hover{box-shadow:var(--shadow-md);transform:translateY(-4px) scale(1.01)}
     .stat-card:nth-child(1){border-left-color:#10b981}.stat-card:nth-child(2){border-left-color:var(--accent)}.stat-card:nth-child(3){border-left-color:var(--primary)}.stat-card:nth-child(4){border-left-color:#f59e0b}
     .stat-card__header{display:flex;align-items:center;justify-content:space-between}
     .stat-card__icon{width:42px;height:42px;border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;font-size:1rem}
@@ -290,15 +294,15 @@
         <div class="sidebar__nav-section-label">Main</div>
         <a class="sidebar__nav-item active" onclick="showSection('overview','Dashboard',this)" role="button" tabindex="0"><i class="fa-solid fa-house"></i> Overview</a>
         <a class="sidebar__nav-item" onclick="showSection('analytics','Analytics',this)" role="button" tabindex="0"><i class="fa-solid fa-chart-line"></i> Analytics <span class="sidebar__nav-badge">New</span></a>
-        <a class="sidebar__nav-item" onclick="showSection('transactions','AI Projects',this)" role="button" tabindex="0"><i class="fa-solid fa-cart-shopping"></i> Orders <span class="sidebar__nav-badge red">8</span></a>
-        <a class="sidebar__nav-item" onclick="showSection('invoices','builds',this)" role="button" tabindex="0"><i class="fa-solid fa-screwdriver-wrench"></i> Inventory</a>
+        <a class="sidebar__nav-item" onclick="showSection('transactions','AI Projects',this)" role="button" tabindex="0"><i class="fa-solid fa-diagram-project"></i> AI Projects <span class="sidebar__nav-badge red">8</span></a>
+        <a class="sidebar__nav-item" onclick="showSection('invoices','builds',this)" role="button" tabindex="0"><i class="fa-solid fa-server"></i> Service Catalog</a>
       </div>
       <div class="sidebar__nav-section">
         <div class="sidebar__nav-section-label">Management</div>
         <a class="sidebar__nav-item" onclick="showSection('users','Team Users',this)" role="button" tabindex="0"><i class="fa-solid fa-user-tie"></i> Users</a>
         <a class="sidebar__nav-item" onclick="showSection('clients','Customers',this)" role="button" tabindex="0"><i class="fa-solid fa-users"></i> Customers</a>
-        <a class="sidebar__nav-item" onclick="showSection('reports','Sales Reports',this)" role="button" tabindex="0"><i class="fa-solid fa-clipboard-list"></i> Reports</a>
-        <a class="sidebar__nav-item" onclick="showSection('compliance','Stock Compliance',this)" role="button" tabindex="0"><i class="fa-solid fa-clipboard-check"></i> Compliance <span class="sidebar__nav-badge red">3</span></a>
+        <a class="sidebar__nav-item" onclick="showSection('reports','Performance Reports',this)" role="button" tabindex="0"><i class="fa-solid fa-clipboard-list"></i> Reports</a>
+        <a class="sidebar__nav-item" onclick="showSection('compliance','Model Compliance',this)" role="button" tabindex="0"><i class="fa-solid fa-shield-halved"></i> Compliance <span class="sidebar__nav-badge red">3</span></a>
       </div>
       <div class="sidebar__nav-section">
         <div class="sidebar__nav-section-label">System</div>
@@ -326,42 +330,42 @@
             </div>
             <div class="welcome-banner__actions">
               <button class="welcome-banner__btn welcome-banner__btn--outline" onclick="showToast('Generating report...')"><i class="fa-solid fa-download"></i> Export</button>
-              <button class="welcome-banner__btn welcome-banner__btn--primary" onclick="showSection('invoices')"><i class="fa-solid fa-plus"></i> Add Product</button>
+              <button class="welcome-banner__btn welcome-banner__btn--primary" onclick="showSection('invoices')"><i class="fa-solid fa-plus"></i> New AI Project</button>
             </div>
           </div>
           <div class="stats-grid">
-            <div class="stat-card"><div class="stat-card__header"><div class="stat-card__icon stat-card__icon--green"><i class="fa-solid fa-cart-shopping"></i></div><div class="stat-card__trend up"><i class="fa-solid fa-arrow-trend-up"></i> +14%</div></div><div class="stat-card__value">1,284</div><div class="stat-card__label">Active Projects</div></div>
-            <div class="stat-card"><div class="stat-card__header"><div class="stat-card__icon stat-card__icon--purple"><i class="fa-solid fa-boxes-stacked"></i></div><div class="stat-card__trend up"><i class="fa-solid fa-arrow-trend-up"></i> +22%</div></div><div class="stat-card__value">8,420</div><div class="stat-card__label">Products Sold</div></div>
+            <div class="stat-card"><div class="stat-card__header"><div class="stat-card__icon stat-card__icon--green"><i class="fa-solid fa-diagram-project"></i></div><div class="stat-card__trend up"><i class="fa-solid fa-arrow-trend-up"></i> +14%</div></div><div class="stat-card__value">1,284</div><div class="stat-card__label">Active Projects</div></div>
+            <div class="stat-card"><div class="stat-card__header"><div class="stat-card__icon stat-card__icon--purple"><i class="fa-solid fa-brain"></i></div><div class="stat-card__trend up"><i class="fa-solid fa-arrow-trend-up"></i> +22%</div></div><div class="stat-card__value">8,420</div><div class="stat-card__label">Models Deployed</div></div>
             <div class="stat-card"><div class="stat-card__header"><div class="stat-card__icon stat-card__icon--blue"><i class="fa-solid fa-indian-rupee-sign"></i></div><div class="stat-card__trend up"><i class="fa-solid fa-arrow-trend-up"></i> +9.6%</div></div><div class="stat-card__value">₹18.4L</div><div class="stat-card__label">Monthly Revenue</div></div>
             <div class="stat-card"><div class="stat-card__header"><div class="stat-card__icon stat-card__icon--amber"><i class="fa-solid fa-clock"></i></div><div class="stat-card__trend down"><i class="fa-solid fa-arrow-trend-down"></i> -3</div></div><div class="stat-card__value">17</div><div class="stat-card__label">Pending Requests</div></div>
           </div>
           <div class="dash-row">
             <div class="highlight-grid">
-              <div class="highlight-card"><img src="assets/blog-1.webp" alt="NLP Chatbots" loading="lazy" /><div class="highlight-card__overlay"><div class="highlight-card__title">Keyboards &amp; Mice</div><div class="highlight-card__meta">842 units sold this month</div></div></div>
-              <div class="highlight-card"><img src="assets/service-automation.webp" alt="Automation Pipeline" loading="lazy" /><div class="highlight-card__overlay"><div class="highlight-card__title">Monitors &amp; Displays</div><div class="highlight-card__meta">516 orders this month</div></div></div>
-              <div class="highlight-card"><img src="assets/blog-2.webp" alt="Voice Synthesis Deployed" loading="lazy" /><div class="highlight-card__overlay"><div class="highlight-card__title">Audio &amp; Headsets</div><div class="highlight-card__meta">328 headsets shipped</div></div></div>
+              <div class="highlight-card"><img src="assets/blog-1.webp" alt="NLP Chatbots" loading="lazy" /><div class="highlight-card__overlay"><div class="highlight-card__title">NLP Chatbots</div><div class="highlight-card__meta">842 deployments this month</div></div></div>
+              <div class="highlight-card"><img src="assets/service-automation.webp" alt="Automation Pipeline" loading="lazy" /><div class="highlight-card__overlay"><div class="highlight-card__title">Automation Pipelines</div><div class="highlight-card__meta">516 projects this month</div></div></div>
+              <div class="highlight-card"><img src="assets/blog-2.webp" alt="Voice Synthesis Deployed" loading="lazy" /><div class="highlight-card__overlay"><div class="highlight-card__title">Voice AI</div><div class="highlight-card__meta">328 voice agents live</div></div></div>
             </div>
           </div>
           <div class="dash-row dash-row--3col">
             <div class="dash-card">
-              <div class="dash-card__header"><div class="dash-card__title"><i class="fa-solid fa-screwdriver-wrench" style="color:var(--primary);margin-right:.4rem"></i> Recent Orders</div><button class="dash-card__action" onclick="showSection('invoices')">View All</button></div>
+              <div class="dash-card__header"><div class="dash-card__title"><i class="fa-solid fa-diagram-project" style="color:var(--primary);margin-right:.4rem"></i> Recent AI Projects</div><button class="dash-card__action" onclick="showSection('invoices')">View All</button></div>
               <div class="dash-card__body" style="padding:0">
                 <div class="dash-table-wrap"><table class="dash-table"><thead><tr><th>Customer</th><th>Service</th><th>Date</th><th>Status</th></tr></thead><tbody>
-                  <tr><td><div class="dash-table__name"><div class="dash-table__avatar">RK</div><div><div class="dash-table__name-text">Rahul Krishnan</div><div class="dash-table__email">rahul@email.com</div></div></div></td><td>Gaming Computer Accessories Kit</td><td>Jun 20</td><td><span class="badge badge--green">Completed</span></td></tr>
-                  <tr><td><div class="dash-table__name"><div class="dash-table__avatar">PN</div><div><div class="dash-table__name-text">Priya Nair</div><div class="dash-table__email">priya@email.com</div></div></div></td><td>Mechanical Keyboard Bundle</td><td>Jun 21</td><td><span class="badge badge--gold">Pending</span></td></tr>
-                  <tr><td><div class="dash-table__name"><div class="dash-table__avatar">VS</div><div><div class="dash-table__name-text">Vijay Sharma</div><div class="dash-table__email">vijay@email.com</div></div></div></td><td>4K Monitor + Stand</td><td>Jun 22</td><td><span class="badge badge--blue">In Progress</span></td></tr>
-                  <tr><td><div class="dash-table__name"><div class="dash-table__avatar">AM</div><div><div class="dash-table__name-text">Ananya Mehta</div><div class="dash-table__email">ananya@email.com</div></div></div></td><td>Wireless Headset Pro</td><td>Jun 22</td><td><span class="badge badge--purple">Scheduled</span></td></tr>
+                  <tr><td><div class="dash-table__name"><div class="dash-table__avatar">RK</div><div><div class="dash-table__name-text">Rahul Krishnan</div><div class="dash-table__email">rahul@email.com</div></div></div></td><td>Enterprise NLP Chatbot Suite</td><td>Jun 20</td><td><span class="badge badge--green">Completed</span></td></tr>
+                  <tr><td><div class="dash-table__name"><div class="dash-table__avatar">PN</div><div><div class="dash-table__name-text">Priya Nair</div><div class="dash-table__email">priya@email.com</div></div></div></td><td>Data Pipeline Integration</td><td>Jun 21</td><td><span class="badge badge--gold">Pending</span></td></tr>
+                  <tr><td><div class="dash-table__name"><div class="dash-table__avatar">VS</div><div><div class="dash-table__name-text">Vijay Sharma</div><div class="dash-table__email">vijay@email.com</div></div></div></td><td>Object Detection API</td><td>Jun 22</td><td><span class="badge badge--blue">In Progress</span></td></tr>
+                  <tr><td><div class="dash-table__name"><div class="dash-table__avatar">AM</div><div><div class="dash-table__name-text">Ananya Mehta</div><div class="dash-table__email">ananya@email.com</div></div></div></td><td>Voice Synthesis Engine</td><td>Jun 22</td><td><span class="badge badge--purple">Scheduled</span></td></tr>
                 </tbody></table></div>
               </div>
             </div>
             <div class="dash-card">
               <div class="dash-card__header"><div class="dash-card__title"><i class="fa-solid fa-bolt" style="color:var(--primary);margin-right:.4rem"></i> Quick Actions</div></div>
               <div class="dash-card__body"><div class="quick-actions">
-                <button class="quick-action-btn" onclick="showSection('invoices')"><i class="fa-solid fa-plus"></i><span>Add Product</span></button>
+                <button class="quick-action-btn" onclick="showSection('invoices')"><i class="fa-solid fa-plus"></i><span>New AI Project</span></button>
                 <button class="quick-action-btn" onclick="showSection('clients')"><i class="fa-solid fa-user-plus"></i><span>Add Customer</span></button>
                 <button class="quick-action-btn" onclick="showSection('reports')"><i class="fa-solid fa-file-lines"></i><span>Reports</span></button>
                 <button class="quick-action-btn" onclick="showSection('compliance')"><i class="fa-solid fa-shield-check"></i><span>Compliance</span></button>
-                <button class="quick-action-btn" onclick="showSection('transactions')"><i class="fa-solid fa-cart-shopping"></i><span>Orders</span></button>
+                <button class="quick-action-btn" onclick="showSection('transactions')"><i class="fa-solid fa-diagram-project"></i><span>AI Projects</span></button>
                 <button class="quick-action-btn" onclick="showSection('settings')"><i class="fa-solid fa-gear"></i><span>Settings</span></button>
               </div></div>
             </div>
@@ -370,20 +374,20 @@
             <div class="dash-card">
               <div class="dash-card__header"><div class="dash-card__title"><i class="fa-solid fa-bell" style="color:var(--primary);margin-right:.4rem"></i> Priority Alerts</div><button class="dash-card__action" onclick="showSection('compliance')">View All</button></div>
               <div class="dash-card__body"><div class="alert-list">
-                <div class="alert-card alert-card--urgent"><div class="alert-card__icon"><i class="fa-solid fa-triangle-exclamation"></i></div><div class="alert-card__body"><div class="alert-card__title">Low stock alert · Logitech MX Keys — 3 units left</div><div class="alert-card__meta">Warehouse A · Reported 2h ago</div></div><span class="badge badge--red">Urgent</span></div>
-                <div class="alert-card alert-card--urgent"><div class="alert-card__icon"><i class="fa-solid fa-lock-open"></i></div><div class="alert-card__body"><div class="alert-card__title">Warranty expiring — bulk order</div><div class="alert-card__meta">Vijay Sharma · 12 monitors</div></div><span class="badge badge--red">Urgent</span></div>
-                <div class="alert-card alert-card--pending"><div class="alert-card__icon"><i class="fa-solid fa-clock"></i></div><div class="alert-card__body"><div class="alert-card__title">Shipping delay · Ananya Mehta</div><div class="alert-card__meta">HyperX Cloud II order · Due Jun 24</div></div><span class="badge badge--gold">Pending</span></div>
-                <div class="alert-card alert-card--done"><div class="alert-card__icon"><i class="fa-solid fa-check"></i></div><div class="alert-card__body"><div class="alert-card__title">Order fulfilled · Rahul Krishnan</div><div class="alert-card__meta">Razer DeathAdder V3 x24 shipped · Completed</div></div><span class="badge badge--green">Done</span></div>
+                <div class="alert-card alert-card--urgent"><div class="alert-card__icon"><i class="fa-solid fa-triangle-exclamation"></i></div><div class="alert-card__body"><div class="alert-card__title">GPU quota warning · Training cluster at 92% capacity</div><div class="alert-card__meta">Cloud Region A · Reported 2h ago</div></div><span class="badge badge--red">Urgent</span></div>
+                <div class="alert-card alert-card--urgent"><div class="alert-card__icon"><i class="fa-solid fa-lock-open"></i></div><div class="alert-card__body"><div class="alert-card__title">SLA review due — enterprise client</div><div class="alert-card__meta">Vijay Sharma · 3 active pipelines</div></div><span class="badge badge--red">Urgent</span></div>
+                <div class="alert-card alert-card--pending"><div class="alert-card__icon"><i class="fa-solid fa-clock"></i></div><div class="alert-card__body"><div class="alert-card__title">Deployment delay · Ananya Mehta</div><div class="alert-card__meta">Voice AI module · Due Jun 24</div></div><span class="badge badge--gold">Pending</span></div>
+                <div class="alert-card alert-card--done"><div class="alert-card__icon"><i class="fa-solid fa-check"></i></div><div class="alert-card__body"><div class="alert-card__title">Project deployed · Rahul Krishnan</div><div class="alert-card__meta">Custom Chatbot v2 live · Completed</div></div><span class="badge badge--green">Done</span></div>
               </div></div>
             </div>
             <div class="dash-card">
               <div class="dash-card__header"><div class="dash-card__title"><i class="fa-solid fa-gauge-high" style="color:var(--primary);margin-right:.4rem"></i> System Health</div></div>
               <div class="dash-card__body"><div class="progress-section">
-                <div class="progress-item"><span class="progress-item__label">Order Fulfillment</span><div class="progress-track"><div class="progress-fill" style="width:99%;background:#10b981"></div></div><span class="progress-item__pct">99%</span></div>
-                <div class="progress-item"><span class="progress-item__label">Stock Accuracy</span><div class="progress-track"><div class="progress-fill" style="width:94%;background:var(--primary)"></div></div><span class="progress-item__pct">94%</span></div>
+                <div class="progress-item"><span class="progress-item__label">Project Delivery</span><div class="progress-track"><div class="progress-fill" style="width:99%;background:#10b981"></div></div><span class="progress-item__pct">99%</span></div>
+                <div class="progress-item"><span class="progress-item__label">Model Accuracy</span><div class="progress-track"><div class="progress-fill" style="width:94%;background:var(--primary)"></div></div><span class="progress-item__pct">94%</span></div>
                 <div class="progress-item"><span class="progress-item__label">Client Sat.</span><div class="progress-track"><div class="progress-fill" style="width:96%;background:var(--accent)"></div></div><span class="progress-item__pct">96%</span></div>
-                <div class="progress-item"><span class="progress-item__label">Dispatch Rate</span><div class="progress-track"><div class="progress-fill" style="width:88%;background:#f59e0b"></div></div><span class="progress-item__pct">88%</span></div>
-                <div class="progress-item"><span class="progress-item__label">Return Rate</span><div class="progress-track"><div class="progress-fill" style="width:91%;background:#6366f1"></div></div><span class="progress-item__pct">91%</span></div>
+                <div class="progress-item"><span class="progress-item__label">Deployment Velocity</span><div class="progress-track"><div class="progress-fill" style="width:88%;background:#f59e0b"></div></div><span class="progress-item__pct">88%</span></div>
+                <div class="progress-item"><span class="progress-item__label">Client Retention</span><div class="progress-track"><div class="progress-fill" style="width:91%;background:#6366f1"></div></div><span class="progress-item__pct">91%</span></div>
               </div></div>
             </div>
           </div>
@@ -391,22 +395,22 @@
 
         
         <div class="section-panel" id="section-analytics">
-          <div class="section-header"><div><div class="section-header__title">Analytics</div><div class="section-header__sub">Store sales performance, trends and forecasts</div></div><button class="section-header__btn" onclick="showToast('Exporting analytics report...')"><i class="fa-solid fa-download"></i> Export Report</button></div>
+          <div class="section-header"><div><div class="section-header__title">Analytics</div><div class="section-header__sub">AI service performance, trends and forecasts</div></div><button class="section-header__btn" onclick="showToast('Exporting analytics report...')"><i class="fa-solid fa-download"></i> Export Report</button></div>
           <div class="kpi-grid">
             <div class="kpi-tile"><div class="kpi-tile__value">₹18.4L</div><div class="kpi-tile__label">Monthly Revenue</div><div class="kpi-tile__change up">↑ 9.6% vs last month</div></div>
             <div class="kpi-tile"><div class="kpi-tile__value">342</div><div class="kpi-tile__label">Active Projects</div><div class="kpi-tile__change up">+ 186 new this month</div></div>
             <div class="kpi-tile"><div class="kpi-tile__value">96%</div><div class="kpi-tile__label">Customer Satisfaction</div><div class="kpi-tile__change up">↑ 2.1%</div></div>
-            <div class="kpi-tile"><div class="kpi-tile__value">8,420</div><div class="kpi-tile__label">Products Sold</div><div class="kpi-tile__change up">+ 520 this week</div></div>
+            <div class="kpi-tile"><div class="kpi-tile__value">8,420</div><div class="kpi-tile__label">Models Deployed</div><div class="kpi-tile__change up">+ 520 this week</div></div>
           </div>
           <div class="dash-row dash-row--2col">
-            <div class="dash-card"><div class="dash-card__header"><div class="dash-card__title">Category Sales (This Month)</div></div><div class="dash-card__body">
+            <div class="dash-card"><div class="dash-card__header"><div class="dash-card__title">Service Category Mix (This Month)</div></div><div class="dash-card__body">
               <div class="chart-wrap">
                 <svg class="svg-chart" viewBox="0 0 400 220" role="img" aria-label="Category sales bar chart">
                   <line x1="40" y1="180" x2="380" y2="180" stroke="#334155" stroke-width="1"/>
-                  <rect x="55" y="40" width="45" height="140" rx="6" fill="#2563eb" opacity="0.9"/><text x="77" y="35" text-anchor="middle" fill="#94a3b8" font-size="11">38%</text><text x="77" y="198" text-anchor="middle" fill="#cbd5e1" font-size="10">Keyboards</text>
-                  <rect x="115" y="72" width="45" height="108" rx="6" fill="#10b981" opacity="0.9"/><text x="137" y="67" text-anchor="middle" fill="#94a3b8" font-size="11">28%</text><text x="137" y="198" text-anchor="middle" fill="#cbd5e1" font-size="10">Monitors</text>
-                  <rect x="175" y="88" width="45" height="92" rx="6" fill="#38bdf8" opacity="0.9"/><text x="197" y="83" text-anchor="middle" fill="#94a3b8" font-size="11">22%</text><text x="197" y="198" text-anchor="middle" fill="#cbd5e1" font-size="10">Audio</text>
-                  <rect x="235" y="120" width="45" height="60" rx="6" fill="#f59e0b" opacity="0.9"/><text x="257" y="115" text-anchor="middle" fill="#94a3b8" font-size="11">12%</text><text x="257" y="198" text-anchor="middle" fill="#cbd5e1" font-size="10">Mice</text>
+                  <rect x="55" y="40" width="45" height="140" rx="6" fill="#2563eb" opacity="0.9"/><text x="77" y="35" text-anchor="middle" fill="#94a3b8" font-size="11">38%</text><text x="77" y="198" text-anchor="middle" fill="#cbd5e1" font-size="10">NLP</text>
+                  <rect x="115" y="72" width="45" height="108" rx="6" fill="#10b981" opacity="0.9"/><text x="137" y="67" text-anchor="middle" fill="#94a3b8" font-size="11">28%</text><text x="137" y="198" text-anchor="middle" fill="#cbd5e1" font-size="10">Automation</text>
+                  <rect x="175" y="88" width="45" height="92" rx="6" fill="#38bdf8" opacity="0.9"/><text x="197" y="83" text-anchor="middle" fill="#94a3b8" font-size="11">22%</text><text x="197" y="198" text-anchor="middle" fill="#cbd5e1" font-size="10">Voice AI</text>
+                  <rect x="235" y="120" width="45" height="60" rx="6" fill="#f59e0b" opacity="0.9"/><text x="257" y="115" text-anchor="middle" fill="#94a3b8" font-size="11">12%</text><text x="257" y="198" text-anchor="middle" fill="#cbd5e1" font-size="10">Vision</text>
                   <rect x="295" y="140" width="45" height="40" rx="6" fill="#ec4899" opacity="0.9"/><text x="317" y="135" text-anchor="middle" fill="#94a3b8" font-size="11">8%</text><text x="317" y="198" text-anchor="middle" fill="#cbd5e1" font-size="10">Other</text>
                 </svg>
               </div>
@@ -442,23 +446,23 @@
 
         
         <div class="section-panel" id="section-transactions">
-          <div class="section-header"><div><div class="section-header__title">AI Projects</div><div class="section-header__sub">Product orders and accessory purchases</div></div><button class="section-header__btn" onclick="showToast('Creating new order...')"><i class="fa-solid fa-plus"></i> New Order</button></div>
-          <div class="dash-card"><div class="dash-card__body" style="padding:0"><div class="dash-table-wrap"><table class="dash-table"><thead><tr><th>Order ID</th><th>Customer</th><th>Package</th><th>Amount</th><th>Date</th><th>Status</th><th>Action</th></tr></thead><tbody>
-            <tr><td>#ORD-2841</td><td><div class="dash-table__name"><div class="dash-table__avatar">RK</div><div><div class="dash-table__name-text">Rahul Krishnan</div></div></div></td><td>Gaming Computer Accessories Kit</td><td>₹2,49,999</td><td>Jun 18</td><td><span class="badge badge--green">Delivered</span></td><td><button class="table-action-btn table-action-btn--view" onclick="showToast('Viewing order...')">View</button></td></tr>
-            <tr><td>#ORD-2840</td><td><div class="dash-table__name"><div class="dash-table__avatar">PN</div><div><div class="dash-table__name-text">Priya Nair</div></div></div></td><td>Mechanical Keyboard Pro</td><td>₹45,999</td><td>Jun 19</td><td><span class="badge badge--gold">Processing</span></td><td><button class="table-action-btn table-action-btn--view" onclick="showToast('Viewing order...')">View</button></td></tr>
-            <tr><td>#ORD-2839</td><td><div class="dash-table__name"><div class="dash-table__avatar">VS</div><div><div class="dash-table__name-text">Vijay Sharma</div></div></div></td><td>Monitor + Webcam Bundle</td><td>₹89,999</td><td>Jun 20</td><td><span class="badge badge--blue">Processing</span></td><td><button class="table-action-btn table-action-btn--view" onclick="showToast('Viewing order...')">View</button></td></tr>
-            <tr><td>#ORD-2838</td><td><div class="dash-table__name"><div class="dash-table__avatar">AM</div><div><div class="dash-table__name-text">Ananya Mehta</div></div></div></td><td>Wireless Headset Pro</td><td>₹62,500</td><td>Jun 21</td><td><span class="badge badge--purple">Scheduled</span></td><td><button class="table-action-btn table-action-btn--view" onclick="showToast('Viewing order...')">View</button></td></tr>
-            <tr><td>#ORD-2837</td><td><div class="dash-table__name"><div class="dash-table__avatar">KS</div><div><div class="dash-table__name-text">Karthik Sundaram</div></div></div></td><td>Gaming Mouse + Pad Kit</td><td>₹38,999</td><td>Jun 21</td><td><span class="badge badge--gold">Pending</span></td><td><button class="table-action-btn table-action-btn--view" onclick="showToast('Viewing order...')">View</button></td></tr>
+          <div class="section-header"><div><div class="section-header__title">AI Projects</div><div class="section-header__sub">AI service engagements and technology projects</div></div><button class="section-header__btn" onclick="showToast('Creating new project...')"><i class="fa-solid fa-plus"></i> New Project</button></div>
+          <div class="dash-card"><div class="dash-card__body" style="padding:0"><div class="dash-table-wrap"><table class="dash-table"><thead><tr><th>Project ID</th><th>Customer</th><th>Package</th><th>Amount</th><th>Date</th><th>Status</th><th>Action</th></tr></thead><tbody>
+            <tr><td>#PRJ-2841</td><td><div class="dash-table__name"><div class="dash-table__avatar">RK</div><div><div class="dash-table__name-text">Rahul Krishnan</div></div></div></td><td>Enterprise NLP Chatbot Suite</td><td>₹2,49,999</td><td>Jun 18</td><td><span class="badge badge--green">Deployed</span></td><td><button class="table-action-btn table-action-btn--view" onclick="showToast('Viewing project...')">View</button></td></tr>
+            <tr><td>#PRJ-2840</td><td><div class="dash-table__name"><div class="dash-table__avatar">PN</div><div><div class="dash-table__name-text">Priya Nair</div></div></div></td><td>MLOps Pipeline Setup</td><td>₹45,999</td><td>Jun 19</td><td><span class="badge badge--gold">Processing</span></td><td><button class="table-action-btn table-action-btn--view" onclick="showToast('Viewing project...')">View</button></td></tr>
+            <tr><td>#PRJ-2839</td><td><div class="dash-table__name"><div class="dash-table__avatar">VS</div><div><div class="dash-table__name-text">Vijay Sharma</div></div></div></td><td>CV + NLP Integration Pack</td><td>₹89,999</td><td>Jun 20</td><td><span class="badge badge--blue">Processing</span></td><td><button class="table-action-btn table-action-btn--view" onclick="showToast('Viewing project...')">View</button></td></tr>
+            <tr><td>#PRJ-2838</td><td><div class="dash-table__name"><div class="dash-table__avatar">AM</div><div><div class="dash-table__name-text">Ananya Mehta</div></div></div></td><td>Voice Synthesis Engine</td><td>₹62,500</td><td>Jun 21</td><td><span class="badge badge--purple">Scheduled</span></td><td><button class="table-action-btn table-action-btn--view" onclick="showToast('Viewing project...')">View</button></td></tr>
+            <tr><td>#PRJ-2837</td><td><div class="dash-table__name"><div class="dash-table__avatar">KS</div><div><div class="dash-table__name-text">Karthik Sundaram</div></div></div></td><td>Predictive Analytics Module</td><td>₹38,999</td><td>Jun 21</td><td><span class="badge badge--gold">Pending</span></td><td><button class="table-action-btn table-action-btn--view" onclick="showToast('Viewing project...')">View</button></td></tr>
           </tbody></table></div></div></div>
         </div>
 
         
         <div class="section-panel" id="section-invoices">
-          <div class="section-header"><div><div class="section-header__title">Inventory &amp; Restock</div><div class="section-header__sub">Stock records and warehouse restock logs</div></div><button class="section-header__btn" onclick="showToast('Creating restock record...')"><i class="fa-solid fa-plus"></i> New Restock</button></div>
+          <div class="section-header"><div><div class="section-header__title">Service Catalog &amp; Deployments</div><div class="section-header__sub">Service catalog entries and deployment logs</div></div><button class="section-header__btn" onclick="showToast('Creating deployment record...')"><i class="fa-solid fa-plus"></i> New Deployment</button></div>
           <div class="content-grid">
-            <div class="content-card"><img class="content-card__img" src="assets/blog-1.webp" alt="NLP Model Deployed — Batch #2841" loading="lazy" /><div class="content-card__body"><div class="content-card__title">Keyboard Restock — Batch #2841</div><div class="content-card__meta">INV-2024 · Rahul Krishnan · Jun 18</div><div class="content-card__text">120 mechanical keyboards, 45 wireless mice restocked in Warehouse A.</div><div class="content-card__footer"><span class="badge badge--green">Completed</span><button class="table-action-btn table-action-btn--view" onclick="showToast('Opening invoice...')">View</button></div></div></div>
-            <div class="content-card"><img class="content-card__img" src="assets/service-automation.webp" alt="Data Pipeline Integrated" loading="lazy" /><div class="content-card__body"><div class="content-card__title">4K Monitor + Stand Setup</div><div class="content-card__meta">INV-2025 · Vijay Sharma · Jun 20</div><div class="content-card__text">64 curved monitors received and quality-checked for June dispatch.</div><div class="content-card__footer"><span class="badge badge--blue">In Progress</span><button class="table-action-btn table-action-btn--view" onclick="showToast('Opening invoice...')">View</button></div></div></div>
-            <div class="content-card"><img class="content-card__img" src="assets/blog-2.webp" alt="Voice Synthesis Deployed" loading="lazy" /><div class="content-card__body"><div class="content-card__title">Headset Inventory Audit</div><div class="content-card__meta">INV-2026 · Ananya Mehta · Jun 22</div><div class="content-card__text">Wireless headset stock count and barcode sync completed.</div><div class="content-card__footer"><span class="badge badge--gold">Scheduled</span><button class="table-action-btn table-action-btn--view" onclick="showToast('Opening invoice...')">View</button></div></div></div>
+            <div class="content-card"><img class="content-card__img" src="assets/blog-1.webp" alt="NLP Model Deployed — Batch #2841" loading="lazy" /><div class="content-card__body"><div class="content-card__title">NLP Model Deployed — Batch #2841</div><div class="content-card__meta">INV-2024 · Rahul Krishnan · Jun 18</div><div class="content-card__text">12 chatbot instances and 4 fine-tuned models deployed to production.</div><div class="content-card__footer"><span class="badge badge--green">Completed</span><button class="table-action-btn table-action-btn--view" onclick="showToast('Opening invoice...')">View</button></div></div></div>
+            <div class="content-card"><img class="content-card__img" src="assets/service-automation.webp" alt="Data Pipeline Integrated" loading="lazy" /><div class="content-card__body"><div class="content-card__title">Automation Pipeline — Client Rollout</div><div class="content-card__meta">INV-2025 · Vijay Sharma · Jun 20</div><div class="content-card__text">64 workflow automations configured and UAT-approved for June go-live.</div><div class="content-card__footer"><span class="badge badge--blue">In Progress</span><button class="table-action-btn table-action-btn--view" onclick="showToast('Opening invoice...')">View</button></div></div></div>
+            <div class="content-card"><img class="content-card__img" src="assets/blog-2.webp" alt="Voice Synthesis Deployed" loading="lazy" /><div class="content-card__body"><div class="content-card__title">Voice AI Module Audit</div><div class="content-card__meta">INV-2026 · Ananya Mehta · Jun 22</div><div class="content-card__text">Voice agent inventory synced and API endpoints verified.</div><div class="content-card__footer"><span class="badge badge--gold">Scheduled</span><button class="table-action-btn table-action-btn--view" onclick="showToast('Opening invoice...')">View</button></div></div></div>
           </div>
         </div>
 
@@ -466,12 +470,12 @@
         <div class="section-panel" id="section-users">
           <div class="section-header"><div><div class="section-header__title">Team Users</div><div class="section-header__sub">Manage system access and roles</div></div><button class="section-header__btn" onclick="showToast('Inviting team member...')"><i class="fa-solid fa-user-plus"></i> Invite User</button></div>
           <div class="team-grid">
-            <div class="team-card"><div class="team-card__media"><img class="team-card__img" src="assets/male-admin.webp" alt="Arjun Mehta" loading="lazy" /></div><div class="team-card__body"><div class="team-card__name">Arjun Mehta</div><div class="team-card__role">Store Operations Manager</div><div class="team-card__tags"><span class="tag">Admin</span><span class="tag">Engineer</span></div></div></div>
-            <div class="team-card"><div class="team-card__media"><img class="team-card__img" src="assets/female1.webp" alt="Priya Rajan" loading="lazy" /></div><div class="team-card__body"><div class="team-card__name">Priya Rajan</div><div class="team-card__role">Inventory & Quality Lead</div><div class="team-card__tags"><span class="tag">Compliance</span></div></div></div>
-            <div class="team-card"><div class="team-card__media"><img class="team-card__img" src="assets/male3.webp" alt="Karthik Sundaram" loading="lazy" /></div><div class="team-card__body"><div class="team-card__name">Karthik Sundaram</div><div class="team-card__role">Sales Analytics Lead</div><div class="team-card__tags"><span class="tag">Analyst</span></div></div></div>
-            <div class="team-card"><div class="team-card__media"><img class="team-card__img" src="./assets/female4.webp" alt="Kavitha Nair" loading="lazy"></div><div class="team-card__body"><div class="team-card__name">Kavitha Nair</div><div class="team-card__role">Product Merchandiser</div><div class="team-card__tags"><span class="tag">Design</span></div></div></div>
-            <div class="team-card"><div class="team-card__media"><img class="team-card__img" src="assets/male2.webp" alt="Ravi Patel" loading="lazy"></div><div class="team-card__body"><div class="team-card__name">Ravi Patel</div><div class="team-card__role">Warehouse Supervisor</div><div class="team-card__tags"><span class="tag">Technician</span></div></div></div>
-            <div class="team-card"><div class="team-card__media"><img class="team-card__img" src="assets/female4.webp" alt="Meera Joshi" loading="lazy"></div><div class="team-card__body"><div class="team-card__name">Meera Joshi</div><div class="team-card__role">Customer Support Lead</div><div class="team-card__tags"><span class="tag">Support</span></div></div></div>
+            <div class="team-card"><div class="team-card__media"><img class="team-card__img" src="assets/team-1.webp" alt="Arjun Mehta" loading="lazy" /></div><div class="team-card__body"><div class="team-card__name">Arjun Mehta</div><div class="team-card__role">AI Solutions Director</div><div class="team-card__tags"><span class="tag">Admin</span><span class="tag">Engineer</span></div></div></div>
+            <div class="team-card"><div class="team-card__media"><img class="team-card__img" src="assets/team-2.webp" alt="Priya Rajan" loading="lazy" /></div><div class="team-card__body"><div class="team-card__name">Priya Rajan</div><div class="team-card__role">MLOps &amp; Quality Lead</div><div class="team-card__tags"><span class="tag">Compliance</span></div></div></div>
+            <div class="team-card"><div class="team-card__media"><img class="team-card__img" src="assets/team-3.webp" alt="Karthik Sundaram" loading="lazy" /></div><div class="team-card__body"><div class="team-card__name">Karthik Sundaram</div><div class="team-card__role">Sales Analytics Lead</div><div class="team-card__tags"><span class="tag">Analyst</span></div></div></div>
+            <div class="team-card"><div class="team-card__media"><img class="team-card__img" src="./assets/team-4.webp" alt="Kavitha Nair" loading="lazy"></div><div class="team-card__body"><div class="team-card__name">Kavitha Nair</div><div class="team-card__role">AI Product Strategist</div><div class="team-card__tags"><span class="tag">Design</span></div></div></div>
+            <div class="team-card"><div class="team-card__media"><img class="team-card__img" src="assets/team-1.webp" alt="Ravi Patel" loading="lazy"></div><div class="team-card__body"><div class="team-card__name">Ravi Patel</div><div class="team-card__role">Cloud Infrastructure Lead</div><div class="team-card__tags"><span class="tag">DevOps</span></div></div></div>
+            <div class="team-card"><div class="team-card__media"><img class="team-card__img" src="assets/team-4.webp" alt="Meera Joshi" loading="lazy"></div><div class="team-card__body"><div class="team-card__name">Meera Joshi</div><div class="team-card__role">Customer Support Lead</div><div class="team-card__tags"><span class="tag">Support</span></div></div></div>
           </div>
         </div>
 
@@ -479,22 +483,22 @@
         <div class="section-panel" id="section-clients">
           <div class="section-header"><div><div class="section-header__title">Customers</div><div class="section-header__sub">Registered customers and order history</div></div><button class="section-header__btn" onclick="showToast('Adding customer...')"><i class="fa-solid fa-user-plus"></i> Add Customer</button></div>
           <div class="content-grid">
-            <div class="content-card"><img class="content-card__img" src="./assets/male2.webp" alt="Rahul Krishnan home" loading="lazy" /><div class="content-card__body"><div class="content-card__title">Rahul Krishnan</div><div class="content-card__meta">rahul@email.com · Bangalore · 24 orders</div><div class="content-card__text">Regular buyer — gaming keyboards, monitors, and PC components.</div><div class="content-card__footer"><span class="badge badge--green">Active</span><button class="table-action-btn table-action-btn--view" onclick="showToast('Viewing profile...')">Profile</button></div></div></div>
-            <div class="content-card"><img class="content-card__img" src="assets/female1.webp" alt="Priya Nair home" loading="lazy" /><div class="content-card__body"><div class="content-card__title">Priya Nair</div><div class="content-card__meta">priya@email.com · Mumbai · 8 orders</div><div class="content-card__text">Ordered mechanical keyboard bundle — awaiting delivery.</div><div class="content-card__footer"><span class="badge badge--gold">Pending Setup</span><button class="table-action-btn table-action-btn--view" onclick="showToast('Viewing profile...')">Profile</button></div></div></div>
-            <div class="content-card"><img class="content-card__img" src="assets/male1.webp" alt="Vijay Sharma home" loading="lazy" /><div class="content-card__body"><div class="content-card__title">Vijay Sharma</div><div class="content-card__meta">vijay@email.com · Delhi · 14 orders</div><div class="content-card__text">Purchased 4K monitor and gaming mouse — setting up at home.</div><div class="content-card__footer"><span class="badge badge--blue">Processing</span><button class="table-action-btn table-action-btn--view" onclick="showToast('Viewing profile...')">Profile</button></div></div></div>
-            <div class="content-card"><img class="content-card__img" src="assets/female2.webp" alt="Ananya Mehta home" loading="lazy" /><div class="content-card__body"><div class="content-card__title">Ananya Mehta</div><div class="content-card__meta">ananya@email.com · Hyderabad · 5 orders</div><div class="content-card__text">Headset and webcam order scheduled for dispatch.</div><div class="content-card__footer"><span class="badge badge--purple">Scheduled</span><button class="table-action-btn table-action-btn--view" onclick="showToast('Viewing profile...')">Profile</button></div></div></div>
-            <div class="content-card"><img class="content-card__img" src="assets/male3.webp" alt="Karthik Sundaram home" loading="lazy" /><div class="content-card__body"><div class="content-card__title">Karthik Sundaram</div><div class="content-card__meta">karthik@email.com · Chennai · 19 orders</div><div class="content-card__text">Full-stack components with remote monitoring and voice control.</div><div class="content-card__footer"><span class="badge badge--green">Active</span><button class="table-action-btn table-action-btn--view" onclick="showToast('Viewing profile...')">Profile</button></div></div></div>
-            <div class="content-card"><img class="content-card__img" src="assets/female3.webp" alt="Lakshmi Reddy home" loading="lazy" /><div class="content-card__body"><div class="content-card__title">Lakshmi Reddy</div><div class="content-card__meta">lakshmi@email.com · Pune · 2 orders</div><div class="content-card__text">New customer — starter accessory bundle in cart.</div><div class="content-card__footer"><span class="badge badge--gray">New Lead</span><button class="table-action-btn table-action-btn--view" onclick="showToast('Viewing profile...')">Profile</button></div></div></div>
+            <div class="content-card"><img class="content-card__img" src="./assets/team-1.webp" alt="Rahul Krishnan home" loading="lazy" /><div class="content-card__body"><div class="content-card__title">Rahul Krishnan</div><div class="content-card__meta">rahul@email.com · Bangalore · 24 projects</div><div class="content-card__text">Enterprise client — NLP chatbots, automation, and custom ML models.</div><div class="content-card__footer"><span class="badge badge--green">Active</span><button class="table-action-btn table-action-btn--view" onclick="showToast('Viewing profile...')">Profile</button></div></div></div>
+            <div class="content-card"><img class="content-card__img" src="assets/team-2.webp" alt="Priya Nair home" loading="lazy" /><div class="content-card__body"><div class="content-card__title">Priya Nair</div><div class="content-card__meta">priya@email.com · Mumbai · 8 projects</div><div class="content-card__text">Data pipeline project — awaiting UAT sign-off.</div><div class="content-card__footer"><span class="badge badge--gold">Pending Setup</span><button class="table-action-btn table-action-btn--view" onclick="showToast('Viewing profile...')">Profile</button></div></div></div>
+            <div class="content-card"><img class="content-card__img" src="assets/team-3.webp" alt="Vijay Sharma home" loading="lazy" /><div class="content-card__body"><div class="content-card__title">Vijay Sharma</div><div class="content-card__meta">vijay@email.com · Delhi · 14 projects</div><div class="content-card__text">Active CV API and LLM fine-tuning — staging environment setup.</div><div class="content-card__footer"><span class="badge badge--blue">Processing</span><button class="table-action-btn table-action-btn--view" onclick="showToast('Viewing profile...')">Profile</button></div></div></div>
+            <div class="content-card"><img class="content-card__img" src="assets/team-2.webp" alt="Ananya Mehta home" loading="lazy" /><div class="content-card__body"><div class="content-card__title">Ananya Mehta</div><div class="content-card__meta">ananya@email.com · Hyderabad · 5 projects</div><div class="content-card__text">Voice AI deployment scheduled for production rollout.</div><div class="content-card__footer"><span class="badge badge--purple">Scheduled</span><button class="table-action-btn table-action-btn--view" onclick="showToast('Viewing profile...')">Profile</button></div></div></div>
+            <div class="content-card"><img class="content-card__img" src="assets/team-3.webp" alt="Karthik Sundaram home" loading="lazy" /><div class="content-card__body"><div class="content-card__title">Karthik Sundaram</div><div class="content-card__meta">karthik@email.com · Chennai · 19 projects</div><div class="content-card__text">Full-stack AI platform with monitoring dashboards and voice agents.</div><div class="content-card__footer"><span class="badge badge--green">Active</span><button class="table-action-btn table-action-btn--view" onclick="showToast('Viewing profile...')">Profile</button></div></div></div>
+            <div class="content-card"><img class="content-card__img" src="assets/team-4.webp" alt="Lakshmi Reddy home" loading="lazy" /><div class="content-card__body"><div class="content-card__title">Lakshmi Reddy</div><div class="content-card__meta">lakshmi@email.com · Pune · 2 projects</div><div class="content-card__text">New lead — starter AI assessment package in pipeline.</div><div class="content-card__footer"><span class="badge badge--gray">New Lead</span><button class="table-action-btn table-action-btn--view" onclick="showToast('Viewing profile...')">Profile</button></div></div></div>
           </div>
         </div>
 
         
         <div class="section-panel" id="section-reports">
-          <div class="section-header"><div><div class="section-header__title">Sales Reports</div><div class="section-header__sub">Monthly sales and inventory activity reports</div></div><button class="section-header__btn" onclick="showToast('Generating report...')"><i class="fa-solid fa-file-export"></i> Generate</button></div>
+          <div class="section-header"><div><div class="section-header__title">Performance Reports</div><div class="section-header__sub">Monthly AI service and deployment activity reports</div></div><button class="section-header__btn" onclick="showToast('Generating report...')"><i class="fa-solid fa-file-export"></i> Generate</button></div>
           <div class="dash-row dash-row--2col">
             <div class="dash-card"><div class="dash-card__header"><div class="dash-card__title">Report Alerts</div></div><div class="dash-card__body"><div class="alert-list">
               <div class="alert-card alert-card--urgent"><div class="alert-card__icon"><i class="fa-solid fa-file-circle-exclamation"></i></div><div class="alert-card__body"><div class="alert-card__title">Q2 Sales Report · overdue submission</div><div class="alert-card__meta">Due Jun 30 · Assigned to Arjun Mehta</div></div><span class="badge badge--red">Urgent</span></div>
-              <div class="alert-card alert-card--pending"><div class="alert-card__icon"><i class="fa-solid fa-file-lines"></i></div><div class="alert-card__body"><div class="alert-card__title">Warehouse Stock Audit · May 2026</div><div class="alert-card__meta">In review · 2,140 SKUs catalogued</div></div><span class="badge badge--gold">Pending</span></div>
+              <div class="alert-card alert-card--pending"><div class="alert-card__icon"><i class="fa-solid fa-file-lines"></i></div><div class="alert-card__body"><div class="alert-card__title">Model Registry Audit · May 2026</div><div class="alert-card__meta">In review · 214 models catalogued</div></div><span class="badge badge--gold">Pending</span></div>
               <div class="alert-card alert-card--pending"><div class="alert-card__icon"><i class="fa-solid fa-file-lines"></i></div><div class="alert-card__body"><div class="alert-card__title">Customer Satisfaction Survey · June</div><div class="alert-card__meta">142 responses collected · 68% complete</div></div><span class="badge badge--gold">Pending</span></div>
               <div class="alert-card alert-card--done"><div class="alert-card__icon"><i class="fa-solid fa-file-circle-check"></i></div><div class="alert-card__body"><div class="alert-card__title">Monthly Revenue Report · May 2026</div><div class="alert-card__meta">₹16.8L recorded · Approved by admin</div></div><span class="badge badge--green">Done</span></div>
             </div></div></div>
@@ -508,20 +512,20 @@
 
         
         <div class="section-panel" id="section-compliance">
-          <div class="section-header"><div><div class="section-header__title">Stock Compliance</div><div class="section-header__sub">Stock levels, supplier certifications and quality checks</div></div><button class="section-header__btn" onclick="showToast('Running compliance scan...')"><i class="fa-solid fa-shield-check"></i> Run Scan</button></div>
+          <div class="section-header"><div><div class="section-header__title">Model Compliance</div><div class="section-header__sub">Model governance, data privacy and quality audits</div></div><button class="section-header__btn" onclick="showToast('Running compliance scan...')"><i class="fa-solid fa-shield-check"></i> Run Scan</button></div>
           <div class="alert-list" style="margin-bottom:1.25rem">
-            <div class="alert-card alert-card--urgent"><div class="alert-card__icon"><i class="fa-solid fa-microchip"></i></div><div class="alert-card__body"><div class="alert-card__title">Supplier recall notice · 45 gaming mice affected</div><div class="alert-card__meta">Critical security patch required · 3 customer sites</div></div><span class="badge badge--red">Urgent</span></div>
-            <div class="alert-card alert-card--urgent"><div class="alert-card__icon"><i class="fa-solid fa-temperature-half"></i></div><div class="alert-card__body"><div class="alert-card__title">Monitor panel defect batch · Samsung Odyssey series</div><div class="alert-card__meta">5 orders across 4 builds · Exceeds tolerance</div></div><span class="badge badge--red">Urgent</span></div>
-            <div class="alert-card alert-card--pending"><div class="alert-card__icon"><i class="fa-solid fa-certificate"></i></div><div class="alert-card__body"><div class="alert-card__title">BIS certification renewal · Stackly Pro Keyboard v2</div><div class="alert-card__meta">Expires Jul 15, 2026 · Documentation in progress</div></div><span class="badge badge--gold">Pending</span></div>
-            <div class="alert-card alert-card--pending"><div class="alert-card__icon"><i class="fa-solid fa-boxes-stacked"></i></div><div class="alert-card__body"><div class="alert-card__title">USB-C cable compatibility audit</div><div class="alert-card__meta">Q2 FY26 · 89 cables pending QC</div></div><span class="badge badge--gold">Pending</span></div>
-            <div class="alert-card alert-card--done"><div class="alert-card__icon"><i class="fa-solid fa-shield-check"></i></div><div class="alert-card__body"><div class="alert-card__title">Annual safety inspection · Stackly Gaming Mouse Gen 2</div><div class="alert-card__meta">All 340 units passed QC · Certified Jun 10</div></div><span class="badge badge--green">Done</span></div>
+            <div class="alert-card alert-card--urgent"><div class="alert-card__icon"><i class="fa-solid fa-microchip"></i></div><div class="alert-card__body"><div class="alert-card__title">Model drift alert · 45 inference endpoints affected</div><div class="alert-card__meta">Retraining recommended · 3 production environments</div></div><span class="badge badge--red">Urgent</span></div>
+            <div class="alert-card alert-card--urgent"><div class="alert-card__icon"><i class="fa-solid fa-temperature-half"></i></div><div class="alert-card__body"><div class="alert-card__title">Bias audit flagged · Vision model batch #V-204</div><div class="alert-card__meta">5 clients across 4 deployments · Exceeds threshold</div></div><span class="badge badge--red">Urgent</span></div>
+            <div class="alert-card alert-card--pending"><div class="alert-card__icon"><i class="fa-solid fa-certificate"></i></div><div class="alert-card__body"><div class="alert-card__title">ISO 27001 review · Stackly AI Platform v2</div><div class="alert-card__meta">Expires Jul 15, 2026 · Documentation in progress</div></div><span class="badge badge--gold">Pending</span></div>
+            <div class="alert-card alert-card--pending"><div class="alert-card__icon"><i class="fa-solid fa-boxes-stacked"></i></div><div class="alert-card__body"><div class="alert-card__title">API security &amp; compliance audit</div><div class="alert-card__meta">Q2 FY26 · 89 endpoints pending review</div></div><span class="badge badge--gold">Pending</span></div>
+            <div class="alert-card alert-card--done"><div class="alert-card__icon"><i class="fa-solid fa-shield-check"></i></div><div class="alert-card__body"><div class="alert-card__title">Annual model governance · Stackly Predictive Engine v2</div><div class="alert-card__meta">All 340 models passed audit · Certified Jun 10</div></div><span class="badge badge--green">Done</span></div>
             <div class="alert-card alert-card--done"><div class="alert-card__icon"><i class="fa-solid fa-check-double"></i></div><div class="alert-card__body"><div class="alert-card__title">GDPR data handling review · Customer portals</div><div class="alert-card__meta">Compliant · Reviewed by Priya Rajan · May 2026</div></div><span class="badge badge--green">Done</span></div>
           </div>
         </div>
 
         
         <div class="section-panel" id="section-settings">
-          <div class="section-header"><div><div class="section-header__title">Settings</div><div class="section-header__sub">Configure your Stackly store admin portal</div></div></div>
+          <div class="section-header"><div><div class="section-header__title">Settings</div><div class="section-header__sub">Configure your Stackly AI agency admin portal</div></div></div>
           <div class="settings-grid">
             <div class="settings-nav">
               <div class="settings-nav-item active"><i class="fa-solid fa-building"></i> Company Profile</div>
@@ -551,14 +555,14 @@
                     <span class="form-error">Phone number is required</span>
                   </div>
                   <div class="form-group" id="adminHubRegionGroup">
-                    <label for="adminHubRegion">Default Warehouse <span style="color:#ef4444">*</span></label>
+                    <label for="adminHubRegion">Primary Data Region <span style="color:#ef4444">*</span></label>
                     <select class="form-control" id="adminHubRegion" required>
-                      <option value="" selected disabled>Select warehouse</option>
+                      <option value="" selected disabled>Select data region</option>
                       <option value="south">South India (Bangalore)</option>
                       <option value="west">West India (Mumbai)</option>
                       <option value="north">North India (Delhi)</option>
                     </select>
-                    <span class="form-error">Please select a warehouse</span>
+                    <span class="form-error">Please select a data region</span>
                   </div>
                   <div class="form-group form-group--full" id="adminAddressGroup">
                     <label for="adminBusinessAddress">Business Address <span style="color:#ef4444">*</span></label>
@@ -576,11 +580,11 @@
         <div class="section-panel" id="section-notifications">
           <div class="section-header"><div><div class="section-header__title">Notifications</div><div class="section-header__sub">System alerts and admin notifications</div></div><button class="section-header__btn" onclick="showToast('All notifications marked read')"><i class="fa-solid fa-check-double"></i> Mark All Read</button></div>
           <div class="dash-card"><div class="dash-card__body"><div class="activity-list">
-            <div class="activity-item"><div class="activity-item__icon" style="background:#fee2e2;color:#dc2626"><i class="fa-solid fa-triangle-exclamation"></i></div><div><div class="activity-item__text"><strong>Device Alert:</strong> Low stock alert at Logitech MX Keys — 3 units left · Warehouse A unresponsive for 2 hours</div><div class="activity-item__time">12 min ago · Urgent</div></div></div>
-            <div class="activity-item"><div class="activity-item__icon" style="background:var(--primary-pale);color:var(--primary)"><i class="fa-solid fa-cart-shopping"></i></div><div><div class="activity-item__text"><strong>New Order:</strong> Karthik Sundaram ordered Gaming Mouse + Pad Kit · ₹38,999</div><div class="activity-item__time">45 min ago</div></div></div>
-            <div class="activity-item"><div class="activity-item__icon" style="background:#d1fae5;color:#059669"><i class="fa-solid fa-check-circle"></i></div><div><div class="activity-item__text"><strong>Order Delivered:</strong> Rahul Krishnan's Gaming PC Build Kit order delivered successfully</div><div class="activity-item__time">3 hours ago</div></div></div>
-            <div class="activity-item"><div class="activity-item__icon" style="background:#fef3c7;color:#d97706"><i class="fa-solid fa-clock"></i></div><div><div class="activity-item__text"><strong>Reminder:</strong> Dispatch scheduled for Ananya Mehta · Wireless Headset Pro tomorrow 10 AM</div><div class="activity-item__time">5 hours ago</div></div></div>
-            <div class="activity-item"><div class="activity-item__icon" style="background:var(--accent-light);color:var(--accent)"><i class="fa-solid fa-clipboard-check"></i></div><div><div class="activity-item__text"><strong>Stock Alert:</strong> Supplier recall notice affects 45 gaming mice — replacement stock required</div><div class="activity-item__time">Yesterday · Urgent</div></div></div>
+            <div class="activity-item"><div class="activity-item__icon" style="background:#fee2e2;color:#dc2626"><i class="fa-solid fa-triangle-exclamation"></i></div><div><div class="activity-item__text"><strong>System Alert:</strong> GPU cluster at 92% capacity — Cloud Region A scaling review needed</div><div class="activity-item__time">12 min ago · Urgent</div></div></div>
+            <div class="activity-item"><div class="activity-item__icon" style="background:var(--primary-pale);color:var(--primary)"><i class="fa-solid fa-diagram-project"></i></div><div><div class="activity-item__text"><strong>New Project:</strong> Karthik Sundaram started Predictive Analytics Module · ₹38,999</div><div class="activity-item__time">45 min ago</div></div></div>
+            <div class="activity-item"><div class="activity-item__icon" style="background:#d1fae5;color:#059669"><i class="fa-solid fa-check-circle"></i></div><div><div class="activity-item__text"><strong>Project Deployed:</strong> Rahul Krishnan's Enterprise Chatbot Suite deployed successfully</div><div class="activity-item__time">3 hours ago</div></div></div>
+            <div class="activity-item"><div class="activity-item__icon" style="background:#fef3c7;color:#d97706"><i class="fa-solid fa-clock"></i></div><div><div class="activity-item__text"><strong>Reminder:</strong> Production rollout scheduled for Ananya Mehta · Voice AI Module tomorrow 10 AM</div><div class="activity-item__time">5 hours ago</div></div></div>
+            <div class="activity-item"><div class="activity-item__icon" style="background:var(--accent-light);color:var(--accent)"><i class="fa-solid fa-clipboard-check"></i></div><div><div class="activity-item__text"><strong>Model Alert:</strong> Model drift affects 45 endpoints — retraining pipeline required</div><div class="activity-item__time">Yesterday · Urgent</div></div></div>
           </div></div></div>
         </div>
 
@@ -596,7 +600,7 @@
             </div></div></div>
             <div class="dash-card"><div class="dash-card__header"><div class="dash-card__title">Submit Support Ticket</div></div><div class="dash-card__body">
               <div class="form-grid">
-                <div class="form-group"><label>Subject</label><input class="form-control" type="text" placeholder="e.g. Stock sync issue in warehouse" /></div>
+                <div class="form-group"><label>Subject</label><input class="form-control" type="text" placeholder="e.g. Model sync issue in production cluster" /></div>
                 <div class="form-group"><label>Priority</label><select class="form-control"><option>Low</option><option selected>Medium</option><option>High</option><option>Critical</option></select></div>
                 <div class="form-group form-group--full"><label>Describe your issue</label><textarea class="form-control" style="resize:vertical;min-height:80px" placeholder="Describe the problem in detail..."></textarea></div>
               </div>
@@ -672,8 +676,8 @@ function showSection(sectionId, titleText, navEl) {
   if (navEl) navEl.classList.add('active');
   const titleMap = {
     overview: 'Dashboard', analytics: 'Analytics', transactions: 'AI Projects',
-    invoices: 'Inventory', users: 'Team Users', clients: 'Customers',
-    reports: 'Sales Reports', compliance: 'Stock Compliance',
+    invoices: 'Service Catalog', users: 'Team Users', clients: 'Customers',
+    reports: 'Performance Reports', compliance: 'Model Compliance',
     settings: 'Settings', notifications: 'Notifications', support: 'Help & Support'
   };
   const label = titleText || titleMap[sectionId] || sectionId;
@@ -737,7 +741,7 @@ function handleAdminSettingsSave(e) {
     { group: document.getElementById('adminCompanyNameGroup'), message: validateAdminField(companyEl.value, 'Company name is required', 'Enter a valid company name (min 2 characters)', validateAdminName) },
     { group: document.getElementById('adminSupportEmailGroup'), message: validateAdminField(emailEl.value, 'Support email is required', 'Please enter a valid email address', validateAdminEmail) },
     { group: document.getElementById('adminPhoneGroup'), message: validateAdminField(phoneEl.value, 'Phone number is required', 'Please enter a valid 10-digit phone number', validateAdminPhone) },
-    { group: document.getElementById('adminHubRegionGroup'), message: regionEl.value ? '' : 'Please select a warehouse' },
+    { group: document.getElementById('adminHubRegionGroup'), message: regionEl.value ? '' : 'Please select a data region' },
     { group: document.getElementById('adminAddressGroup'), message: validateAdminField(addressEl.value, 'Business address is required', 'Please enter a complete address (min 10 characters)', validateAdminAddress) }
   ];
 

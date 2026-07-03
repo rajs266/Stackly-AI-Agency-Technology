@@ -36,12 +36,26 @@
       <a href="index.html" class="navbar-logo">
         <img src="assets/logo.webp" alt="Stackly">
       </a>
-      <div class="navbar-menu">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="services.html">Services</a>
-        <a href="blog.html" class="active">Blog</a>
-        <a href="contact.html">Contact</a>
+      <div class="navbar-menu" id="navbarMenu">
+        <div class="mobile-menu-header">
+          <a href="index.html" class="mobile-menu-logo">
+            <img src="assets/logo.webp" alt="Stackly">
+          </a>
+          <button type="button" class="mobile-menu-close" aria-label="Close Menu">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="mobile-menu-links">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="services.html">Services</a>
+          <a href="blog.html" class="active">Blog</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div class="mobile-menu-actions">
+          <a href="signin.html" class="btn-signin btn-signin--mobile">Sign In</a>
+          <a href="signup.html" class="btn btn-primary btn-sm">Get Started <i class="fas fa-arrow-right"></i></a>
+        </div>
       </div>
       <div class="navbar-actions">
         <a href="signin.html" class="btn-signin">Sign In</a>
@@ -294,8 +308,8 @@
         <i class="fas fa-envelope-open-text" style="font-size: 3rem; color: var(--primary); margin-bottom: 1.5rem;"></i>
         <h3>Subscribe to Stackly Insights</h3>
         <p class="mb-3" style="color: var(--text-secondary);">Receive monthly technical digests, predictive research, and news directly to your inbox.</p>
-        <form class="newsletter-form" style="display:flex; gap: 0.5rem; max-width: 500px; margin: 0 auto;" data-validate>
-          <input type="email" placeholder="Enter your business email" required style="flex:1; padding: 0.85rem 1.25rem; border:2px solid var(--border-color); border-radius: var(--radius-full); outline:none;">
+        <form class="newsletter-form blog-newsletter-form" data-validate>
+          <input type="email" placeholder="Enter your business email" required style="padding: 0.85rem 1.25rem; border:2px solid var(--border-color); border-radius: var(--radius-full); outline:none;">
           <button type="submit" class="btn btn-primary">Subscribe</button>
         </form>
       </div>
