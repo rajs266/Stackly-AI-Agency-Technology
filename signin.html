@@ -476,11 +476,11 @@
     .forgot-link {
       font-size: 0.85rem;
       font-weight: 600;
-      color: var(--clr-primary);
+      color: #ffffff;
       transition: color var(--dur-base) var(--ease);
     }
     .forgot-link:hover {
-      color: var(--clr-accent);
+      color: rgba(255, 255, 255, 0.85);
     }
     .signin-submit {
       width: 100%;
@@ -650,7 +650,10 @@
       visibility: visible;
       pointer-events: auto;
     }
-    .signin-toast--success { border-left-color: var(--clr-primary); }
+    .signin-toast--success {
+      border-left-color: #22c55e;
+      color: #4ade80;
+    }
     .signin-toast--error { border-left-color: #E53E3E; }
     .signin-form-side .signin-form-box__title { color: var(--clr-white); }
     .signin-form-side .signin-form-box__sub { color: rgba(255,255,255,0.7); }
@@ -658,7 +661,8 @@
     .signin-form-side .remember-me span { color: rgba(255,255,255,0.7); }
     .signin-form-side .signin-footer { color: rgba(255,255,255,0.65); }
     .signin-form-side .signin-footer a { color: var(--clr-accent); }
-    .signin-form-side .forgot-link { color: var(--clr-accent); }
+    .signin-form-side .forgot-link { color: #ffffff; }
+    .signin-form-side .forgot-link:hover { color: rgba(255, 255, 255, 0.85); }
     .signin-form-side .signin-divider { color: rgba(255,255,255,0.5); }
     .signin-form-side .signin-divider::before,
     .signin-form-side .signin-divider::after { background: rgba(255,255,255,0.15); }
